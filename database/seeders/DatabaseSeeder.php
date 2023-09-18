@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\BusinessFeature;
 use App\Models\Notify;
+use App\Models\OwnerDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             NotifySeeder::class,
             BusinessSeeder::class,
             BusinessFeatureSeeder::class,
+            OwnerDetailSeeder::class,
         ]);
     }
 }
