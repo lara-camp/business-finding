@@ -33,7 +33,7 @@ const navigation = [
 
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
 
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
+  { name: 'Users', href: '/admin/users', icon: UsersIcon, current: false },
 
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
 

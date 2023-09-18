@@ -16,9 +16,13 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'create user',
-            'edit user',
             'view user',
             'delete user',
+            'edit user',
+            'create region',
+            'view region',
+            'delete region',
+            'edit region',
         ];
 
         foreach ($permissions as $key => $permission) {

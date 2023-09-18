@@ -3,9 +3,11 @@ import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
 const Index = ({users}) => {
+  const columns = ['id', 'name', 'email', 'created_at', 'action']
+  const routeName = 'user'
   return (
     <div>
-      <Table users={users} />
+      <Table data={users} columns={columns} routeName={routeName} />
     </div>
   )
 }

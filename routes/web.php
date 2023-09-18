@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Backend\RegionController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,17 +42,28 @@ Route::get('/table', function(){
 
 // Admin 
 
-Route::inertia('/admin/dashboard', 'Backend/Dashboard');
-Route::get('/admin/users', [UserController::class, 'index']);
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+    // Dashboard 
+    Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
+    // User 
+    Route::get('/user', [UserController::class, 'index'])->name('admin.users');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('admin.user.show');
+    Route::post('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
+    Route::inertia('/user/create', 'Backend/User/Create');
+});
+
+
+Route::get('/admin/regions', [RegionController::class, 'index'])->name('admin.regions');
 
 // User
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'role:user'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['user', 'role:user'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
