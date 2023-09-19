@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Backend\AccountSettingController;
+use App\Http\Controllers\Backend\GeneralSettingController;
+use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RegionController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -29,17 +33,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/userLogin', function(){
-    dd(Blog::all());
-     return Inertia::render('Test/UserLogin');
-});
-Route::get('/sidebar', function(){
-     return Inertia::render('Test/Sidebar');
-});
-Route::get('/table', function(){
-     return Inertia::render('Test/Table');
-});
-
 // Admin 
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
@@ -47,11 +40,36 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
     // User 
-    Route::get('/user', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
-    Route::get('/user/{id}', [UserController::class, 'show'])->name('admin.user.show');
-    Route::post('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
-    Route::inertia('/user/create', 'Backend/User/Create');
+    Route::prefix('user')->group(function() {
+        Route::get('/', [UserController::class, 'index'])->name('admin.users');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+        Route::get('/{id}', [UserController::class, 'show'])->name('admin.user.show');
+        Route::post('/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
+        Route::inertia('/create', 'Backend/User/Create');  
+    });
+
+    // Setting 
+
+    Route::prefix('setting')->group(function() {
+        // Account Setting 
+        Route::prefix('account')->group(function() {
+            Route::get('/', [AccountSettingController::class, 'index'])->name('admin.account');
+            Route::get('/edit', [AccountSettingController::class, 'edit']);
+            Route::post('/edit', [AccountSettingController::class, 'update']);
+        });
+
+        // General Setting 
+        Route::prefix('general')->group(function() {
+            Route::get('/', [GeneralSettingController::class, 'index']);
+            Route::get('/create', [GeneralSettingController::class, 'index']);
+            Route::get('/edit/{id}', [GeneralSettingController::class, 'index']);
+        });
+
+        // Permission Setting 
+        Route::prefix('permission')->group(function() {
+            Route::get('/', [PermissionController::class, 'index']);
+        });
+    });
 });
 
 
@@ -67,6 +85,10 @@ Route::middleware(['user', 'role:user'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/logout', function() {
+    Auth::logout();
 });
 
 require __DIR__.'/auth.php';
