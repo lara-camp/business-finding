@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\RegionController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
 use Illuminate\Foundation\Application;
@@ -40,13 +41,13 @@ Route::get('/table', function(){
      return Inertia::render('Test/Table');
 });
 
-// Admin 
+// Admin
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
-    // Dashboard 
+    // Dashboard
     Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
-    // User 
+    // User
     Route::get('/user', [UserController::class, 'index'])->name('admin.users');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('admin.user.show');
@@ -56,6 +57,14 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
 
 
 Route::get('/admin/regions', [RegionController::class, 'index'])->name('admin.regions');
+// Category
+Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
+Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.edit');
+Route::get('/admin/category/{id}', [CategoryController::class, 'show'])->name('admin.show');
+Route::post('/admin/category/{id}', [CategoryController::class, 'destory'])->name('admin.delete');
+Route::inertia('/admin/category/create', 'Backend/Category/Create');
+
+// end
 
 // User
 
