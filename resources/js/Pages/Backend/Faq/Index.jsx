@@ -2,12 +2,12 @@ import React from 'react'
 import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
-const Index = ({categories}) => {
-  const columns = ['id', 'name', 'slug', 'created_at', 'action']
-  const routeName = 'category'
+const Index = ({faqs}) => {
+  const columns = ['id', 'question', 'answer', 'status', 'created_at', 'action']
+  const routeName = 'faq'
   return (
     <div>
-      <Table data={categories} columns={columns} routeName={routeName} />
+      <Table data={faqs} columns={columns} routeName={routeName} />
     </div>
   )
 }

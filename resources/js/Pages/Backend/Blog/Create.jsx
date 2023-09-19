@@ -9,5 +9,5 @@ const Create = () => {
   )
 }
 
-Create.layout = page => <BackendLayout children={page} title="Category Create" />
+Create.layout = page => <BackendLayout children={page} title="Blog Create" />
 export default Create

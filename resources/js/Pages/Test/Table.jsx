@@ -21,12 +21,12 @@ export default function Example({ data, columns, routeName}) {
                         'Deleted!',
                         'Your file has been deleted.',
                         'success'
-                    )   
+                    )
                 })
             }
-          })     
+          })
     }
-    
+
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
@@ -38,8 +38,8 @@ export default function Example({ data, columns, routeName}) {
 
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     {
-                        permissions.includes(`create ${routeName}`) 
-                        ? 
+                        permissions.includes(`create ${routeName}`)
+                        ?
                         <button
                             type="button"
                             className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -50,7 +50,7 @@ export default function Example({ data, columns, routeName}) {
                         </button>
                         : ""
                     }
-                    
+
                 </div>
             </div>
 
@@ -65,41 +65,56 @@ export default function Example({ data, columns, routeName}) {
                                             <th
                                                 key={item}
                                                 scope="col"
-                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                                                className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
                                             >
                                                 {item.toUpperCase()}
                                             </th>
                                         ))}
+                                        {/* <th
+                                            key={2}
+                                            scope="col"
+                                            className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
+                                        >
+                                            Action
+                                        </th> */}
 
                                         <th
                                             scope="col"
-                                            className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                                            className="relative py-3.5 pl-3 pr-4 sm:pr-6 text-center"
                                         >
                                             <span className="sr-only">
-                                                Edit
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                                </svg>
                                             </span>
                                         </th>
                                     </tr>
                                 </thead>
 
                                 <tbody className="divide-y divide-gray-200 bg-white">
+                                    
                                     {data.data.data.map((item) => (
                                         <tr key={item.id}>
                                           {
                                             columns.map(col => (
-                                              <td key={col} className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                              <td key={col} className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-center font-medium text-gray-900 sm:pl-6">
                                                   {item[col]}
                                               </td>
                                             ))
                                           }
-                                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                            <td className="relative flex whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 {
-                                                    permissions.includes(`view ${routeName}`) ? 
+                                                    permissions.includes(`view ${routeName}`) ?
                                                     <Link
                                                         href={`/admin/${routeName}/${item.id}`}
                                                         className="text-yellow-700 hover:text-yello-200 me-5"
                                                     >
-                                                        View 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-cyan-500 text-bold">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4c-5.5 0-10 4.5-10 5s4.5 5 10 5 10-4.5 10-5-4.5-5-10-5zm0 9a3 3 0 100-6 3 3 0 000 6z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16s2-2.5 2-4" />
+                                                        </svg>
+
                                                     </Link> : ""
                                                 }
                                                 {
@@ -108,19 +123,26 @@ export default function Example({ data, columns, routeName}) {
                                                     href={`/admin/${routeName}/edit/${item.id}`}
                                                     className="text-indigo-600 hover:text-indigo-900  me-5"
                                                 >
-                                                    Edit
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                                    </svg>
+
                                                 </Link> : ""
                                                 }
                                                 {
                                                     permissions.includes(`create ${routeName}`) ?
-                                                        <button 
+                                                        <button
                                                             onClick={() => handleDelete(item.id)}
                                                             className="text-red-500 hover:text-red-300"
-                                                        > 
-                                                            Delete 
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                            </svg>
+
                                                         </button>: ""
                                                 }
-                                                
+
                                             </td>
                                         </tr>
                                     ))}

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CategoryCollection extends ResourceCollection
+class FaqCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,15 +14,15 @@ class CategoryCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-
         return [
             'data' => $this->collection->transform(
-                function($category) {
+                function($faq) {
                     return [
-                        'id' => $category->id,
-                        'name' => $category->name,
-                        'slug' => $category->slug,
-                        'created_at' => $category->created_at->toFormattedDateString(),
+                        'id' => $faq->id,
+                        'question' => $faq->question,
+                        'answer' => $faq->answer,
+                        'status' => $faq->status,
+                        'created_at' => $faq->created_at->toFormattedDateString(),
                     ];
                 }
             ),

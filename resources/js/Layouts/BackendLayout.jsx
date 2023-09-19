@@ -23,6 +23,8 @@ const intitalNavigation = [
     { name: "Users", href: "/admin/user", icon: UsersIcon, current: false },
     { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false },
     { name: "Category", href: "/admin/category", icon: FolderIcon, current: false },
+    { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false },
+    { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false },
 ];
 
 

@@ -22,7 +22,7 @@ class BlogFactory extends Factory
             'body' => $this->faker->text,
             'tag' => $this->faker->randomElement(['Technology', 'Food', 'Travel', 'Fashion']),
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
-            'status' => $this->faker->randomElement(['Draft', 'Published', 'Archived']),
+            'status' => $this->faker->randomElement(['0', '1']),
         ];
     }
 }
