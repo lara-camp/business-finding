@@ -5,18 +5,16 @@ import ProfileImage from '../../../Images/default/profile.png'
 import React from "react";
 
 const Account = ({ user }) => {
-    alert(user.image)
     return (
         <>
             <div className="info-container my-5">
                 <div className="profile-img my-3 p-2">
-                    <img src={ProfileImage} alt="" id="previewImg" width={200} height={200}/>
-                    <input
-                        type="file"
-                        name="image"
-                        id="profileImage"
-                        style={{ display: "none" }}
-                    />
+                    {
+                        user.image
+                        ? <img src={user.image} alt="" width={200} height={200}/>
+                        : <img src={ProfileImage} alt="" width={200} height={200}/>
+                    }
+                    
                 </div>
                 <div className="profile-inputs flex h-80">
                     <div className="w-1/2">

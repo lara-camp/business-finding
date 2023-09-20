@@ -3,7 +3,6 @@ import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout';
 
 const Index = ({regions}) => {
-  console.log(regions)
     const columns = ['id', 'name','type', 'created_at', 'action'];
     const routeName = "region"
   return (

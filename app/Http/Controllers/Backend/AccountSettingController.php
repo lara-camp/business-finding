@@ -37,10 +37,19 @@ class AccountSettingController extends Controller
         $user = User::findOrFail(auth()->id());
         
         if($request->hasFile('image')) {
+            // Delete file if exists 
+
+            if(Storage::exists($user->image)) {
+                Storage::delete($user->image);
+            }
+
+            // Update File 
             $file = $request->file('image');
             $filename = time() . '_'. $file->getClientOriginalName();
-            $file->storeAs('uploads/profile', $filename);
-            $user->image = $filename;
+            $path = Storage::putFileAs(
+                'uploads/profile', $file, $filename 
+            );
+            $user->image = $path;
             $user->save();
         }
 

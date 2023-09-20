@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             NotifySeeder::class,
             BusinessSeeder::class,
             BusinessFeatureSeeder::class,
+            GeneralSettingSeeder::class,
         ]);
     }
 }

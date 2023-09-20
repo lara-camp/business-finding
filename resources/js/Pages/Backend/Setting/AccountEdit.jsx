@@ -4,9 +4,11 @@ import SettingLayout from "@/Layouts/SettingLayout";
 import ProfileImage from "@/Images/default/defaultprofile.png";
 import { Link, useForm, router} from "@inertiajs/react";
 import { useRef } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import Swal from "sweetalert2";
 
 const AccountEdit = ({ user }) => {
-    const [imageSrc, setImageSrc] = useState(ProfileImage)
+    const [imageSrc, setImageSrc] = useState(user.image ? user.image : ProfileImage)
     const {data, setData,  processing} = useForm({
         'name' : user.name,
         'email' : user.email,
@@ -14,13 +16,13 @@ const AccountEdit = ({ user }) => {
         'phone' : user.phone,
         'image' : "",
     })
+    
     const fileInputRef = useRef(null);
-
     function submit(e)  {
         e.preventDefault()
         router.post('/admin/setting/account/edit', data, {
             onSuccess : () => {
-                alert("success")
+                Swal.fire("Profile Updated Successfully");
             }
         })
     }
@@ -43,6 +45,7 @@ const AccountEdit = ({ user }) => {
 
     return (
         <React.Fragment>
+            <Toaster />
             <form action="" onSubmit={submit} encType="multipart/form-data">
                 <div className="info-container my-5">
                     <div className="profile-img my-3 p-2">

@@ -61,8 +61,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
         // General Setting 
         Route::prefix('general')->group(function() {
             Route::get('/', [GeneralSettingController::class, 'index']);
-            Route::get('/create', [GeneralSettingController::class, 'index']);
-            Route::get('/edit/{id}', [GeneralSettingController::class, 'index']);
+            Route::get('/create', [GeneralSettingController::class, 'create']);
+            Route::get('/edit/{id}', [GeneralSettingController::class, 'edit']);
         });
 
         // Permission Setting 

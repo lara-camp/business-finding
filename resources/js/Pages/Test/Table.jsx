@@ -2,7 +2,7 @@ import Pagination from "@/Components/Pagination";
 import { Link, router, usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
 
-export default function Example({ data, columns, routeName}) {
+export default function Example({ data, columns, routeName, view, title, edit, destroy, add}) {
 
     const {permissions} = usePage().props;
     const handleDelete = (id) => {
@@ -38,14 +38,14 @@ export default function Example({ data, columns, routeName}) {
 
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     {
-                        permissions.includes(`create ${routeName}`) 
+                        permissions.includes(`create ${title}`) 
                         ? 
                         <button
                             type="button"
                             className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                             <Link href={`/admin/${routeName}/create`}>
-                              Add {routeName.toUpperCase()}
+                              Add {title.toUpperCase()}
                             </Link>
                         </button>
                         : ""
@@ -93,8 +93,9 @@ export default function Example({ data, columns, routeName}) {
                                             ))
                                           }
                                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                {
-                                                    permissions.includes(`view ${routeName}`) ? 
+                                                {   
+                                                    view &&
+                                                    permissions.includes(`view ${title}`) ? 
                                                     <Link
                                                         href={`/admin/${routeName}/${item.id}`}
                                                         className="text-yellow-700 hover:text-yello-200 me-5"
@@ -103,7 +104,7 @@ export default function Example({ data, columns, routeName}) {
                                                     </Link> : ""
                                                 }
                                                 {
-                                                    permissions.includes(`edit ${routeName}`) ?
+                                                    permissions.includes(`edit ${title}`) ?
                                                     <Link
                                                     href={`/admin/${routeName}/edit/${item.id}`}
                                                     className="text-indigo-600 hover:text-indigo-900  me-5"
@@ -111,8 +112,9 @@ export default function Example({ data, columns, routeName}) {
                                                     Edit
                                                 </Link> : ""
                                                 }
-                                                {
-                                                    permissions.includes(`create ${routeName}`) ?
+                                                {   
+                                                    destroy &&
+                                                    permissions.includes(`delete ${title}`) ?
                                                         <button 
                                                             onClick={() => handleDelete(item.id)}
                                                             className="text-red-500 hover:text-red-300"

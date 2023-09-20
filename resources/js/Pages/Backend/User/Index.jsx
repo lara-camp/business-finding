@@ -5,9 +5,10 @@ import BackendLayout from '@/Layouts/BackendLayout'
 const Index = ({users}) => {
   const columns = ['id', 'name', 'email', 'created_at', 'action']
   const routeName = 'user'
+  const title = 'user'
   return (
     <div>
-      <Table data={users} columns={columns} routeName={routeName} />
+      <Table data={users} columns={columns} routeName={routeName} title={title} />
     </div>
   )
 }

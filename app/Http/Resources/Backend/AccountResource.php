@@ -21,6 +21,7 @@ class AccountResource extends JsonResource
             'email' => $this->email,
             'role' => $this->getRoleNames(),
             'phone' => $this->phone,
+            'image' => $this->image != null ?  Storage::url($this->image) : ""
         ];
     }
 }

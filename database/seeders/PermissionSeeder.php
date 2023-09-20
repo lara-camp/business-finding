@@ -23,6 +23,10 @@ class PermissionSeeder extends Seeder
             'view region',
             'delete region',
             'edit region',
+            'create general',
+            'view general',
+            'delete general',
+            'edit general',
         ];
 
         foreach ($permissions as $key => $permission) {
