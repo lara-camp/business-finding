@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Backend\RegionController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\FaqController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
 use Illuminate\Foundation\Application;

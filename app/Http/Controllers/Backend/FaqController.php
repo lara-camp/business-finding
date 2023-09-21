@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\FaqCollection;
 use App\Http\Resources\FaqResource;
 use App\Models\Faq;

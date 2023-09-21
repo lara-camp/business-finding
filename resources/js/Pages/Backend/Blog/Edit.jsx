@@ -6,6 +6,7 @@ const Edit = ({blog}) => {
     <div>
       <h3> this is blog edit </h3>
       <p> {blog.id} </p>
+      <p> {blog.image.url} </p>
       <p> {blog.title} </p>
       <p> {blog.body} </p>
       <p> {blog.tag} </p>

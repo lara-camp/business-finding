@@ -20,6 +20,7 @@ class BlogCollection extends ResourceCollection
             {
                 return [
                     'id' => $blog->id,
+                    'image' => $blog->image->url,
                     'title' => $blog->title,
                     'body' => $blog->body,
                     'tag' => $blog->tag,

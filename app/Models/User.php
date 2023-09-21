@@ -54,4 +54,8 @@ class User extends Authenticatable
     // {
     //     return $this->hasMany(Notify::class, 'user_id', 'id');
     // }
+
+    public function image() {
+        return $this->morphOne('App\Models\Image', 'imageable');
+    }
 }

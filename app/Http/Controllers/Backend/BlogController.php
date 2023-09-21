@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Resources\BlogCollection;
-use App\Http\Resources\BlogResource;
 use App\Models\Blog;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\BlogCollection;
 
 class BlogController extends Controller
 {
     public function index()
     {
         $blogs = Blog::paginate(10);
+
+        // dd(Blog::first()->image->url);
         // dd(new BlogCollection($blogs), Blog::get());
         return Inertia::render('Backend/Blog/Index', ['blogs' => new BlogCollection($blogs),]);
     }
