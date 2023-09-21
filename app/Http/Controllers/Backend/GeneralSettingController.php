@@ -20,4 +20,8 @@ class GeneralSettingController extends Controller
     public function create() {
         return Inertia::render('Backend/Setting/GeneralAdd');
     }
+
+    public function edit() {
+        return Inertia::render('Backend/Setting/GeneralEdit');
+    }
 }

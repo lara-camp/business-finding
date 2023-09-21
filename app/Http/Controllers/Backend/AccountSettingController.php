@@ -6,7 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Backend\AccountResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class AccountSettingController extends Controller
@@ -39,8 +42,10 @@ class AccountSettingController extends Controller
         if($request->hasFile('image')) {
             // Delete file if exists 
 
-            if(Storage::exists($user->image)) {
-                Storage::delete($user->image);
+            if($user->image != null) {
+                if(Storage::exists($user->image)) {
+                    Storage::delete($user->image);
+                }
             }
 
             // Update File 
@@ -64,6 +69,32 @@ class AccountSettingController extends Controller
         } else {
             // do something
         }   
+    }
+
+    public function change_password(Request $request) {
+        if($request->isMethod('post')) {
+            $request->validate([
+                'current_password' => 'required |min:8|max:16',
+                'new_password' => 'required| min:8| max:16',
+                'confirm_password' => 'required | same:new_password'
+            ]);
+
+            if(!Hash::check($request->current_password, auth()->user()->password)) {
+                throw ValidationException::withMessages([
+                    'current_password' => 'Password does not match.Please try again.',
+                ]);
+            } else {
+                $user = User::findOrFail(auth()->id());
+                $user->update([
+                    'password' => $request->new_password,
+                ]);
+                return to_route('admin.account');
+            }
+
+
+        } else {
+            return Inertia::render("Backend/Setting/UpdatePassword");
+        }
     }
 }
 

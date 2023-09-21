@@ -55,7 +55,7 @@ const Account = ({ user }) => {
                       <Link href="/admin/setting/account/edit" className="bg-indigo-700 text-white p-2 rounded-md"> Edit Profile </Link>
                     </div>
                     <div className="w-1/2">
-                      <Link className="bg-indigo-700 text-white p-2 rounded-md"> Edit Password </Link>
+                      <Link href="/admin/setting/account/change-password" className="bg-indigo-700 text-white p-2 rounded-md"> Edit Password </Link>
                     </div>
                 </div>
             </div>

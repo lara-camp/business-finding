@@ -19,6 +19,10 @@ class UserController extends Controller
         ]);
     }
 
+    public function create() {
+        return Inertia::render('Backend/User/Create');
+    }
+
     public function edit($id) {
         $user = User::findOrFail($id);
         return Inertia::render('Backend/User/Edit', [
