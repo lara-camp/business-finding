@@ -33,7 +33,7 @@ const AccountEdit = ({ user }) => {
 
     const handleImageChange = (e) => {
         const selectedFile = e.target.files[0]
-        setData('image', e.target.files[0])
+        setData('image', selectedFile)
         // Read the selected file as a data URL
         const reader = new FileReader();
         reader.onload = (e) => {
