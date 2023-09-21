@@ -28,12 +28,14 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             CategorySeeder::class,
             BlogSeeder::class,
+            FaqSeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
             NotifySeeder::class,
             BusinessSeeder::class,
             BusinessFeatureSeeder::class,
             GeneralSettingSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }
