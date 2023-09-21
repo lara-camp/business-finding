@@ -18,8 +18,8 @@ class FaqFactory extends Factory
     {
         return [
             'question' => $this->faker->sentence,
-            'answer' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['Published', 'Draft']),
+            'answer' => $this->faker->sentence,
+            'status' => $this->faker->randomElement(['0', '1']),
         ];
     }
 }

@@ -16,8 +16,11 @@ class ImageFactory extends Factory
      */
     public function definition(): array
     {
+        $imageableId = $this->faker->unique()->numberBetween(1, 50);
         return [
-            'imageable_type' => fake()->name,
+            'url' => $this->faker->url,
+            'imageable_id' => $imageableId,
+            'imageable_type' => 'App\Models\Blog',
         ];
     }
 }
