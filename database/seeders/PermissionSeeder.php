@@ -44,6 +44,11 @@ class PermissionSeeder extends Seeder
             'view blog',
             'delete blog',
             'edit blog',
+
+            'create permission',
+            'view permission',
+            'delete permission',
+            'edit permission',
         ];
 
         foreach ($permissions as $key => $permission) {

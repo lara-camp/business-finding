@@ -17,6 +17,7 @@ import {
     ChevronDownIcon,
     MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true },
@@ -39,10 +40,11 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function BackendLayout({ children }) {
+export default function BackendLayout({ children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [navigation, setNavigation] = useState(intitalNavigation)
     const { url, component } = usePage()
+    const {general_setting} = usePage().props;
 
     return (
         <>
@@ -111,7 +113,7 @@ export default function BackendLayout({ children }) {
                                         <div className="flex items-center h-16 shrink-0">
                                             <img
                                                 className="w-auto h-8"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                                src={general_setting.logo}
                                                 alt="Your Company"
                                             />
                                         </div>
@@ -190,7 +192,7 @@ export default function BackendLayout({ children }) {
                         <div className="flex items-center h-16 shrink-0">
                             <img
                                 className="w-auto h-8"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                src={general_setting.logo}
                                 alt="Your Company"
                             />
                         </div>
@@ -387,6 +389,9 @@ export default function BackendLayout({ children }) {
                     <main className="py-10">
                         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                     </main>
+                    <footer>
+                        <Footer title={general_setting.title} />
+                    </footer>
                 </div>
             </div>
         </>

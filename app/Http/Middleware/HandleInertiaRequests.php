@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helper\Helper;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -36,6 +37,11 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'permissions' => $request->user() ? $request->user()->getAllPermissions()->pluck('name')->toArray() : "",
+            'general_setting' => array(
+                'logo'         => Helper::generalSetting('logo'),
+                'website-name' => Helper::generalSetting('Website Name'),
+                'title'        => Helper::generalSetting('title'),
+            ),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
