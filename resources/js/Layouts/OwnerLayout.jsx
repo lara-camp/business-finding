@@ -21,19 +21,10 @@ import {
 import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
-    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true , permission : "view dashboard" },
-    { name: "Users", href: "/admin/user", icon: UsersIcon, current: false , permission : "view user" },
-    { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false , permission : "view region" },
-    { name: "Category", href: "/admin/category", icon: FolderIcon, current: false , permission : "view category"},
-    { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false , permission : "view faq" },
-    { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false , permission : "view blog" },
+    { name: "Dashboard", href: "/owner/dashboard", icon: HomeIcon, current: true },
+    { name: "Business", href: "/owner/business", icon: UsersIcon, current: false},
 ];
 
-
-const userNavigation = [
-    { name: "Your profile", href: "#" },
-    { name: "Sign out", href: "logout" },
-];
 
 
 
@@ -41,7 +32,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function BackendLayout({ children}) {
+export default function OwnerLayout({ children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [navigation, setNavigation] = useState(intitalNavigation)
     const { url, component } = usePage()
@@ -208,7 +199,7 @@ export default function BackendLayout({ children}) {
                                         {navigation.map((item) => (
                                             <li key={item.name}>
                                                 {
-                                                    permissions.includes(item.permission) &&
+                                                    
                                                     <Link
                                                     href={item.href}
                                                     className={
@@ -238,12 +229,11 @@ export default function BackendLayout({ children}) {
 
                                 <li className="mt-auto">
                                     {
-                                        permissions.includes('view setting') &&
                                         <Link
-                                        href="/admin/setting/account"
+                                        href="/owner/setting/account"
                                         className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
                                         ${
-                                            url.startsWith('/admin/setting') 
+                                            url.startsWith('/owner/setting') 
                                             ? "bg-gray-800 text-white"
                                             : "text-gray-400 hover:text-white hover:bg-gray-800"
                                         }
@@ -379,7 +369,7 @@ export default function BackendLayout({ children}) {
                                         <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                                                 <Menu.Item>
                                                         <Link
-                                                            href={route('admin.account')}
+                                                            href={route('owner.account')}
                                                             className="block px-3 py-1 text-sm leading-6 text-gray-900"
                                                         >
                                                             Profile

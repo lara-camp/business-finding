@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\FaqController;
+use App\Http\Controllers\Backend\Owner\AccountController;
+use App\Http\Controllers\Backend\Owner\DashboardContoller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +39,8 @@ Route::get('/', function () {
 
 // Admin 
 
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
+Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(function() {
     // Dashboard
     Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
@@ -124,6 +127,24 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
 Route::get('/logout', function() {
     Auth::logout();
+});
+
+// Ownner 
+
+Route::prefix('owner')->middleware('auth', 'role:owner')->group(function() {
+    Route::get('/dashboard', [DashboardContoller::class, 'index'])->name('owner.dashboard');
+
+    Route::prefix('setting')->group(function() {
+        Route::prefix('account')->group(function() {
+            Route::get('/', [AccountController::class, 'index'])->name('owner.account');
+            Route::get('/edit', [AccountController::class, 'edit'])->name('owner.account.edit');
+            Route::post('/edit', [AccountController::class, 'update'])->name('owner.account.update');
+            
+            // Update password 
+
+            Route::match(['get', 'post'], '/change-password', [AccountController::class, 'change_password'])->name('owner.account.change-password');
+        });
+    });
 });
 
 require __DIR__.'/auth.php';

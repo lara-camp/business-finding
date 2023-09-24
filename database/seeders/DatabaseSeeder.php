@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\BusinessFeature;
+use App\Models\User;
 use App\Models\Notify;
+use App\Models\BusinessFeature;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,11 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(100)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
-        ]);
-
+        
         $this->call([
             RoleSeeder::class,
             PermissionSeeder::class,
@@ -37,5 +34,11 @@ class DatabaseSeeder extends Seeder
             GeneralSettingSeeder::class,
             ImageSeeder::class,
         ]);
+
+        $user = User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+        ]);
+        $user->assignRole('user');
     }
 }

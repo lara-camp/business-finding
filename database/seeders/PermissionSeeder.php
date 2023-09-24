@@ -49,6 +49,9 @@ class PermissionSeeder extends Seeder
             'view permission',
             'delete permission',
             'edit permission',
+
+            'view dashboard',
+            'view setting',
         ];
 
         foreach ($permissions as $key => $permission) {
