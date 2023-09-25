@@ -4,7 +4,7 @@ import React from "react";
 import Switch from '@mui/material/Switch';
 import { router } from "@inertiajs/react";
 
-const PermissionEdit = ({ permissions, user_permissions, role }) => {
+const PermissionEdit = ({ all_permissions, user_permissions, role }) => {
     const handleChange = (id) => {
         router.post(route('admin.permission.update', role.id),{
             'permission_id' : id,
@@ -20,7 +20,7 @@ const PermissionEdit = ({ permissions, user_permissions, role }) => {
     return (
         <div className="my-10">
             <div className="flex flex-wrap">
-                {permissions.map((item) => (
+                {all_permissions.map((item) => (
                     <div className="w-1/4" key={item.id}>
                         <label htmlFor="permission"> {item.name} </label> <br />
                         <Switch

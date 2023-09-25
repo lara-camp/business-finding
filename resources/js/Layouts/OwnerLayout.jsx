@@ -21,8 +21,8 @@ import {
 import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
-    { name: "Dashboard", href: "/owner/dashboard", icon: HomeIcon, current: true },
-    { name: "Business", href: "/owner/business", icon: UsersIcon, current: false},
+    { name: "Dashboard", href: route('owner.dashboard'), icon: HomeIcon, current: true },
+    { name: "Business", href: route('owner.business'), icon: UsersIcon, current: false},
 ];
 
 

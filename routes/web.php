@@ -9,8 +9,11 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\Owner\AccountController;
+use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Business;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,14 +31,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [HomeController::class,'index'])->name('home');
 
 // Admin 
 
@@ -144,6 +140,13 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function() {
 
             Route::match(['get', 'post'], '/change-password', [AccountController::class, 'change_password'])->name('owner.account.change-password');
         });
+    });
+
+    Route::prefix('business')->group(function() {
+        Route::get('/', [BusinessController::class, 'index'])->name('owner.business');
+        Route::get('/{id}', [BusinessController::class, 'show'])->name('owner.business.show');
+        Route::get('/create', [BusinessController::class, 'create'])->name('owner.business.create');
+        Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('owner.business.edit');
     });
 });
 

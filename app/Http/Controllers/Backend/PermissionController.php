@@ -30,7 +30,7 @@ class PermissionController extends Controller
         $permissions = Permission::latest('id')->get(['id', 'name']);
         return Inertia::render('Backend/Setting/PermissionEdit', [
             'user_permissions' => $user_permissions,
-            'permissions' => $permissions,
+            'all_permissions' => $permissions,
             'role' => $role,
         ]);
     }
