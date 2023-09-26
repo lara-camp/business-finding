@@ -6,9 +6,10 @@ const Index = ({ cities }) => {
     console.log(cities)
     const columns = ['id', 'name', 'region_id', 'created_at', 'action'];
     const routeName = "cities"
+    const title = "city"
     return (
         <div>
-            <Table data={cities} columns={columns} routeName={routeName} />
+            <Table data={cities} columns={columns} routeName={routeName} title={title} edit={true} />
         </div >
     )
 }
