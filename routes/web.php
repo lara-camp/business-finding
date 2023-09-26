@@ -1,25 +1,22 @@
 <?php
 
-use App\Http\Controllers\Backend\AccountSettingController;
-use App\Http\Controllers\Backend\GeneralSettingController;
-use App\Http\Controllers\Backend\PermissionController;
-use App\Http\Controllers\Backend\RegionController;
-use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\Backend\BlogController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\FaqController;
-use App\Http\Controllers\Backend\Owner\AccountController;
-use App\Http\Controllers\Backend\Owner\BusinessController;
-use App\Http\Controllers\Backend\Owner\DashboardContoller;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\ProfileController;
-use App\Models\Business;
-use Illuminate\Foundation\Application;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\FaqController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Backend\RegionController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\Owner\AccountController;
+use App\Http\Controllers\Backend\AccountSettingController;
+use App\Http\Controllers\Backend\GeneralSettingController;
+use App\Http\Controllers\Backend\Owner\BusinessController;
+use App\Http\Controllers\Backend\Owner\DashboardContoller;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,20 +48,24 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     });
 
     // Category------------------------------------------------------------------------------------------------
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
-    Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
-    Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
-    Route::inertia('/category/create','Backend/Category/Create')->name('admin.category.create');
+    Route::prefix('category')->group(function() {
+        Route::get('/', [CategoryController::class, 'index'])->name('admin.category');
+        Route::inertia('/create','Backend/Category/Create')->name('admin.category.create');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::get('/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
+        Route::post('/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+    });
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
-    Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
-    Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
-    Route::get('/blog/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
-    Route::post('/blog/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
-    Route::get('/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
-    Route::post('/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
+    Route::prefix('blog')->group(function() {
+        Route::get('/', [BlogController::class, 'index'])->name('admin.blog');
+        Route::get('/create', [BlogController::class, 'create'])->name('admin.blog.create');
+        Route::post('/store', [BlogController::class, 'store'])->name('admin.blog.store');
+        Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
+        Route::get('/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
+        Route::post('/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
+    });
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------

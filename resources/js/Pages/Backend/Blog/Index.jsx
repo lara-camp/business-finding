@@ -14,8 +14,9 @@ const Index = ({blogs}) => {
                 columns={columns}
                 routeName={routeName}
                 title={title}
-                view={false}
-                destroy={false}
+                view={true}
+                destroy={true}
+                add={true}
           />}
     </div>
   )

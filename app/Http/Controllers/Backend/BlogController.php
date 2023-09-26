@@ -24,7 +24,6 @@ class BlogController extends Controller
 
     public function create()
     {
-        dd("hello");
         return Inertia::render('Backend/Blog/Create');
     }
     public function store(Request $request)
