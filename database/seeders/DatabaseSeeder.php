@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Notify;
 use App\Models\BusinessFeature;
+use App\Models\OwnerDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             BusinessFeatureSeeder::class,
             GeneralSettingSeeder::class,
             ImageSeeder::class,
+            OwnerDetailSeeder::class,
         ]);
 
         $user = User::factory()->create([

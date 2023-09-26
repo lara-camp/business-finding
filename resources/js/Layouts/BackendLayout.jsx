@@ -27,6 +27,7 @@ const intitalNavigation = [
     { name: "Category", href: "/admin/category", icon: FolderIcon, current: false , permission : "view category"},
     { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false , permission : "view faq" },
     { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false , permission : "view blog" },
+    { name: "Cities", href: "/admin/cities", icon: Bars3Icon, current: false , permission : "view city"},
 ];
 
 

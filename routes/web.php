@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,8 +82,15 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     });
 });
 
-
+// region
 Route::get('/admin/regions', [RegionController::class, 'index'])->name('admin.regions');
+Route::get('/admin/region/create', [RegionController::class, 'create'])->name('admin.region.create');
+Route::get('/admin/region/{id}', [RegionController::class, 'show'])->name('admin.region.show');
+Route::get('/admin/region/edit/{id}', [RegionController::class, 'edit'])->name('admin.region.edit');
+
+// cities
+Route::get('/admin/cities', [CityController::class, 'index'])->name('admin.cities');
+
 
 // Category------------------------------------------------------------------------------------------------
 Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');

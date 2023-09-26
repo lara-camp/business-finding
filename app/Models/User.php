@@ -51,10 +51,10 @@ class User extends Authenticatable
         return $this->hasOne(OwnerDetail::class, 'user_id', 'id');
     }
 
-    // public function notifies()
-    // {
-    //     return $this->hasMany(Notify::class, 'user_id', 'id');
-    // }
+    public function notifies()
+    {
+        return $this->hasMany(Notify::class, 'user_id', 'id');
+    }
 
     public function image() {
         return $this->morphOne('App\Models\Image', 'imageable');
