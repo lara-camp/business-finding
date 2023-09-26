@@ -22,6 +22,7 @@ const intitalNavigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true },
     { name: "Users", href: "/admin/user", icon: UsersIcon, current: false },
     { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false },
+    { name: "Cities", href: "/admin/cities", icon: Bars3Icon, current: false },
 ];
 
 
@@ -205,8 +206,7 @@ export default function BackendLayout({ children }) {
                                                     href={item.href}
                                                     className={
                                                         `
-                                                        ${
-                                                            url.startsWith(item.href) 
+                                                        ${url.startsWith(item.href)
                                                             ? "bg-gray-800 text-white"
                                                             : "text-gray-400 hover:text-white hover:bg-gray-800"
                                                         }

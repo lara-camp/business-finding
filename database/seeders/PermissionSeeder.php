@@ -23,6 +23,9 @@ class PermissionSeeder extends Seeder
             'view region',
             'delete region',
             'edit region',
+            'view city',
+            'edit city',
+            'delete city'
         ];
 
         foreach ($permissions as $key => $permission) {

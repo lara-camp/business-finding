@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\RegionController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
 use Illuminate\Foundation\Application;
@@ -29,20 +30,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/userLogin', function(){
+Route::get('/userLogin', function () {
     dd(Blog::all());
-     return Inertia::render('Test/UserLogin');
+    return Inertia::render('Test/UserLogin');
 });
-Route::get('/sidebar', function(){
-     return Inertia::render('Test/Sidebar');
+Route::get('/sidebar', function () {
+    return Inertia::render('Test/Sidebar');
 });
-Route::get('/table', function(){
-     return Inertia::render('Test/Table');
+Route::get('/table', function () {
+    return Inertia::render('Test/Table');
 });
 
 // Admin 
 
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Dashboard 
     Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
@@ -52,10 +53,22 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('admin.user.show');
     Route::post('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
     Route::inertia('/user/create', 'Backend/User/Create');
+
+    // regions
+    // Route::prefix('regions')->group(function () {
+
+    // });
 });
 
-
+// region
 Route::get('/admin/regions', [RegionController::class, 'index'])->name('admin.regions');
+Route::get('/admin/region/create', [RegionController::class, 'create'])->name('admin.region.create');
+Route::get('/admin/region/{id}', [RegionController::class, 'show'])->name('admin.region.show');
+Route::get('/admin/region/edit/{id}', [RegionController::class, 'edit'])->name('admin.region.edit');
+
+// cities
+Route::get('/admin/cities', [CityController::class, 'index'])->name('admin.cities');
+
 
 // User
 
@@ -69,4 +82,4 @@ Route::middleware(['user', 'role:user'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
