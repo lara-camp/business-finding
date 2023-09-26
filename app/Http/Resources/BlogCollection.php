@@ -22,7 +22,7 @@ class BlogCollection extends ResourceCollection
                     'id' => $blog->id,
                     'image' => $blog->image->url,
                     'title' => $blog->title,
-                    'body' => $blog->body,
+                    // 'body' => $blog->body,
                     'tag' => $blog->tag,
                     'user_id' => $blog->user_id,
                     'status' => $blog->status,

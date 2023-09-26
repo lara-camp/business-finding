@@ -20,6 +20,12 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        dd("create");
+        return Inertia::render('Backend/Category/Create');
+    }
+
     public function edit($id)
     {
         $category = Category::findOrFail($id);
