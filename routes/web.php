@@ -60,11 +60,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
 
     // Faq------------------------------------------------------------------------------------------------
     Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
+    Route::post('/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
     Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
     Route::get('/blog/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
     Route::post('/blog/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
-    Route::get('/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
-    Route::post('/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------

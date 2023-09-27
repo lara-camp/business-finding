@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -24,26 +25,40 @@ class BlogController extends Controller
 
     public function create()
     {
-        dd("hello");
-        return Inertia::render('Backend/Blog/Create');
+        return Inertia::render('Backend/Blog/Create',[
+            'blog' => new Blog(),
+        ]);
     }
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         // Validate the incoming request data (title and content)
-        $validatedData = $request->validate([
+       /*  $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required',
-        ]);
+            'description' => 'required',
+            'tags' => 'required',
+            // 'coverImage' => 'required',
+        ]); */
+        // dd($validatedData);
 
         // Create a new blog post using the validated data
         $blog = Blog::create([
-            'title' => $validatedData['title'],
-            'content' => $validatedData['content'],
+            'title' => $request->title,
+            'body' => $request->description,
+            'tag' => $request->tag,
+            'user_id' => auth()->user()->id,
+            'status' => 1,
         ]);
+        dd($request->hasFile('coverImage'));
+        if($request->hasFile('coverImage'))
+        {
+            $file = $request->file('coverImage');
+            dd($file);
+            $path = Storage::disk('custom_disk')->put('CoverImage', $file);
+        }
 
         // Optionally, you can redirect back or return a response
-        return redirect()->route('admin.blog.index'); // Redirect to the index page or any other page as needed
+        return redirect()->route('admin.blog'); // Redirect to the index page or any other page as needed
     }
 
     public function edit($id, Request $request)
