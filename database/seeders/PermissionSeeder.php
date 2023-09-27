@@ -19,22 +19,27 @@ class PermissionSeeder extends Seeder
             'view user',
             'delete user',
             'edit user',
+
             'create region',
             'view region',
             'delete region',
             'edit region',
+
             'create general',
             'view general',
             'delete general',
             'edit general',
+
             'create category',
             'view category',
             'delete category',
             'edit category',
+
             'create faq',
             'view faq',
             'delete faq',
             'edit faq',
+            
             'create blog',
             'view blog',
             'delete blog',

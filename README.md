@@ -21,4 +21,6 @@
 ### Package.json and lock json file are git ignoring due to different system 
 ### please make sure to install package manually
 
+`npm i react-icons`
+
 

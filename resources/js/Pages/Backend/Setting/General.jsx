@@ -15,6 +15,7 @@ const General = ({gs}) => {
         columns={columns} 
         routeName={routeName}
         title={title}
+        edit={true}
         view={false}
         destroy={false}
         />

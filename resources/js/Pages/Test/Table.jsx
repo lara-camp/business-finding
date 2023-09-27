@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 
 export default function Example({ data, columns, routeName, view, title, edit, destroy, add}) {
   const { permissions } = usePage().props;
-
+  console.log(edit + " " +  destroy + "" + view)
+ 
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -55,7 +56,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
   const renderActions = (item) => (
     <td className="relative flex py-4 pl-3 pr-4 text-sm font-medium text-center whitespace-nowrap sm:pr-6">
       {/* Render your action links/buttons here */}
-      {permissions.includes(`view ${routeName}`) && (
+      {view && permissions.includes(`view ${title}`) && (
         <Link
           href={`/admin/${routeName}/${item.id}`}
           className="text-yellow-700 hover:text-yello-200 me-5"
@@ -67,7 +68,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
         </svg>
         </Link>
       )}
-      {permissions.includes(`edit ${routeName}`) && (
+      {edit && permissions.includes(`edit ${title}`) && (
         <Link
           href={`/admin/${routeName}/edit/${item.id}`}
           className="text-indigo-600 hover:text-indigo-900 me-5"
@@ -79,7 +80,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
             </svg>
         </Link>
       )}
-      {permissions.includes(`delete ${routeName}`) && (
+      {destroy && permissions.includes(`delete ${title}`) && (
         <button
           onClick={() => handleDelete(item.id)}
           className="text-red-500 hover:text-red-300"
@@ -104,7 +105,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
         </div>
 
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          {permissions.includes(`create ${routeName}`) ? (
+          {add && permissions.includes(`create ${title}`) ? (
             <button
               type="button"
               className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

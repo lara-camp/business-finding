@@ -9,7 +9,6 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Blog;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -95,6 +94,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
             Route::get('/', [GeneralSettingController::class, 'index'])->name('admin.general');
             Route::get('/create', [GeneralSettingController::class, 'create'])->name('admin.general.create');
             Route::get('/edit/{id}', [GeneralSettingController::class, 'edit'])->name('admin.general.edit');
+            Route::post('/edit/{id}', [GeneralSettingController::class, 'update'])->name('admin.general.update');
         });
 
         // Permission Setting
@@ -102,6 +102,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
             Route::get('/', [PermissionController::class, 'index'])->name('admin.permission');
             Route::get('/create', [PermissionController::class, 'create'])->name('admin.permission.create');
             Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+            Route::post('/edit/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
         });
 
 
