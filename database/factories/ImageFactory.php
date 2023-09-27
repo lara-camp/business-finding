@@ -18,7 +18,7 @@ class ImageFactory extends Factory
     {
         $imageableId = $this->faker->unique()->numberBetween(1, 50);
         return [
-            'url' => $this->faker->url,
+            'url' => $this->faker->imageUrl(50,50),
             'imageable_id' => $imageableId,
             'imageable_type' => 'App\Models\Blog',
         ];
