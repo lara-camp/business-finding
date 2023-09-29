@@ -39,7 +39,7 @@ const Create = ( { blog}) => {
     <div>
           <form onSubmit={handleSubmit}>
             <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
-                <div className='col-md-6 col-lg-6 col-sm-6'>
+                <div className='col-md-6 col-lg-6 col-sm-12'>
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h2>General Information</h2>
                         <div class="mb-4">
@@ -85,7 +85,7 @@ const Create = ( { blog}) => {
                     </div>
                 </div>
 
-                <div className='col-lg-6 col-md-6 col-sm-6'>
+                <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div class="bg-white rounded-lg shadow-lg p-6 ml-4">
 
                         <h1>File Attachments</h1>
@@ -125,55 +125,17 @@ const Create = ( { blog}) => {
                         </div>
 
                     </div>
-                    {/* <div class="bg-white rounded-lg shadow-lg rounded-sm shadow-sm p-6">
-
-                            <h2 class="">File Attachment</h2>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="file">
-                                    Select a File
-                                </label>
-                                <input
-                                    class="hidden"
-                                    type="file"
-                                    id="file"
-                                    name="file"
-                                    accept=".jpg, .jpeg, .png, .pdf"
-                                />
-                                <label
-                                    for="file"
-                                    class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
-                                >
-                                    Browse
-                                </label>
-                            </div>
-
-
-                            <div class="border-dashed border-2 border-gray-300 p-4 text-center">
-                                <p class="text-gray-600">Drag and drop your files here or</p>
-                                <p class="text-blue-500">Browse</p>
-                            </div>
-
-                    </div> */}
 
                 </div>
             </div>
 
-            <div className='grid grid-cols-1 gap-1 mt-2'>
-                <div class="bg-white rounded-lg shadow-lg p-6">
+            <div className='grid grid-cols-1 gap-1 mt-2' style={{ height: '200px'}}>
+                <div class="bg-white rounded-lg shadow-lg p-6" style={{ height: '200px'}}>
                     <h2>Contact</h2>
-                    {/* <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="contact"
-                          id="contact"
-                          value={data.content}
-                          placeholder="contact"
-                          onChange={(e) => setData('content',e.target.value)}
-                      >
-
-                      </textarea> */}
                         <ReactQuill
                             name="content"
                             id="content"
+                            style={{ height: '100px'}}
                             value={editorHtml}
                             onChange={handleChange}
                         />

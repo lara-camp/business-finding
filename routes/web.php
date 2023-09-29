@@ -52,10 +52,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
 
     // Category------------------------------------------------------------------------------------------------
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::get('/category/create',[CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/category/store',[CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
     Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
-    Route::inertia('/category/create','Backend/Category/Create')->name('admin.category.create');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
@@ -69,10 +70,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
 
     // Faq------------------------------------------------------------------------------------------------
     Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq');
+    Route::inertia('/faq/create', [FaqController::class, 'create']);
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::get('/faq/{id}', [FaqController::class, 'show'])->name('admin.faq.show');
     Route::post('/faq/{id}', [FaqController::class, 'destroy'])->name('admin.faq.delete');
-    Route::inertia('/faq/create', [FaqController::class, 'create']);
     // end---------------------------------------------------------------------------------------------------
 
     // Setting

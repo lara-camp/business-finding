@@ -17,9 +17,6 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::paginate(10);
-
-        // dd(Blog::first()->image->url);
-        // dd(new BlogCollection($blogs), Blog::get());
         return Inertia::render('Backend/Blog/Index', ['blogs' => new BlogCollection($blogs),]);
     }
 
@@ -31,21 +28,12 @@ class BlogController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
-        // Validate the incoming request data (title and content)
-       /*  $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'tags' => 'required',
-            // 'coverImage' => 'required',
-        ]); */
-        // dd($validatedData);
-
-        // Create a new blog post using the validated data
+        
         $blog = Blog::create([
             'title' => $request->title,
             'body' => $request->description,
             'tag' => $request->tag,
+            'content' => $request->content,
             'user_id' => auth()->user()->id,
             'status' => 1,
         ]);
@@ -55,13 +43,24 @@ class BlogController extends Controller
             $file = 'cover'.auth()->id().'-'.$_FILES['cover_image']['name'];
             // dd($file);
             $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+'));
+            $blog->cover_image = $file ;
+            $blog->save();
 
-            Image::create([
-                'url' => $file ,
-                'imageable_id' => $blog->id,
-                'imageable_type' => 'App\Models\Blog',
-            ]);
-
+        }
+        if($request->image_attachments)
+        {
+            foreach($request->image_attachments as $image)
+            {
+                $file = 'img_'.auth()->id().'-'.$image->getClientOriginalName();
+                // dd($file);
+                $path = Storage::disk('public')->put( $file,fopen($image, 'r+'));
+                $blog->cover_image = $file ;
+                Image::create([
+                    'url' => $file ,
+                    'imageable_id' => $blog->id,
+                    'imageable_type' => 'App\Models\Blog',
+                ]);
+            }
         }
 
         // Optionally, you can redirect back or return a response

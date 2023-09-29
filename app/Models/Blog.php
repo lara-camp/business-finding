@@ -14,6 +14,8 @@ class Blog extends Model
         'title',
         'body',
         'tag',
+        'content',
+        'cover_image',
         'user_id',
         'status',
     ];
@@ -25,6 +27,7 @@ class Blog extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        // dd($this->belongsTo('App\Models\User'), User::findOrFail(107));
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
