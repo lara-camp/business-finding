@@ -56,6 +56,16 @@ return [
             'throw' => false,
         ],
 
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'port' => env('FTP_PORT'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'passive' => true,
+            'root' => env('FTP_FILE_LINK') // for example: /public_html/images
+        ],
+
     ],
 
     /*

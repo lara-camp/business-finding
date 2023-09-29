@@ -31,7 +31,7 @@ class BlogController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         // Validate the incoming request data (title and content)
        /*  $validatedData = $request->validate([
             'title' => 'required|max:255',
@@ -49,12 +49,19 @@ class BlogController extends Controller
             'user_id' => auth()->user()->id,
             'status' => 1,
         ]);
-        dd($request->hasFile('coverImage'));
-        if($request->hasFile('coverImage'))
+        // dd($request->hasFile('cover_image'));
+        if($request->hasFile('cover_image'))
         {
-            $file = $request->file('coverImage');
-            dd($file);
-            $path = Storage::disk('custom_disk')->put('CoverImage', $file);
+            $file = 'cover'.auth()->id().'-'.$_FILES['cover_image']['name'];
+            // dd($file);
+            $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+'));
+
+            Image::create([
+                'url' => $file ,
+                'imageable_id' => $blog->id,
+                'imageable_type' => 'App\Models\Blog',
+            ]);
+
         }
 
         // Optionally, you can redirect back or return a response

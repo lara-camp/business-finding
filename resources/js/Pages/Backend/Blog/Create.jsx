@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import BackendLayout from '@/Layouts/BackendLayout';
 import { router, useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // import Quill styles
 
 
 const Create = ( { blog}) => {
@@ -9,20 +11,19 @@ const Create = ( { blog}) => {
         {
             'tag' : blog.tag ,
             'title' : blog.title ,
-            'content' : blog.content ,
+            'content' : '' ,
             'description': blog.description,
             'cover_image' : "",
             'image_attachment' : "",
         }
     );
 
-    const handleCoverImageChange = (e) => {
-        e.preventDefault();
-        const selectedFile = e.target.files[0];
-        setData('cover_image', selectedFile);
-    }
+    const [editorHtml, setEditorHtml] = useState('');
 
-
+    const handleChange = (html) => {
+        setEditorHtml(html);
+        setData('content', editorHtml);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -160,20 +161,27 @@ const Create = ( { blog}) => {
             <div className='grid grid-cols-1 gap-1 mt-2'>
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h2>Contact</h2>
-                    <textarea
+                    {/* <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        name="contact"
+                            name="contact"
                           id="contact"
                           value={data.content}
                           placeholder="contact"
                           onChange={(e) => setData('content',e.target.value)}
                       >
 
-                      </textarea>
+                      </textarea> */}
+                        <ReactQuill
+                            name="content"
+                            id="content"
+                            value={editorHtml}
+                            onChange={handleChange}
+                        />
 
                 </div>
+
             </div>
-            <div className='text-center mt-2 bg-white rounded-lg shadow-lg p-6'>
+            <div className='p-6 mt-2 text-center bg-white rounded-lg shadow-lg'>
                   <button type="submit" class="bg-blue-500 w-75 txt-center
                         hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Save
