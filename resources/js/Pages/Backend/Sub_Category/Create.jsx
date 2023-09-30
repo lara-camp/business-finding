@@ -3,18 +3,19 @@ import BackendLayout from '@/Layouts/BackendLayout';
 import { router, useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 
-const Create = ( { category}) => {
+const Create = ( { categories }) => {
     const { data, setData } = useForm(
         {
-            'category_name' : category.category_name ,
-            'slug' : category.slug ,
+            'name' : '' ,
+            'slug' : '',
+            'category_id' : '' ,
 
         }
     );
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        router.post('/admin/category/store', data, {
+        router.post('/admin/sub_category/store', data, {
           onSuccess: () => {
               Swal.fire("created successfully.");
           }
@@ -24,24 +25,43 @@ const Create = ( { category}) => {
 
   return (
     <div>
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
                 <div className='col-md-12 col-lg-12 col-sm-12'>
                     <div class="bg-white rounded-lg shadow-lg p-6">
-                        <h2>Parent Category</h2>
+                        {/* <h2>Parent Category</h2> */}
+                        <div class="mb-4 mt-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                                Sub Category Name
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="name"
+                                type="text"
+                                name="name"
+                                placeholder="sub category"
+                                value={data.sub_category_name}
+                                onChange={ (e) => setData('name', e.target.value)}
+                            />
+                        </div>
                         <div class="mb-4 mt-5">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
                                 Category Name
                             </label>
-                            <input
+                            <select
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="category_name"
+                                id="category_id"
                                 type="text"
-                                name="category_name"
+                                name="category_id"
                                 placeholder="category"
-                                value={data.category_name}
-                                onChange={ (e) => setData('category_name', e.target.value)}
-                            />
+                                onChange={ (e) => setData('category_id', e.target.value)}
+                            >
+                            {categories.map((item) => (
+                                <option key={item.id} value={item.id}>
+                                {item.name}
+                                </option>
+                            ))}
+                            </select>
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">

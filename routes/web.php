@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\AccountSettingController;
 use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
+use App\Http\Controllers\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,33 +48,39 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
         Route::post('/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
     });
 
-    // Category------------------------------------------------------------------------------------------------
-    Route::prefix('category')->group(function() {
-        Route::get('/', [CategoryController::class, 'index'])->name('admin.category');
-        Route::inertia('/create','Backend/Category/Create')->name('admin.category.create');
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
-        Route::get('/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
-        Route::post('/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
-    });
+    // jCategory------------------------------------------------------------------------------------------------
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::get('/category/create',[CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/category/store',[CategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
+    Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+    // end---------------------------------------------------------------------------------------------------
+
+    // Sub Category------------------------------------------------------------------------------------------------
+    Route::get('/sub_category', [SubCategoryController::class, 'index'])->name('admin.sub_category');
+    Route::get('/sub_category/create',[SubCategoryController::class, 'create'])->name('admin.sub_category.create');
+    Route::post('/sub_category/store',[SubCategoryController::class, 'store'])->name('admin.sub_category.store');
+    // Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
+    // Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
+    // Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
-    Route::prefix('blog')->group(function() {
-        Route::get('/', [BlogController::class, 'index'])->name('admin.blog');
-        Route::get('/create', [BlogController::class, 'create'])->name('admin.blog.create');
-        Route::post('/store', [BlogController::class, 'store'])->name('admin.blog.store');
-        Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
-        Route::get('/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
-        Route::post('/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
-    });
+    Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
+    Route::post('/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
+    Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
+    Route::get('/blog/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
+    Route::post('/blog/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
     Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq');
+    Route::inertia('/faq/create', [FaqController::class, 'create']);
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::get('/faq/{id}', [FaqController::class, 'show'])->name('admin.faq.show');
     Route::post('/faq/{id}', [FaqController::class, 'destroy'])->name('admin.faq.delete');
-    Route::inertia('/faq/create', [FaqController::class, 'create']);
     // end---------------------------------------------------------------------------------------------------
 
     // Setting

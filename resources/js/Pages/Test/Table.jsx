@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 export default function Example({ data, columns, routeName, view, title, edit, destroy, add}) {
   const { permissions } = usePage().props;
   console.log(edit + " " +  destroy + "" + view)
- 
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -34,8 +34,8 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           className="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6"
         >
           <img
-            src={item.image} // Assuming 'item.image' contains the image URL
-            alt="Image"
+            src={`/storage/app/public/${item.image}`} // Assuming 'item.image' contains the image URL
+            // alt="Image"
             className="h-auto max-w-xs"
           />
         </td>

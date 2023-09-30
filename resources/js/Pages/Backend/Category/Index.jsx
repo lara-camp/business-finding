@@ -5,9 +5,18 @@ import BackendLayout from '@/Layouts/BackendLayout'
 const Index = ({categories}) => {
   const columns = ['id', 'name', 'slug', 'created_at', 'action']
   const routeName = 'category'
+  const title = 'category'
   return (
     <div>
-      <Table data={categories} columns={columns} routeName={routeName} />
+          <Table
+            data={categories}
+            columns={columns}
+            routeName={routeName}
+            title={title}
+            add={true}
+            edit={true}
+            view={true}
+            destroy={true} />
     </div>
   )
 }
