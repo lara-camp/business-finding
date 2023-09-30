@@ -41,7 +41,7 @@ class BlogController extends Controller
         if($request->hasFile('cover_image'))
         {
             $file = 'cover'.auth()->id().'-'.$_FILES['cover_image']['name'];
-            // dd($file);
+            // dd($file);k
             $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+'));
             $blog->cover_image = $file ;
             $blog->save();

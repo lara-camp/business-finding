@@ -50,7 +50,7 @@ const FinicialDetails = () => {
                     <div className="w-5/12 me-3">
                         <p> Select the price range </p>
                         <select
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('asking_price', e.target.value)}
@@ -60,19 +60,19 @@ const FinicialDetails = () => {
                         </select>
                     </div>
                     <div className="w-2/12">
-                        <p className="text-center"> OR </p>
+                        <p className="number-center"> OR </p>
                     </div>
                     <div className="w-5/12">
                         <p> Type Specific Price </p>
                         <input
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('asking_price', e.target.value)}
                         />
                     </div>
                 </div>
-                <small className="text-slate-500">
+                <small className="number-slate-500">
                     Many prospective buyers utilize our business database to
                     filter listings based on their asking price. Opting for the
                     "Undisclosed" option could potentially result in some buyers
@@ -88,7 +88,7 @@ const FinicialDetails = () => {
                     <div className="w-5/12 me-3">
                         <p> Select the price range </p>
                         <select
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('asking_price', e.target.value)}
@@ -98,12 +98,12 @@ const FinicialDetails = () => {
                         </select>
                     </div>
                     <div className="w-2/12">
-                        <p className="text-center"> OR </p>
+                        <p className="number-center"> OR </p>
                     </div>
                     <div className="w-5/12">
                         <p> Type Specific Price </p>
                         <input
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('asking_price', e.target.value)}
@@ -120,7 +120,7 @@ const FinicialDetails = () => {
                     <div className="w-5/12 me-3">
                         <p> Select the price range </p>
                         <select
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('cash_flow', e.target.value)}
@@ -130,12 +130,12 @@ const FinicialDetails = () => {
                         </select>
                     </div>
                     <div className="w-2/12">
-                        <p className="text-center"> OR </p>
+                        <p className="number-center"> OR </p>
                     </div>
                     <div className="w-5/12">
                         <p> Type Specific Price </p>
                         <input
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('cash_flow', e.target.value)}
@@ -152,7 +152,7 @@ const FinicialDetails = () => {
                     <div className="w-5/12 me-3">
                         <p> Select the price range </p>
                         <select
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('inventory_value', e.target.value)}
@@ -162,12 +162,12 @@ const FinicialDetails = () => {
                         </select>
                     </div>
                     <div className="w-2/12">
-                        <p className="text-center"> OR </p>
+                        <p className="number-center"> OR </p>
                     </div>
                     <div className="w-5/12">
                         <p> Type Specific Price </p>
                         <input
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('inventory_value', e.target.value)}
@@ -184,7 +184,7 @@ const FinicialDetails = () => {
                     <div className="w-5/12 me-3">
                         <p> Select the price range </p>
                         <select
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('net_income', e.target.value)}
@@ -194,12 +194,12 @@ const FinicialDetails = () => {
                         </select>
                     </div>
                     <div className="w-2/12">
-                        <p className="text-center"> OR </p>
+                        <p className="number-center"> OR </p>
                     </div>
                     <div className="w-5/12">
                         <p> Type Specific Price </p>
                         <input
-                            type="text"
+                            type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('net_income', e.target.value)}

@@ -21,14 +21,14 @@ import {
 import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
-    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true , permission : "view dashboard" },
-    { name: "Users", href: "/admin/user", icon: UsersIcon, current: false , permission : "view user" },
-    { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false , permission : "view region" },
-    { name: "Category", href: "/admin/category", icon: FolderIcon, current: false , permission : "view category"},
-    { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false , permission : "view faq" },
-    { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false , permission : "view blog" },
-    { name: "Cities", href: "/admin/cities", icon: Bars3Icon, current: false , permission : "view city"},
-    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permisson: "view subcategory" },
+    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon , permission : "view dashboard" },
+    { name: "Users", href: "/admin/user", icon: UsersIcon,  permission : "view user" },
+    { name: "Regions", href: "/admin/regions", icon: FolderIcon,  permission : "view region" },
+    { name: "Category", href: "/admin/category", icon: FolderIcon,  permission : "view category"},
+    { name: "Faq", href: "/admin/faq", icon: FolderIcon,  permission : "view faq" },
+    { name: "Blog", href: "/admin/blog", icon: FolderIcon,  permission : "view blog" },
+    { name: "Cities", href: "/admin/cities", icon: Bars3Icon,  permission : "view city"},
+    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon,  permission: "view subcategory" },
 ];
 
 
@@ -211,6 +211,7 @@ export default function BackendLayout({ children}) {
                                             <li key={item.name}>
                                                 {
                                                     permissions.includes(item.permission) &&
+                                                    
                                                     <Link
                                                     href={item.href}
                                                     className={

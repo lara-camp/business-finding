@@ -11,7 +11,7 @@ import BusinessProvider from "@/Provider/BusinessProvider";
 
 const steps = ["Build Your Listing", "Futher Details", "Create an ad"];
 
-const Index = ({ categories }) => {
+const Index = ({ categories, regions, cities}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
  
@@ -104,7 +104,11 @@ const Index = ({ categories }) => {
                             Step {activeStep + 1}
                             {activeStep == 0 && 
                                 <BusinessProvider>
-                                    <Business categories={categories} /> 
+                                    <Business 
+                                        categories={categories} 
+                                        regions = {regions}
+                                        cities = {cities}
+                                    /> 
                                 </BusinessProvider>
                             }
                             {activeStep == 1 && "this is step 2 page" }

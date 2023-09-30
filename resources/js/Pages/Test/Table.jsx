@@ -174,9 +174,12 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           </div>
         </div>
       </div>
-      <div className="mt-10">
-        <Pagination links={data.links} meta={data.meta} />
-      </div>
+      {
+        data.data.data.length > 1 &&
+        <div className="mt-10">
+          <Pagination links={data.links} meta={data.meta} />
+        </div>
+      }
     </div>
   );
 }

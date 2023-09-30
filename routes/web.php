@@ -169,6 +169,7 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
         Route::get('/', [BusinessController::class, 'index'])->name('owner.business');
         Route::get('/{id}', [BusinessController::class, 'show'])->name('owner.business.show');
         Route::get('/create', [BusinessController::class, 'create'])->name('owner.business.create');
+        Route::post('/create', [BusinessController::class, 'store'])->name('owner.business.store');
         Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('owner.business.edit');
     });
 });

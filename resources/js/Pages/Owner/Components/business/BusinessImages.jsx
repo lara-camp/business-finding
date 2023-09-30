@@ -171,6 +171,7 @@ const BusinessImages = () => {
                                     </div>
                                     <div className="text-center w-2/12">
                                     <button 
+                                        type="button"
                                         className="p-2 bg-indigo-500 hover:bg-indigo-700 my-2 text-white rounded-md"
                                         onClick={() => toggleFlexDirection(index)}
                                     > 
@@ -206,7 +207,9 @@ const BusinessImages = () => {
                     ))
                 }
                 <div className="text-end">
-                    <button onClick={addNewInputs}>
+                    <button 
+                        type="button"
+                        onClick={addNewInputs}>
                         <BsFillPlusCircleFill size={30}/>
                     </button>
                 </div>

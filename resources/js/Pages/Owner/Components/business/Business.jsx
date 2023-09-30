@@ -10,11 +10,12 @@ import BusinessSocial from "./BusinessSocial";
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 
-const Business = ({categories}) => {
+const Business = ({categories, cities, regions}) => {
     const [open, setOpen] = React.useState(true);
-    const {data, featureInfo} = useContext(BusinessContext)
-    function handleSubmit() {
-        
+    const {data, featureInfo, post} = useContext(BusinessContext)
+    function handleSubmit(e) {
+        e.preventDefault()
+        post(route('owner.business.store'))
     }
     return (
             <div className="my-5 min-h-screen">
@@ -57,7 +58,11 @@ const Business = ({categories}) => {
                         </Collapse>
                     </div>
                     <ListingDetails />
-                    <BusinessDetails categories={categories}/>
+                    <BusinessDetails 
+                        categories={categories} 
+                        cities = {cities}
+                        regions = {regions}
+                    />
                     <FinicialDetails />
                     <BusinessImages />
                     <BusinessDocuments />

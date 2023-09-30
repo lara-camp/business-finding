@@ -4,12 +4,12 @@ import React from 'react'
 import { useState } from 'react'
 
 const BusinessProvider = ({children}) => {
-    const {data, setData, errors} = useForm({
+    const {data, setData, post, errors} = useForm({
         "name" : "",
         "description" : "",
         "status" : "",
         "category_id" : "",
-        "subcategory" : "",
+        "subcategory_id" : "",
         "region_id" : "",
         "city_id" : "",
         "property_status" : "",
@@ -30,7 +30,7 @@ const BusinessProvider = ({children}) => {
     }])
 
   return (
-    <BusinessContext.Provider value={{data, setData, featureInfo, setFeatureInfo}}>
+    <BusinessContext.Provider value={{data, setData, featureInfo, setFeatureInfo, post}}>
         {children}
     </BusinessContext.Provider>
   )
