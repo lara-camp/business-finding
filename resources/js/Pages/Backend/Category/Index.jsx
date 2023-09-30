@@ -13,7 +13,7 @@ const Index = ({categories}) => {
             columns={columns}
             routeName={routeName}
             title={title}
-            create={true}
+            add={true}
             edit={true}
             view={true}
             destroy={true} />

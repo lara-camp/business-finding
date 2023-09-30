@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             AdminSeeder::class,
             CategorySeeder::class,
-            BlogSeeder::class,
+            // BlogSeeder::class,
             FaqSeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             BusinessSeeder::class,
             BusinessFeatureSeeder::class,
             GeneralSettingSeeder::class,
-            ImageSeeder::class,
+            // ImageSeeder::class,
         ]);
     }
 }

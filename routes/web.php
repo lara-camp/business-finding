@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Backend\AccountSettingController;
-use App\Http\Controllers\Backend\GeneralSettingController;
-use App\Http\Controllers\Backend\PermissionController;
-use App\Http\Controllers\Backend\RegionController;
-use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\Backend\BlogController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\FaqController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\FaqController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\RegionController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PermissionController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Backend\AccountSettingController;
+use App\Http\Controllers\Backend\GeneralSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,13 +51,22 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
         Route::post('/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
     });
 
-    // Category------------------------------------------------------------------------------------------------
+    // jCategory------------------------------------------------------------------------------------------------
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
     Route::get('/category/create',[CategoryController::class, 'create'])->name('admin.category.create');
     Route::post('/category/store',[CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
     Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+    // end---------------------------------------------------------------------------------------------------
+
+    // Sub Category------------------------------------------------------------------------------------------------
+    Route::get('/sub_category', [SubCategoryController::class, 'index'])->name('admin.sub_category');
+    Route::get('/sub_category/create',[SubCategoryController::class, 'create'])->name('admin.sub_category.create');
+    Route::post('/sub_category/store',[SubCategoryController::class, 'store'])->name('admin.sub_category.store');
+    // Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
+    // Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
+    // Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------

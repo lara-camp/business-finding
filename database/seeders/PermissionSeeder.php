@@ -35,11 +35,16 @@ class PermissionSeeder extends Seeder
             'delete category',
             'edit category',
 
+            'create subcategory',
+            'view subcategory',
+            'delete subcategory',
+            'edit subcategory',
+
             'create faq',
             'view faq',
             'delete faq',
             'edit faq',
-            
+
             'create blog',
             'view blog',
             'delete blog',

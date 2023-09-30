@@ -23,6 +23,7 @@ const intitalNavigation = [
     { name: "Users", href: "/admin/user", icon: UsersIcon, current: false },
     { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false },
     { name: "Category", href: "/admin/category", icon: FolderIcon, current: false },
+    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, current: false },
     { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false },
     { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false },
 ];
@@ -235,7 +236,7 @@ export default function BackendLayout({ children }) {
                                         href="/admin/setting/account"
                                         className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
                                         ${
-                                            url.startsWith('/admin/setting') 
+                                            url.startsWith('/admin/setting')
                                             ? "bg-gray-800 text-white"
                                             : "text-gray-400 hover:text-white hover:bg-gray-800"
                                         }
@@ -374,7 +375,7 @@ export default function BackendLayout({ children }) {
                                                             method="post"
                                                             className="block px-3 py-1 text-sm leading-6 text-gray-900"
                                                         >
-                                                            Logout 
+                                                            Logout
                                                         </Link>
                                                 </Menu.Item>
                                         </Menu.Items>

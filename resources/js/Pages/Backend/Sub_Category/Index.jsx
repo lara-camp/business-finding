@@ -2,15 +2,15 @@ import React from 'react'
 import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
-const Index = ({blogs}) => {
-  const columns = ['id', 'image', 'title', 'tag', 'user_id', 'status', 'created_at', 'action']
-    const routeName = 'blog'
-    const title = 'blog'
-    console.log(blogs);
+const Index = ({subcategories}) => {
+  const columns = ['id', 'name', 'slug', 'category_name', 'created_at', 'action']
+    const routeName = 'subcategory'
+    const title = 'subcategory'
+    console.log(subcategories)
   return (
       <div>
           {<Table
-                data={blogs}
+                data={subcategories}
                 columns={columns}
                 routeName={routeName}
                 title={title}
