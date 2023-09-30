@@ -13,11 +13,29 @@ class CategoryController extends Controller
 {
     public function index() {
         // dd("hello");
-        $categories = Category::paginate(10);
-        // dd(new CategoryCollection($categories));
+        $categories = Category::latest()->paginate(10);
         return Inertia::render('Backend/Category/Index', [
             'categories' => new CategoryCollection($categories),
         ]);
+    }
+
+    public function create()
+    {
+        // dd("create");
+        return Inertia::render('Backend/Category/Create', [
+            'category' => new Category(),
+            ]
+
+        );
+    }
+
+    public function store(Request $request)
+    {
+        Category::create([
+            'name' => $request->category_name,
+            'slug' => $request->slug,
+        ]);
+        return redirect()->route('admin.category');
     }
 
     public function edit($id)

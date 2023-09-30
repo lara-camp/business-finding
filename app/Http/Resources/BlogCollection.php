@@ -20,9 +20,9 @@ class BlogCollection extends ResourceCollection
             {
                 return [
                     'id' => $blog->id,
-                    'image' => $blog->image->url,
+                    'image' => $blog->cover_image,
                     'title' => $blog->title,
-                    'body' => $blog->body,
+                    // 'body' => $blog->body,
                     'tag' => $blog->tag,
                     'user_id' => $blog->user_id,
                     'status' => $blog->status,

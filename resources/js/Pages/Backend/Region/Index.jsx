@@ -2,13 +2,14 @@ import React from 'react'
 import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout';
 
-const Index = ({regions}) => {
-    const columns = ['id', 'name','type', 'created_at', 'action'];
-    const routeName = "region"
+const Index = ({ regions }) => {
+  const columns = ['id', 'name', 'type', 'created_at', 'action'];
+  const routeName = "region"
+  const title = "region"
   return (
     <div>
-      <Table data={regions} columns={columns} routeName={routeName} />
-    </div>
+      <Table data={regions} columns={columns} routeName={routeName} title={title} add={true} edit={true} view={true} />
+    </div >
   )
 }
 

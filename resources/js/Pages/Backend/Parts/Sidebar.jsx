@@ -18,7 +18,7 @@ import {
     MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 
-const Sidebar = ({setSideBarOpen, sideBarOpen}) => {
+const Sidebar = ({ setSideBarOpen, sideBarOpen }) => {
 
     const navigation = [
         { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -31,6 +31,12 @@ const Sidebar = ({setSideBarOpen, sideBarOpen}) => {
         {
             name: "Regions",
             href: "/admin/regions",
+            icon: FolderIcon,
+            current: false,
+        },
+        {
+            name: "Cities",
+            href: "/admin/cities",
             icon: FolderIcon,
             current: false,
         },

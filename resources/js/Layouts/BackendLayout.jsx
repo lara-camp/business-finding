@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Link } from "@inertiajs/react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { usePage } from '@inertiajs/react'
+import ProfileImage from '../Images/default/profile.png'
 
 import {
     Bars3Icon,
@@ -17,14 +18,17 @@ import {
     ChevronDownIcon,
     MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
-    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true },
-    { name: "Users", href: "/admin/user", icon: UsersIcon, current: false },
-    { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false },
-    { name: "Category", href: "/admin/category", icon: FolderIcon, current: false },
-    { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false },
-    { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false },
+    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: true , permission : "view dashboard" },
+    { name: "Users", href: "/admin/user", icon: UsersIcon, current: false , permission : "view user" },
+    { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false , permission : "view region" },
+    { name: "Category", href: "/admin/category", icon: FolderIcon, current: false , permission : "view category"},
+    { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false , permission : "view faq" },
+    { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false , permission : "view blog" },
+    { name: "Cities", href: "/admin/cities", icon: Bars3Icon, current: false , permission : "view city"},
+    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permisson: "view subcategory" },
 ];
 
 
@@ -39,10 +43,11 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function BackendLayout({ children }) {
+export default function BackendLayout({ children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [navigation, setNavigation] = useState(intitalNavigation)
     const { url, component } = usePage()
+    const {general_setting, auth, permissions} = usePage().props;
 
     return (
         <>
@@ -111,7 +116,7 @@ export default function BackendLayout({ children }) {
                                         <div className="flex items-center h-16 shrink-0">
                                             <img
                                                 className="w-auto h-8"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                                src={general_setting.logo}
                                                 alt="Your Company"
                                             />
                                         </div>
@@ -190,7 +195,7 @@ export default function BackendLayout({ children }) {
                         <div className="flex items-center h-16 shrink-0">
                             <img
                                 className="w-auto h-8"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                src={general_setting.logo}
                                 alt="Your Company"
                             />
                         </div>
@@ -204,7 +209,9 @@ export default function BackendLayout({ children }) {
                                     <ul role="list" className="-mx-2 space-y-1">
                                         {navigation.map((item) => (
                                             <li key={item.name}>
-                                                <Link
+                                                {
+                                                    permissions.includes(item.permission) &&
+                                                    <Link
                                                     href={item.href}
                                                     className={
                                                         `
@@ -224,6 +231,7 @@ export default function BackendLayout({ children }) {
 
                                                     {item.name}
                                                 </Link>
+                                                }
                                             </li>
                                         ))}
                                     </ul>
@@ -231,11 +239,13 @@ export default function BackendLayout({ children }) {
 
 
                                 <li className="mt-auto">
-                                    <Link
+                                    {
+                                        permissions.includes('view setting') &&
+                                        <Link
                                         href="/admin/setting/account"
                                         className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
                                         ${
-                                            url.startsWith('/admin/setting') 
+                                            url.startsWith('/admin/setting')
                                             ? "bg-gray-800 text-white"
                                             : "text-gray-400 hover:text-white hover:bg-gray-800"
                                         }
@@ -247,6 +257,7 @@ export default function BackendLayout({ children }) {
                                         />
                                         Settings
                                     </Link>
+                                    }
                                 </li>
                             </ul>
                         </nav>
@@ -329,18 +340,26 @@ export default function BackendLayout({ children }) {
                                             Open user menu
                                         </span>
 
-                                        <img
+                                        {
+                                            auth.user.image ?
+                                            <img
                                             className="w-8 h-8 rounded-full bg-gray-50"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            src={`/storage/${auth.user.image}`}
                                             alt=""
-                                        />
+                                            />  : 
+                                            <img
+                                                className="w-8 h-8 rounded-full bg-gray-50"
+                                                src={ProfileImage}
+                                                alt=""
+                                            />
+                                        }
 
                                         <span className="hidden lg:flex lg:items-center">
                                             <span
                                                 className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                                                 aria-hidden="true"
                                             >
-                                                Tom Cook
+                                               {auth.user.name}
                                             </span>
 
                                             <ChevronDownIcon
@@ -374,7 +393,7 @@ export default function BackendLayout({ children }) {
                                                             method="post"
                                                             className="block px-3 py-1 text-sm leading-6 text-gray-900"
                                                         >
-                                                            Logout 
+                                                            Logout
                                                         </Link>
                                                 </Menu.Item>
                                         </Menu.Items>
@@ -384,9 +403,12 @@ export default function BackendLayout({ children }) {
                         </div>
                     </div>
 
-                    <main className="py-10">
+                    <main className="py-10 h-screen">
                         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                     </main>
+                    <footer>
+                        <Footer title={general_setting.title} />
+                    </footer>
                 </div>
             </div>
         </>

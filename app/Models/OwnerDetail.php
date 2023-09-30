@@ -16,8 +16,8 @@ class OwnerDetail extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    // public function notifies()
-    // {
-    //     return $this->hasMany(Notify::class, 'user_id', 'user_id');
-    // }
+    public function notifies()
+    {
+        return $this->hasMany(Notify::class, 'user_id', 'user_id');
+    }
 }

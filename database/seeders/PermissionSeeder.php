@@ -35,15 +35,34 @@ class PermissionSeeder extends Seeder
             'delete category',
             'edit category',
 
+            'create subcategory',
+            'view subcategory',
+            'delete subcategory',
+            'edit subcategory',
+
             'create faq',
             'view faq',
             'delete faq',
             'edit faq',
-            
+
             'create blog',
             'view blog',
             'delete blog',
             'edit blog',
+
+            'create permission',
+            'view permission',
+            'delete permission',
+            'edit permission',
+
+            'view dashboard',
+            'view setting',
+
+            'view city',
+            'edit city',
+            'delete city',
+            'create city'
+
         ];
 
         foreach ($permissions as $key => $permission) {

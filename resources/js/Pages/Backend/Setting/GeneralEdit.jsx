@@ -9,7 +9,7 @@ const GeneralEdit = ({gs}) => {
   const {data, setData} = useForm({
     'name' : gs.name,
     'value' : gs.value,
-    'image' : null,
+    'image' : null, 
   })
   const {errors} = usePage().props;
   function submit(e) {

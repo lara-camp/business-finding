@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Backend\GeneralSettingCollection;
 use App\Http\Resources\Backend\GeneralSettingResource;
