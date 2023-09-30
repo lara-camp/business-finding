@@ -4,7 +4,7 @@ import BackendLayout from '@/Layouts/BackendLayout'
 
 const Index = ({subcategories}) => {
   const columns = ['id', 'name', 'slug', 'category_name', 'created_at', 'action']
-    const routeName = 'subcategory'
+    const routeName = 'sub_category'
     const title = 'subcategory'
     console.log(subcategories)
   return (
