@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { Link } from "@inertiajs/react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { usePage } from '@inertiajs/react'
-import ProfileImage from '../Images/default/profile.png'
+import { usePage } from "@inertiajs/react";
+import ProfileImage from "../Images/default/profile.png";
 
 import {
     Bars3Icon,
@@ -21,20 +21,29 @@ import {
 import Footer from "@/Pages/Backend/Parts/Footer";
 
 const intitalNavigation = [
-    { name: "Dashboard", href: route('owner.dashboard'), icon: HomeIcon, current: true },
-    { name: "Business", href: route('owner.business'), icon: UsersIcon, current: false},
+    {
+        name: "Dashboard",
+        href: route("owner.dashboard"),
+        icon: HomeIcon,
+        current: true,
+    },
+    {
+        name: "Business",
+        href: route("owner.business"),
+        icon: UsersIcon,
+        current: false,
+    },
 ];
-
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function OwnerLayout({ children}) {
+export default function OwnerLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [navigation, setNavigation] = useState(intitalNavigation)
-    const { url, component } = usePage()
-    const {general_setting, auth, permissions} = usePage().props;
+    const [navigation, setNavigation] = useState(intitalNavigation);
+    const { url, component } = usePage();
+    const { general_setting, auth, permissions } = usePage().props;
 
     return (
         <>
@@ -129,13 +138,13 @@ export default function OwnerLayout({ children}) {
                                                                         href={
                                                                             item.href
                                                                         }
-                                                                        className={classNames(
-                                                                            item.current
+                                                                        className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
+                                                                        ${
+                                                                            url.startsWith(item.href)
                                                                                 ? "bg-gray-800 text-white"
-                                                                                : "text-gray-400 hover:text-white hover:bg-gray-800",
-
-                                                                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                                                        )}
+                                                                                : "text-gray-400 hover:text-white hover:bg-gray-800"
+                                                                        }
+                                                                        `}
                                                                     >
                                                                         <item.icon
                                                                             className="w-6 h-6 shrink-0"
@@ -197,52 +206,50 @@ export default function OwnerLayout({ children}) {
                                         {navigation.map((item) => (
                                             <li key={item.name}>
                                                 {
-                                                    
                                                     <Link
-                                                    href={item.href}
-                                                    className={
-                                                        `
+                                                        href={item.href}
+                                                        className={`
                                                         ${
-                                                            url.startsWith(item.href)
-                                                            ? "bg-gray-800 text-white"
-                                                            : "text-gray-400 hover:text-white hover:bg-gray-800"
+                                                            url.startsWith(
+                                                                item.href
+                                                            )
+                                                                ? "bg-gray-800 text-white"
+                                                                : "text-gray-400 hover:text-white hover:bg-gray-800"
                                                         }
                                                         group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold
-                                                        `
-                                                    }
-                                                >
-                                                    <item.icon
-                                                        className="w-6 h-6 shrink-0"
-                                                        aria-hidden="true"
-                                                    />
+                                                        `}
+                                                    >
+                                                        <item.icon
+                                                            className="w-6 h-6 shrink-0"
+                                                            aria-hidden="true"
+                                                        />
 
-                                                    {item.name}
-                                                </Link>
+                                                        {item.name}
+                                                    </Link>
                                                 }
                                             </li>
                                         ))}
                                     </ul>
                                 </li>
 
-
                                 <li className="mt-auto">
                                     {
                                         <Link
-                                        href="/owner/setting/account"
-                                        className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
+                                            href="/owner/setting/account"
+                                            className={`group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white
                                         ${
-                                            url.startsWith('/owner/setting') 
-                                            ? "bg-gray-800 text-white"
-                                            : "text-gray-400 hover:text-white hover:bg-gray-800"
+                                            url.startsWith("/owner/setting")
+                                                ? "bg-gray-800 text-white"
+                                                : "text-gray-400 hover:text-white hover:bg-gray-800"
                                         }
                                         `}
-                                    >
-                                        <Cog6ToothIcon
-                                            className="w-6 h-6 shrink-0"
-                                            aria-hidden="true"
-                                        />
-                                        Settings
-                                    </Link>
+                                        >
+                                            <Cog6ToothIcon
+                                                className="w-6 h-6 shrink-0"
+                                                aria-hidden="true"
+                                            />
+                                            Settings
+                                        </Link>
                                     }
                                 </li>
                             </ul>
@@ -326,26 +333,26 @@ export default function OwnerLayout({ children}) {
                                             Open user menu
                                         </span>
 
-                                        {
-                                            auth.user.image ?
+                                        {auth.user.image ? (
                                             <img
-                                            className="w-8 h-8 rounded-full bg-gray-50"
-                                            src={`/storage/${auth.user.image}`}
-                                            alt=""
-                                            />  : 
+                                                className="w-8 h-8 rounded-full bg-gray-50"
+                                                src={`/storage/${auth.user.image}`}
+                                                alt=""
+                                            />
+                                        ) : (
                                             <img
                                                 className="w-8 h-8 rounded-full bg-gray-50"
                                                 src={ProfileImage}
                                                 alt=""
                                             />
-                                        }
+                                        )}
 
                                         <span className="hidden lg:flex lg:items-center">
                                             <span
                                                 className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                                                 aria-hidden="true"
                                             >
-                                               {auth.user.name}
+                                                {auth.user.name}
                                             </span>
 
                                             <ChevronDownIcon
@@ -365,23 +372,25 @@ export default function OwnerLayout({ children}) {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                                                <Menu.Item>
-                                                        <Link
-                                                            href={route('owner.account')}
-                                                            className="block px-3 py-1 text-sm leading-6 text-gray-900"
-                                                        >
-                                                            Profile
-                                                        </Link>
-                                                </Menu.Item>
-                                                <Menu.Item>
-                                                        <Link
-                                                            href={route('logout')}
-                                                            method="post"
-                                                            className="block px-3 py-1 text-sm leading-6 text-gray-900"
-                                                        >
-                                                            Logout 
-                                                        </Link>
-                                                </Menu.Item>
+                                            <Menu.Item>
+                                                <Link
+                                                    href={route(
+                                                        "owner.account"
+                                                    )}
+                                                    className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                                                >
+                                                    Profile
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                <Link
+                                                    href={route("logout")}
+                                                    method="post"
+                                                    className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                                                >
+                                                    Logout
+                                                </Link>
+                                            </Menu.Item>
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
@@ -389,7 +398,7 @@ export default function OwnerLayout({ children}) {
                         </div>
                     </div>
 
-                    <main className="py-10 h-screen">
+                    <main className="py-10 min-h-screen">
                         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                     </main>
                     <footer>

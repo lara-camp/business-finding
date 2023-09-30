@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Backend\Owner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BusinessController extends Controller
 {
     public function index() {
-        return Inertia::render('Owner/Business/Index');
+        $categories = Category::latest('id')->get();
+        return Inertia::render('Owner/Business/Index', [
+            'categories' => new CategoryCollection($categories),
+        ]);
     }
 
     public function show() {
