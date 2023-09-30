@@ -39,7 +39,7 @@ class PermissionSeeder extends Seeder
             'view faq',
             'delete faq',
             'edit faq',
-            
+
             'create blog',
             'view blog',
             'delete blog',
@@ -52,10 +52,12 @@ class PermissionSeeder extends Seeder
 
             'view dashboard',
             'view setting',
-            
+
             'view city',
             'edit city',
-            'delete city'
+            'delete city',
+            'create city'
+
         ];
 
         foreach ($permissions as $key => $permission) {
