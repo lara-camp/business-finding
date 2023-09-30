@@ -9,7 +9,9 @@ const Index = ({ cities }) => {
     const title = "city"
     return (
         <div>
-            <Table data={cities} columns={columns} routeName={routeName} title={title} edit={true} />
+            <Table data={cities} columns={columns} routeName={routeName} title={title} edit={true} view={true}
+                destroy={true}
+                add={true} />
         </div >
     )
 }

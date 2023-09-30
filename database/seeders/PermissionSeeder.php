@@ -57,10 +57,12 @@ class PermissionSeeder extends Seeder
 
             'view dashboard',
             'view setting',
-            
+
             'view city',
             'edit city',
-            'delete city'
+            'delete city',
+            'create city'
+
         ];
 
         foreach ($permissions as $key => $permission) {

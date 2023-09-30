@@ -2,7 +2,7 @@ import React from 'react'
 import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
-const Index = ({faqs}) => {
+const Index = ({ faqs }) => {
   const columns = ['id', 'question', 'answer', 'status', 'created_at', 'action']
   const routeName = 'faq'
   const title = 'faq'

@@ -30,17 +30,17 @@ use App\Http\Controllers\SubCategoryController;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Admin
 
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
-Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(function() {
+Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(function () {
     // Dashboard
     Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
 
     // User
-    Route::prefix('user')->group(function() {
+    Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.users');
         Route::get('/create', [UserController::class, 'create']);
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
@@ -85,9 +85,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
 
     // Setting
 
-    Route::prefix('setting')->group(function() {
+    Route::prefix('setting')->group(function () {
         // Account Setting
-        Route::prefix('account')->group(function() {
+        Route::prefix('account')->group(function () {
             Route::get('/', [AccountSettingController::class, 'index'])->name('admin.account');
             Route::get('/edit', [AccountSettingController::class, 'edit']);
             Route::post('/edit', [AccountSettingController::class, 'update']);
@@ -98,7 +98,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
         });
 
         // General Setting
-        Route::prefix('general')->group(function() {
+        Route::prefix('general')->group(function () {
             Route::get('/', [GeneralSettingController::class, 'index'])->name('admin.general');
             Route::get('/create', [GeneralSettingController::class, 'create'])->name('admin.general.create');
             Route::get('/edit/{id}', [GeneralSettingController::class, 'edit'])->name('admin.general.edit');
@@ -106,14 +106,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
         });
 
         // Permission Setting
-        Route::prefix('permission')->group(function() {
+        Route::prefix('permission')->group(function () {
             Route::get('/', [PermissionController::class, 'index'])->name('admin.permission');
             Route::get('/create', [PermissionController::class, 'create'])->name('admin.permission.create');
             Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
             Route::post('/edit/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
         });
-
-
     });
 });
 
@@ -125,6 +123,9 @@ Route::get('/admin/region/edit/{id}', [RegionController::class, 'edit'])->name('
 
 // cities
 Route::get('/admin/cities', [CityController::class, 'index'])->name('admin.cities');
+Route::get('/admin/cities/create', [CityController::class, 'create'])->name('admin.cities.create');
+Route::get('/admin/cities/{id}', [CityController::class, 'show'])->name('admin.cities.show');
+Route::get('/admin/cities/edit/{id}', [CityController::class, 'edit'])->name('admin.cities.edit');
 
 
 
@@ -143,28 +144,28 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/logout', function() {
+Route::get('/logout', function () {
     Auth::logout();
 });
 
 // Ownner 
 
-Route::prefix('owner')->middleware('auth', 'role:owner')->group(function() {
+Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
     Route::get('/dashboard', [DashboardContoller::class, 'index'])->name('owner.dashboard');
 
-    Route::prefix('setting')->group(function() {
-        Route::prefix('account')->group(function() {
+    Route::prefix('setting')->group(function () {
+        Route::prefix('account')->group(function () {
             Route::get('/', [AccountController::class, 'index'])->name('owner.account');
             Route::get('/edit', [AccountController::class, 'edit'])->name('owner.account.edit');
             Route::post('/edit', [AccountController::class, 'update'])->name('owner.account.update');
-            
+
             // Update password 
 
             Route::match(['get', 'post'], '/change-password', [AccountController::class, 'change_password'])->name('owner.account.change-password');
         });
     });
 
-    Route::prefix('business')->group(function() {
+    Route::prefix('business')->group(function () {
         Route::get('/', [BusinessController::class, 'index'])->name('owner.business');
         Route::get('/{id}', [BusinessController::class, 'show'])->name('owner.business.show');
         Route::get('/create', [BusinessController::class, 'create'])->name('owner.business.create');
@@ -172,4 +173,4 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function() {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
