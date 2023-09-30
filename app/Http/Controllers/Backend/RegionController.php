@@ -21,10 +21,7 @@ class RegionController extends Controller
 
     public function create()
     {
-        $regions = Region::paginate(10);
-        return Inertia::render('Backend/Region/Create', [
-            'region' => new RegionResource($regions),
-        ]);
+        return Inertia::render('Backend/Region/Create');
     }
 
     public function show($id)
