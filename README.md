@@ -22,5 +22,6 @@
 ### please make sure to install package manually
 
 `npm i react-icons`
+`npm i react-quill`
 
 
