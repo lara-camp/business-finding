@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(100)->create();
 
-        
+
         $this->call([
             RoleSeeder::class,
             PermissionSeeder::class,
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             BusinessFeatureSeeder::class,
             GeneralSettingSeeder::class,
             OwnerDetailSeeder::class,
-            // ImageSeeder::class,
+            ImageSeeder::class,
         ]);
 
         $user = User::factory()->create([

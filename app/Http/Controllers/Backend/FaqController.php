@@ -17,6 +17,14 @@ class FaqController extends Controller
         return Inertia::render('Backend/Faq/Index', ['faqs' => new FaqCollection($faqs)]);
     }
 
+    public function create()
+    {
+        // dd("hi");
+        return Inertia::render('Backend/Faq/Create',[
+            'faq' => new Faq(),
+        ]);
+    }
+
     public function edit($id)
     {
         $faq = Faq::findOrFail($id);

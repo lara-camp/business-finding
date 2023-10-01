@@ -55,15 +55,17 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
     Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
     // end---------------------------------------------------------------------------------------------------
 
     // Sub Category------------------------------------------------------------------------------------------------
     Route::get('/sub_category', [SubCategoryController::class, 'index'])->name('admin.sub_category');
     Route::get('/sub_category/create',[SubCategoryController::class, 'create'])->name('admin.sub_category.create');
     Route::post('/sub_category/store',[SubCategoryController::class, 'store'])->name('admin.sub_category.store');
-    // Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
-    // Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
-    // Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');
+    Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
+    Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');
+    Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
+    Route::post('/sub_category/update/{id}', [SubCategoryController::class, 'update'])->name('admin.sub_category.update');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
@@ -77,7 +79,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
 
     // Faq------------------------------------------------------------------------------------------------
     Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq');
-    Route::inertia('/faq/create', [FaqController::class, 'create']);
+    Route::get('/faq/create', [FaqController::class, 'create'])->name('admin.faq.create');
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::get('/faq/{id}', [FaqController::class, 'show'])->name('admin.faq.show');
     Route::post('/faq/{id}', [FaqController::class, 'destroy'])->name('admin.faq.delete');
@@ -148,7 +150,7 @@ Route::get('/logout', function () {
     Auth::logout();
 });
 
-// Ownner 
+// Ownner
 
 Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
     Route::get('/dashboard', [DashboardContoller::class, 'index'])->name('owner.dashboard');
@@ -159,7 +161,7 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
             Route::get('/edit', [AccountController::class, 'edit'])->name('owner.account.edit');
             Route::post('/edit', [AccountController::class, 'update'])->name('owner.account.update');
 
-            // Update password 
+            // Update password
 
             Route::match(['get', 'post'], '/change-password', [AccountController::class, 'change_password'])->name('owner.account.change-password');
         });

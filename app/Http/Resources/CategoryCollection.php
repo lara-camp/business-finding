@@ -18,10 +18,12 @@ class CategoryCollection extends ResourceCollection
         return [
             'data' => $this->collection->transform(
                 function($category) {
+                    // dd($category->image->url);
                     return [
                         'id' => $category->id,
                         'name' => $category->name,
                         'slug' => $category->slug,
+                        'image' => $category->image->url,
                         'created_at' => $category->created_at->toFormattedDateString(),
                     ];
                 }

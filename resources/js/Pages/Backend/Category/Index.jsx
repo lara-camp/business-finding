@@ -3,7 +3,7 @@ import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
 const Index = ({ categories }) => {
-  const columns = ['id', 'name', 'slug', 'created_at', 'action']
+  const columns = ['id','image', 'name', 'slug', 'created_at', 'action']
   const routeName = 'category'
   const title = 'category'
   return (

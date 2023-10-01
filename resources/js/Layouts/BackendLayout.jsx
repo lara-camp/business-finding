@@ -25,10 +25,10 @@ const intitalNavigation = [
     { name: "Users", href: "/admin/user", icon: UsersIcon, current: false , permission : "view user" },
     { name: "Regions", href: "/admin/regions", icon: FolderIcon, current: false , permission : "view region" },
     { name: "Category", href: "/admin/category", icon: FolderIcon, current: false , permission : "view category"},
+    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permission: "view subcategory" },
     { name: "Faq", href: "/admin/faq", icon: FolderIcon, current: false , permission : "view faq" },
     { name: "Blog", href: "/admin/blog", icon: FolderIcon, current: false , permission : "view blog" },
     { name: "Cities", href: "/admin/cities", icon: Bars3Icon, current: false , permission : "view city"},
-    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permisson: "view subcategory" },
 ];
 
 
@@ -346,7 +346,7 @@ export default function BackendLayout({ children}) {
                                             className="w-8 h-8 rounded-full bg-gray-50"
                                             src={`/storage/${auth.user.image}`}
                                             alt=""
-                                            />  : 
+                                            />  :
                                             <img
                                                 className="w-8 h-8 rounded-full bg-gray-50"
                                                 src={ProfileImage}

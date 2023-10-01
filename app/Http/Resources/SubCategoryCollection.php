@@ -22,7 +22,7 @@ class SubCategoryCollection extends ResourceCollection
                         'id' => $sub_category->id,
                         'name' => $sub_category->name,
                         'slug' => $sub_category->slug,
-                        'category_name' => $sub_category->category_id,
+                        'category_name' => $sub_category->category->name,
                         'created_at' => $sub_category->created_at->toFormattedDateString(),
                     ];
                 }
