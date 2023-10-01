@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('sub_category_id')->constrained('sub_categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
             $table->string('street');
+            $table->string('name');
             $table->text('description');
-            $table->integer('price');
-            $table->json('documentation');
+            $table->text('status')->comment('for_sale/under_offer/sold')->default('for_sale');
+            $table->string('property_status')->comment('real_property/lease/both_freehold_and_leasehold/n-a')->default('real_property');
+            $table->integer('asking_price');
+            $table->json('documents');
             $table->json('info');
-            $table->integer('views');
-            $table->integer('likes');
+            $table->integer('views')->default(0);
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

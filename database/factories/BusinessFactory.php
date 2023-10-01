@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\City;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,12 +29,13 @@ class BusinessFactory extends Factory
 
         return [
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
-            'category_id' => $this->faker->randomElement(Category::pluck('id')->toArray()),
+            'sub_category_id' => $this->faker->randomElement(SubCategory::pluck('id')->toArray()),
             'city_id' => $this->faker->randomElement(City::pluck('id')->toArray()),
             'street' => $this->faker->streetAddress(),
+            'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomNumber(5, false),
-            'documentation' => json_encode(['doc1', 'doc2', 'doc3']),
+            'asking_price' => $this->faker->randomNumber(5, false),
+            'documents' => json_encode(['doc1', 'doc2', 'doc3']),
             'info' => json_encode($info),
             'views' => $this->faker->randomNumber(5, false),
             'likes' => $this->faker->randomNumber(5, false),

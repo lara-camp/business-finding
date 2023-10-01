@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             AdminSeeder::class,
             CategorySeeder::class,
+            SubCategorySeeder::class,
             // BlogSeeder::class,
             FaqSeeder::class,
             RegionSeeder::class,

@@ -15,6 +15,7 @@ const BusinessProvider = ({children}) => {
         "subcategory_id" : "",
         "region_id" : "",
         "city_id" : "",
+        "street" : "",
         "property_status" : "",
         "asking_price" : "",
         "revenue_price" : "",

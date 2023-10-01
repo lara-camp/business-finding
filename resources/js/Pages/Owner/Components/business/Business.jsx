@@ -9,18 +9,21 @@ import BusinessDocuments from "./BusinessDocuments";
 import BusinessSocial from "./BusinessSocial";
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 const Business = ({categories, cities, regions, subcategories}) => {
     const [open, setOpen] = React.useState(true);
     const {data,featureInfo, } = useContext(BusinessContext)
-
+    const { flash } = usePage().props
+    console.log(flash.message)
     function handleSubmit(e) {
         e.preventDefault()
         router.post(route('owner.business.store'), {
             data : data,
             feature_info : featureInfo,
         },{   
+            preserveScroll : true,
+            preserveState : true,
             forceFormData: true,
             onsuccess : () => {
                 console.log("success")

@@ -42,6 +42,9 @@ class HandleInertiaRequests extends Middleware
                 'website-name' => Helper::generalSetting('Website Name'),
                 'title'        => Helper::generalSetting('title'),
             ),
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
+            ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

@@ -16,8 +16,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
 
     const handleCategoryChange = (e) => {
         const category_id = e.target.value;
-        const relavantSubcategories = subcategories.data.filter(item => item.category_name == category_id)
-        console.log(relavantSubcategories)
+        const relavantSubcategories = subcategories.data.filter(item => item.category_id == category_id)
         setFilteredSubcategory(relavantSubcategories);
     }
 
