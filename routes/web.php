@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\Owner\AccountController;
 use App\Http\Controllers\Backend\AccountSettingController;
 use App\Http\Controllers\Backend\GeneralSettingController;
+use App\Http\Controllers\Backend\IndustryController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
 use App\Http\Controllers\SubCategoryController;
@@ -82,9 +83,20 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     // Faq------------------------------------------------------------------------------------------------
     Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq');
     Route::get('/faq/create', [FaqController::class, 'create'])->name('admin.faq.create');
+    Route::post('/faq/store', [FaqController::class, 'store'])->name('admin.faq.store');
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('admin.faq.edit');
+    Route::post('/faq/update/{id}', [FaqController::class, 'update'])->name('admin.faq.update');
     Route::get('/faq/{id}', [FaqController::class, 'show'])->name('admin.faq.show');
     Route::post('/faq/{id}', [FaqController::class, 'destroy'])->name('admin.faq.delete');
+    // end---------------------------------------------------------------------------------------------------
+    // industry------------------------------------------------------------------------------------------------
+    Route::get('/industry', [IndustryController::class, 'index'])->name('admin.industry');
+    Route::get('/industry/create', [IndustryController::class, 'create'])->name('admin.industry.create');
+    Route::post('/industry/store', [IndustryController::class, 'store'])->name('admin.industry.store');
+    Route::get('/industry/edit/{id}', [IndustryController::class, 'edit'])->name('admin.industry.edit');
+    Route::post('/industry/update/{id}', [IndustryController::class, 'update'])->name('admin.industry.update');
+    Route::get('/industry/{id}', [IndustryController::class, 'show'])->name('admin.industry.show');
+    Route::post('/industry/{id}', [IndustryController::class, 'destroy'])->name('admin.industry.delete');
     // end---------------------------------------------------------------------------------------------------
 
     // Setting

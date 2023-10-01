@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Faq;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Resources\FaqResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FaqCollection;
-use App\Http\Resources\FaqResource;
-use App\Models\Faq;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class FaqController extends Controller
 {
     public function index()
     {
-        $faqs = Faq::paginate(10);
+        $faqs = Faq::latest()->paginate(10);
         return Inertia::render('Backend/Faq/Index', ['faqs' => new FaqCollection($faqs)]);
     }
 
@@ -25,10 +26,55 @@ class FaqController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $rules = [
+            'question' => 'required|string',
+            'answer' => 'required|string',
+            'status' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.fag.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        Faq::create([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'status' => $request->status,
+        ]);
+        return to_route('admin.faq');
+    }
+
     public function edit($id)
     {
         $faq = Faq::findOrFail($id);
         return Inertia::render('Backend/Faq/Edit', ['faq' => new FaqResource($faq)]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $rules = [
+            'question' => 'required|string',
+            'answer' => 'required|string',
+            'status' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.fag.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $faq = Faq::findOrFail($id);
+        $faq->update($request->all());
+        return to_route('admin.faq');
+
     }
     public function show($id)
     {
