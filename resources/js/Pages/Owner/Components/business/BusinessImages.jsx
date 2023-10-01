@@ -50,11 +50,12 @@ const BusinessImages = () => {
         setFeatureInfo([...featureInfo, {
             image : "",
             text : "",
+            flex_direction : 'flex-row',
         }])
     }
 
     const handleFeatureImageChange = (index, e) => {
-        const { name, files } = e.target;
+        const {files } = e.target;
         const reader = new FileReader();
         reader.onload = () => {
             const imgUrl = reader.result; 
@@ -67,12 +68,16 @@ const BusinessImages = () => {
         // Add to form Data 
 
         const formData = [...featureInfo];
-        formData[index] = {image : e.target.files[0], text : featureInfo[index].text}
+        formData[index] = {
+            image : e.target.files[0], 
+            text : featureInfo[index].text,
+            flex_direction : featureInfo[index].flex_direction
+        }
         setFeatureInfo(formData)
     }
 
     const handleFeatureTextChange = (index, e) => {
-        const {name, value} = e.target;
+        const {value} = e.target;
         const updatePreviews = [...featurePreviews];
         updatePreviews[index] = {source : featurePreviews[index].source , text : value,}
         setFeaturePreviews(updatePreviews)
@@ -80,7 +85,11 @@ const BusinessImages = () => {
         // Add data to form 
 
         const formData = [...featureInfo];
-        formData[index] = {image : formData[index].image, text : value}
+        formData[index] = {
+            image : formData[index].image,
+            text : value,
+            flex_direction : featureInfo[index].flex_direction
+        }
         setFeatureInfo(formData)
     }
 
@@ -95,6 +104,18 @@ const BusinessImages = () => {
                 : "flex-row"
         }
         setFeaturePreviews(updatePreviews)
+
+        // Add direction to form 
+
+        const formData = [...featureInfo]
+        formData[index] = {
+            source : featureInfo[index].image,
+            text : featureInfo[index].text,
+            flex_direction : 
+                    featureInfo[index].flex_direction === "flex-row"
+                    ? "flex-row-reverse"
+                    : "flex-row"
+        }
     }
 
     const handleImagesChange = (e) => {

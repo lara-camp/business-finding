@@ -11,7 +11,7 @@ import BusinessProvider from "@/Provider/BusinessProvider";
 
 const steps = ["Build Your Listing", "Futher Details", "Create an ad"];
 
-const Index = ({ categories, regions, cities}) => {
+const Index = ({ categories, regions, cities, subcategories}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
  
@@ -108,6 +108,7 @@ const Index = ({ categories, regions, cities}) => {
                                         categories={categories} 
                                         regions = {regions}
                                         cities = {cities}
+                                        subcategories={subcategories}
                                     /> 
                                 </BusinessProvider>
                             }

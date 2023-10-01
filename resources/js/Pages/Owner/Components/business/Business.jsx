@@ -9,13 +9,26 @@ import BusinessDocuments from "./BusinessDocuments";
 import BusinessSocial from "./BusinessSocial";
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
+import { router } from "@inertiajs/react";
 
-const Business = ({categories, cities, regions}) => {
+const Business = ({categories, cities, regions, subcategories}) => {
     const [open, setOpen] = React.useState(true);
-    const {data, featureInfo, post} = useContext(BusinessContext)
+    const {data,featureInfo, } = useContext(BusinessContext)
+
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('owner.business.store'))
+        router.post(route('owner.business.store'), {
+            data : data,
+            feature_info : featureInfo,
+        },{   
+            forceFormData: true,
+            onsuccess : () => {
+                console.log("success")
+            },
+            onerror : (e) => {
+                console.log(e)
+            }
+        })
     }
     return (
             <div className="my-5 min-h-screen">
@@ -62,6 +75,7 @@ const Business = ({categories, cities, regions}) => {
                         categories={categories} 
                         cities = {cities}
                         regions = {regions}
+                        subcategories = {subcategories}
                     />
                     <FinicialDetails />
                     <BusinessImages />
