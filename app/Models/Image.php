@@ -19,4 +19,9 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+    public function category(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
 }

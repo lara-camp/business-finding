@@ -3,7 +3,7 @@ import BackendLayout from '@/Layouts/BackendLayout';
 import { router, useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 
-const Create = ( { categories }) => {
+const Create = ( { categories, errors }) => {
     const { data, setData } = useForm(
         {
             'name' : '' ,
@@ -42,7 +42,12 @@ const Create = ( { categories }) => {
                                 placeholder="sub category"
                                 value={data.sub_category_name}
                                 onChange={ (e) => setData('name', e.target.value)}
-                            />
+                              />
+                            {errors.sub_category_name && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.sub_category_name}
+                                </p>
+                            )}
                         </div>
                         <div class="mb-4 mt-5">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
@@ -61,7 +66,12 @@ const Create = ( { categories }) => {
                                 {item.name}
                                 </option>
                             ))}
-                            </select>
+                              </select>
+                            {errors.category_id && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.category_id}
+                                </p>
+                            )}
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
@@ -74,7 +84,12 @@ const Create = ( { categories }) => {
                                 value={data.slug}
                                 name="slug"
                                 onChange= {(e)=> setData('slug',e.target.value)}
-                                placeholder="slug" />
+                                  placeholder="slug" />
+                            {errors.slug && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.slug}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>
