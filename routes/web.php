@@ -42,16 +42,18 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     // User
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.users');
-        Route::get('/create', [UserController::class, 'create']);
+        Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+        Route::put('/edit/{id}', [UserController::class, 'update'])->name('admin.user.update');
         Route::get('/{id}', [UserController::class, 'show'])->name('admin.user.show');
         Route::post('/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
     });
 
     // jCategory------------------------------------------------------------------------------------------------
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-    Route::get('/category/create',[CategoryController::class, 'create'])->name('admin.category.create');
-    Route::post('/category/store',[CategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('admin.category.show');
     Route::post('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
@@ -59,8 +61,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
 
     // Sub Category------------------------------------------------------------------------------------------------
     Route::get('/sub_category', [SubCategoryController::class, 'index'])->name('admin.sub_category');
-    Route::get('/sub_category/create',[SubCategoryController::class, 'create'])->name('admin.sub_category.create');
-    Route::post('/sub_category/store',[SubCategoryController::class, 'store'])->name('admin.sub_category.store');
+    Route::get('/sub_category/create', [SubCategoryController::class, 'create'])->name('admin.sub_category.create');
+    Route::post('/sub_category/store', [SubCategoryController::class, 'store'])->name('admin.sub_category.store');
     // Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
     // Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
     // Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');

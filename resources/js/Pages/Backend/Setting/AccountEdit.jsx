@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import BackendLayout from "@/Layouts/BackendLayout";
 import SettingLayout from "@/Layouts/SettingLayout";
 import ProfileImage from "@/Images/default/defaultprofile.png";
-import { Link, useForm, router} from "@inertiajs/react";
+import { Link, useForm, router } from "@inertiajs/react";
 import { useRef } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from "sweetalert2";
 
 const AccountEdit = ({ user }) => {
     const [imageSrc, setImageSrc] = useState(user.image ? user.image : ProfileImage)
-    const {data, setData,  processing} = useForm({
-        'name' : user.name,
-        'email' : user.email,
-        'role' : user.role,
-        'phone' : user.phone,
-        'image' : "",
+    const { data, setData, processing } = useForm({
+        'name': user.name,
+        'email': user.email,
+        'role': user.role,
+        'phone': user.phone,
+        'image': "",
     })
-    
+
     const fileInputRef = useRef(null);
-    function submit(e)  {
+    function submit(e) {
         e.preventDefault()
         router.post('/admin/setting/account/edit', data, {
-            onSuccess : () => {
+            onSuccess: () => {
                 Swal.fire("Profile Updated Successfully");
             }
         })
@@ -37,8 +37,8 @@ const AccountEdit = ({ user }) => {
         // Read the selected file as a data URL
         const reader = new FileReader();
         reader.onload = (e) => {
-        const dataURL = e.target.result;
-        setImageSrc(dataURL);
+            const dataURL = e.target.result;
+            setImageSrc(dataURL);
         };
         reader.readAsDataURL(selectedFile);
     }
@@ -77,7 +77,7 @@ const AccountEdit = ({ user }) => {
                                     Name
                                 </label>
                                 <input
-                                value={data.name}
+                                    value={data.name}
                                     type="text"
                                     name="name"
                                     id="name"
@@ -126,7 +126,7 @@ const AccountEdit = ({ user }) => {
                                 >
                                     Phone
                                 </label>
-                                <input 
+                                <input
                                     value={data.phone ?? ""}
                                     type="text"
                                     name="phone"

@@ -8,7 +8,7 @@ const Index = ({ users }) => {
   const title = 'user'
   return (
     <div>
-      <Table data={users} columns={columns} routeName={routeName} title={title} />
+      <Table data={users} columns={columns} routeName={routeName} title={title} edit={true} view={true} destroy={true} add={true} />
     </div>
   )
 }
