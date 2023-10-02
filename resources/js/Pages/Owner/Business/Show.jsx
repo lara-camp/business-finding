@@ -9,5 +9,5 @@ const Show = () => {
   )
 }
 
-Index.layout = page => <OwnerLayout title="Business" children={page}/>
+Show.layout = page => <OwnerLayout title="Business" children={page}/>
 export default Show

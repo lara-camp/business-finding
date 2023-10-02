@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
 use Inertia\Inertia;
-use App\Models\Business;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {

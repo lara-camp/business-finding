@@ -25,10 +25,10 @@ const Business = ({categories, cities, regions, subcategories}) => {
             preserveScroll : true,
             preserveState : true,
             forceFormData: true,
-            onsuccess : () => {
-                console.log("success")
+            onSuccess : () => {
+                alert('success');
             },
-            onerror : (e) => {
+            onError : (e) => {
                 console.log(e)
             }
         })

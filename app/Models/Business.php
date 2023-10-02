@@ -14,4 +14,12 @@ class Business extends Model
     public function images() {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function business_features() {
+        return $this->hasMany(BusinessFeature::class);
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class);
+    }
 }
