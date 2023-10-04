@@ -9,12 +9,14 @@ use App\Http\Resources\CityCollection;
 use App\Http\Resources\RegionCollection;
 use App\Http\Resources\SubCategoryCollection;
 use App\Models\Business;
+use App\Models\BusinessFeature;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Region;
 use App\Models\SubCategory;
 use App\Services\BusinessService;
 use Exception;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -88,13 +90,32 @@ class BusinessController extends Controller
     public function destroy($id) {
         $business = Business::find($id);
         if($business) {
-            DB::transaction(function() use($business) {
-                // Delete Images for business show case gallery 
-                $business->images()->delete();
-                // Delete business features 
-                $business->with('business_features')->delete();
-                return to_route('owner.business')->with('message', 'Business Deleted Successfully');
-            });
+            try {
+                DB::transaction(function() use($business) {
+                    // Delete Images for business show case gallery 
+                    if(!$business->images->isEmpty()) {
+                        $business->images()->delete();
+                    }
+                    // Delete business  
+                    $business->delete();
+    
+                    // Delete Business Feature 
+                    $business_features = BusinessFeature::where('business_id', $business->id)->get();
+                    if(count($business_features) > 0) {
+                        foreach($business_features as $item) {
+                            // Delele local images 
+                            Storage::delete($item->image);
+        
+                            // Delete Business feature 
+                            $item->delete();
+                        }
+                    }
+                    
+                    return to_route('owner.business')->with('message', 'Business Deleted Successfully');
+                });
+            } catch (\Exception $e) {
+                return redirect()->back()->with('message',  $e->getMessage());
+            }
         } else {
             throw new Exception('Business not found');
         }

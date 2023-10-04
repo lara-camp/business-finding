@@ -1,11 +1,20 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
 import {AiFillLike, AiFillEye} from 'react-icons/ai'
+import { router } from '@inertiajs/react'
 
 const AllBusiness = ({businesses}) => {
-
-    const handleDelete = () => {
-        confirm('are you sure to delete');
+    const {flash} = usePage().props;
+    console.log(flash)
+    const handleDelete = (id) => {
+    if(confirm('are you sure to delete')) {
+        router.post(route('owner.business.destroy', id))
+            if(flash.message) {
+                alert(flash.message)
+            }
+        } else {
+            alert('something wrong');
+        }
     }
   return (
     <div>
