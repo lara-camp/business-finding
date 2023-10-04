@@ -3,6 +3,10 @@ import React from 'react'
 import {AiFillLike, AiFillEye} from 'react-icons/ai'
 
 const AllBusiness = ({businesses}) => {
+
+    const handleDelete = () => {
+        confirm('are you sure to delete');
+    }
   return (
     <div>
       {
@@ -63,8 +67,8 @@ const AllBusiness = ({businesses}) => {
                 {/* Action Button  */}
                 <div className="text-end">
                     <div>
-                        <Link className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </Link>
-                        <Link className='p-2 bg-red-700 rounded-md text-white me-3' href={route('owner.business.destroy', item.id)}> Delete </Link>
+                        <button className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </button>
+                        <button className='p-2 bg-red-700 rounded-md text-white me-3' onClick={() => handleDelete(item.id)}> Delete </button>
                     </div>
                 </div>
             </div>

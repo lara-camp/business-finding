@@ -57,7 +57,7 @@ const Pagination = ({ links, meta }) => {
                         {meta.links.slice(1,meta.links.length-1).map((page) => (
                             <Link   
                                 preserveScroll
-                                key={page}
+                                key={page.url}
                                 href={page.url}
                                 aria-current="page"
                                 className={`relative z-10 inline-flex items-center ${
