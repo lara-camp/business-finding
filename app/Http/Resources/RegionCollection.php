@@ -20,6 +20,7 @@ class RegionCollection extends ResourceCollection
                     'id' => $region->id,
                     'name' => $region->name,
                     'type' => $region->type,
+                    'name_mm' => $region->name_mm,
                     'created_at' => $region->created_at->toFormattedDateString(),
                 ];
             }),
