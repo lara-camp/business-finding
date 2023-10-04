@@ -10,7 +10,7 @@ const AllBusiness = ({businesses}) => {
         ? 
         businesses.data.data.map(item => (
             <>
-            <div className='p-3 border my-4 rounded-md shadow shadow-slate-300'>
+            <div className='p-3 border my-4 rounded-md shadow shadow-slate-300' key={item.id}>
                 {/* head  */}
                 <div className="flex">
                     <div className="w-1/5">
@@ -64,7 +64,7 @@ const AllBusiness = ({businesses}) => {
                 <div className="text-end">
                     <div>
                         <Link className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </Link>
-                        <Link className='p-2 bg-red-700 rounded-md text-white me-3'> Delete </Link>
+                        <Link className='p-2 bg-red-700 rounded-md text-white me-3' href={route('owner.business.destroy', item.id)}> Delete </Link>
                     </div>
                 </div>
             </div>

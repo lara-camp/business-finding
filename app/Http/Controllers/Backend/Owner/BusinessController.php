@@ -84,4 +84,21 @@ class BusinessController extends Controller
     public function edit() {
         return Inertia::render('Owner/Business/Edit');
     }
+
+    public function destroy($id) {
+        $business = Business::find($id);
+        if($business) {
+            DB::transaction(function() use($business) {
+                // Delete Images for business show case gallery 
+                $business->images()->delete();
+                // Delete business features 
+                $business->with('business_features')->delete();
+                return to_route('owner.business')->with('message', 'Business Deleted Successfully');
+            });
+        } else {
+            throw new Exception('Business not found');
+        }
+    }
 }
+
+
