@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\AccountSettingController;
 use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
+use App\Http\Controllers\OwnerDetailController;
 use App\Http\Controllers\SubCategoryController;
 
 /*
@@ -62,8 +63,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
 
     // Sub Category------------------------------------------------------------------------------------------------
     Route::get('/sub_category', [SubCategoryController::class, 'index'])->name('admin.sub_category');
-    Route::get('/sub_category/create',[SubCategoryController::class, 'create'])->name('admin.sub_category.create');
-    Route::post('/sub_category/store',[SubCategoryController::class, 'store'])->name('admin.sub_category.store');
+    Route::get('/sub_category/create', [SubCategoryController::class, 'create'])->name('admin.sub_category.create');
+    Route::post('/sub_category/store', [SubCategoryController::class, 'store'])->name('admin.sub_category.store');
     Route::get('/sub_category/{id}', [SubCategoryController::class, 'show'])->name('admin.sub_category.show');
     Route::post('/sub_category/{id}', [SubCategoryController::class, 'destroy'])->name('admin.sub_category.delete');
     Route::get('/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub_category.edit');
@@ -122,14 +123,22 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
 // region
 Route::get('/admin/regions', [RegionController::class, 'index'])->name('admin.regions');
 Route::get('/admin/region/create', [RegionController::class, 'create'])->name('admin.region.create');
+Route::post('/admin/region/create', [RegionController::class, 'store'])->name('adim.region.store');
 Route::get('/admin/region/{id}', [RegionController::class, 'show'])->name('admin.region.show');
+Route::put('/admin/region/edit/{id}', [RegionController::class, 'update'])->name('admin.region.update');
 Route::get('/admin/region/edit/{id}', [RegionController::class, 'edit'])->name('admin.region.edit');
+Route::post('/admin/region/{id}', [RegionController::class, 'destroy'])->name('admin.region.delete');
 
 // cities
 Route::get('/admin/cities', [CityController::class, 'index'])->name('admin.cities');
 Route::get('/admin/cities/create', [CityController::class, 'create'])->name('admin.cities.create');
 Route::get('/admin/cities/{id}', [CityController::class, 'show'])->name('admin.cities.show');
 Route::get('/admin/cities/edit/{id}', [CityController::class, 'edit'])->name('admin.cities.edit');
+
+Route::get('/admin/owner', [OwnerDetailController::class, 'index'])->name('admin.owner');
+Route::get('/admin/owner/create', [OwnerDetailController::class, 'create'])->name('admin.owner.create');
+Route::get('/admin/owner/{id}}', [OwnerDetailController::class, 'show'])->name('admin.owner.show');
+Route::get('/admin/owner/edit/{id}}', [OwnerDetailController::class, 'edit'])->name('admin.owner.edit');
 
 
 

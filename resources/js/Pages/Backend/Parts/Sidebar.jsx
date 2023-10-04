@@ -40,6 +40,12 @@ const Sidebar = ({ setSideBarOpen, sideBarOpen }) => {
             icon: FolderIcon,
             current: false,
         },
+        {
+            name: "OwnerDetail",
+            href: "/admin/owner",
+            icon: XMarkIcon,
+            current: false,
+        },
         { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
         {
             name: "Documents",

@@ -61,8 +61,12 @@ class PermissionSeeder extends Seeder
             'view city',
             'edit city',
             'delete city',
-            'create city'
+            'create city',
 
+            'create ownerdetail',
+            'view ownerdetail',
+            'delete ownerdetail',
+            'edit ownerdetail',
         ];
 
         foreach ($permissions as $key => $permission) {
