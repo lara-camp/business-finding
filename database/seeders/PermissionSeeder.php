@@ -63,6 +63,11 @@ class PermissionSeeder extends Seeder
             'delete city',
             'create city',
 
+            'view industry',
+            'edit industry',
+            'delete industry',
+            'create industry',
+
             'create ownerdetail',
             'view ownerdetail',
             'delete ownerdetail',

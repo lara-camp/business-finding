@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import BackendLayout from '@/Layouts/BackendLayout';
 import { useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
@@ -9,6 +9,14 @@ const Create = ({ faq, errors }) => {
         answer: faq.answer || '',
         status: 1,
     });
+
+    const [status, setStatus] = useState(data.status);
+    const handleStatusChange = () => {
+        const newStatus = status === 1 ? 0 : 1;
+        setStatus(newStatus);
+        setData('status', newStatus);
+    };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,7 +44,7 @@ const Create = ({ faq, errors }) => {
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="question">
                                     Question
                                 </label>
-                                <input
+                                <textarea
                                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                                         errors.question ? 'border-red-500' : ''
                                     }`}
@@ -57,7 +65,7 @@ const Create = ({ faq, errors }) => {
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="answer">
                                     Answer
                                 </label>
-                                <input
+                                <textarea
                                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                                         errors.answer ? 'border-red-500' : ''
                                     }`}
@@ -73,6 +81,21 @@ const Create = ({ faq, errors }) => {
                                         {errors.answer}
                                     </p>
                                 )}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Status
+                                </label>
+                                <label className="switch">
+                                    <input
+                                        type="checkbox"
+                                        name='status'
+                                        id='status'
+                                        checked={status === 1}
+                                        onChange={handleStatusChange}
+                                    />
+                                    <span className="slider round"></span>
+                                </label>
                             </div>
 
                         </div>

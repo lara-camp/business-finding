@@ -31,6 +31,7 @@ const intitalNavigation = [
     { name: "Cities", href: "/admin/cities", icon: Bars3Icon, permission: "view city" },
     { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permission: "view subcategory" },
     { name: "Owner Detail", href: "/admin/owner", icon: XMarkIcon, permission: "view ownerdetail" },
+    { name: "Industry", href: "/admin/industry", icon: FolderIcon,  permission: "view industry" },
 ];
 
 
