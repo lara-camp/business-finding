@@ -62,13 +62,15 @@ const Edit = ({ sub_category, categories, errors }) => {
                                 name="category_id"
                                 placeholder="category"
                                 onChange={ (e) => setData('category_id', e.target.value)}
-                            >
+                              >
+                            <option key={0} value={0}>Choose Category</option>
                             {categories.map((item) => (
                                 <option key={item.id} value={item.id} selected={item.id == data.category_id }>
                                 {item.name}
                                 </option>
                             ))}
                               </select>
+
                             {errors.category_id && (
                                 <p className="text-red-500 text-xs italic">
                                     {errors.category_id}

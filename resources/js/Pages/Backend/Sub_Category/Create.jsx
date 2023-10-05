@@ -43,9 +43,9 @@ const Create = ( { categories, errors }) => {
                                 value={data.sub_category_name}
                                 onChange={ (e) => setData('name', e.target.value)}
                               />
-                            {errors.sub_category_name && (
+                            {errors.name && (
                                 <p className="text-red-500 text-xs italic">
-                                    {errors.sub_category_name}
+                                    {errors.name}
                                 </p>
                             )}
                         </div>
@@ -60,7 +60,8 @@ const Create = ( { categories, errors }) => {
                                 name="category_id"
                                 placeholder="category"
                                 onChange={ (e) => setData('category_id', e.target.value)}
-                            >
+                              >
+                                  <option key={0} value={0}>Choose Category</option>
                             {categories.map((item) => (
                                 <option key={item.id} value={item.id}>
                                 {item.name}
