@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class IndustryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,11 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return
-        [
-            'id' => $this->id ,
+        return [
+            'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
-            'url' => $this->image->url !== null ? Storage::url($this->image->url) : "",
+            'url' => $this->image->url != null  ? Storage::url($this->image->url) : "" ,
+            'created_at' => $this->created_at->toFormattedDateString(),
         ];
     }
 }

@@ -56,7 +56,7 @@ class CategoryController extends Controller
 
         if($request->hasFile('image'))
         {
-            $file = 'cat'.auth()->id().'-'.$_FILES['image']['name'];
+            $file = 'cat'.time().auth()->id().'-'.$_FILES['image']['name'];
             // dd($file);
             $path = Storage::disk('public')->put( $file,fopen($request->file('image'), 'r+'));
             Image::create([
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     {
         $rules = [
             'category_name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories',
+            'slug' => 'required|string|max:255',
         ];
 
         // Validate the request data
@@ -93,6 +93,24 @@ class CategoryController extends Controller
                 ->withInput();
         }
         $category = Category::findOrFail($id);
+        if($request->image != null && $request->hasFile('image'))
+        {
+            $image = Image::where('imageable_id',$category->id)->where('imageable_type', 'App\Models\Category')->first();
+            // dd( $image->url);
+            if(Storage::disk('public')->exists($image->url))
+            {
+                Storage::disk('public')->delete($image->url);
+            }
+            $image->delete();
+            $file = 'cat'.time().auth()->id().'-'.$_FILES['image']['name'];
+            // dd($file);
+            $path = Storage::disk('public')->put( $file,fopen($request->file('image'), 'r+'));
+            Image::create([
+                'url' => $file ,
+                'imageable_id' => $category->id,
+                'imageable_type' => 'App\Models\Category',
+            ]);
+        }
         $category->update($request->all());
         return redirect()->route('admin.category');
     }
@@ -105,8 +123,8 @@ class CategoryController extends Controller
 
     public function destroy($id) {
         $category = Category::findOrFail($id);
-        $image = Image::findOrFail($category->id);
-        // dd(Storage::disk('public')->exists($image->url), $image->url);
+        $image = Image::where('imageable_id',$category->id)->where('imageable_type', 'App\Models\Category')->first();
+        // dd( $image->url);
         if(Storage::disk('public')->exists($image->url))
         {
             Storage::disk('public')->delete($image->url);
