@@ -5,8 +5,8 @@ import { Link } from '@inertiajs/react'
 const Show = ({ region }) => {
     return (
         <div>
-            <div>
-                <Link href="/admin/regions" className='btn btn-sm btn-secondary' > Back </Link>
+            <div className='m-4'>
+                <Link href="/admin/regions" className='bg-indigo-700 text-white p-2 rounded-md' > Back </Link>
             </div>
             <h3> this is region show </h3>
             <p> {region.name} </p>

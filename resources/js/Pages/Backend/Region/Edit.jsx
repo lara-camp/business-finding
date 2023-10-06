@@ -44,8 +44,8 @@ const Edit = ({ region }) => {
             <div className="p-2 rounded">
                 <div className="d-flex justify-content-between align-items-center">
                     <h3> Region Edit </h3>
-                    <div>
-                        <Link href="/admin/regions" className='btn btn-sm btn-secondary' > Back </Link>
+                    <div className='m-5 text-end'>
+                        <Link href="/admin/regions" className='bg-indigo-700 text-white p-2 rounded-md ' > Back </Link>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ const Edit = ({ region }) => {
                         <div className="col-md-9">
                             <input
                                 type="text"
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Name'
                                 value={data.name}
                                 onChange={e => setData("name", e.target.value)}
@@ -77,7 +77,7 @@ const Edit = ({ region }) => {
                             <input
                                 type="text"
                                 value={data.type}
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Email Address'
                                 onChange={e => setData('type', e.target.value)}
                             />
@@ -93,7 +93,7 @@ const Edit = ({ region }) => {
                             <input
                                 type="text"
                                 value={data.name_mm}
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter name_mm '
                                 onChange={e => setData('name_mm', e.target.value)}
                             />
@@ -103,10 +103,10 @@ const Edit = ({ region }) => {
 
                     <div className="row mx-3">
                         <div className="col-md-12">
-                            <div className="text-end">
+                            <div className="text-end m-5">
                                 <button
                                     type='submit'
-                                    className='btn btn-sm btn-secondary text-dark'> Update </button>
+                                    className='bg-indigo-700 text-white p-2 rounded-md'> Update </button>
                             </div>
                         </div>
                     </div>

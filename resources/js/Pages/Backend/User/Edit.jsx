@@ -25,8 +25,8 @@ const Edit = ({ user }) => {
             <div className="p-2 rounded">
                 <div className="d-flex justify-content-between align-items-center">
                     <h3> User Edit </h3>
-                    <div>
-                        <Link href="/admin/user" className='btn btn-sm btn-secondary' > Back </Link>
+                    <div className='text-end m-5'>
+                        <Link href="/admin/user" className='bg-indigo-700 text-white p-2 rounded-md' > Back </Link>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@ const Edit = ({ user }) => {
                         <div className="col-md-9">
                             <input
                                 type="text"
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Name'
                                 value={data.name}
                                 onChange={e => setData("name", e.target.value)}
@@ -58,7 +58,7 @@ const Edit = ({ user }) => {
                             <input
                                 type="text"
                                 value={data.email}
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Email Address'
                                 onChange={e => setData('email', e.target.value)}
                             />
@@ -68,10 +68,10 @@ const Edit = ({ user }) => {
 
                     <div className="row mx-3">
                         <div className="col-md-12">
-                            <div className="text-end">
+                            <div className="text-end m-5">
                                 <button
                                     type='submit'
-                                    className='btn btn-sm btn-secondary text-dark'> Update </button>
+                                    className='bg-indigo-700 text-white p-2 rounded-md'> Update </button>
                             </div>
                         </div>
                     </div>
