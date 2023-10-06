@@ -1,7 +1,8 @@
 import OwnerLayout from '@/Layouts/OwnerLayout'
-import { Link, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import React from 'react'
 import AllBusiness from './AllBusiness';
+import { useState } from 'react';
 
 const Index = ({businesses, total_count}) => {
     const {url} = usePage();
@@ -10,31 +11,52 @@ const Index = ({businesses, total_count}) => {
             id : 1,
             name : "All",
             param : "all",
+            active : true
         },
         {
             id : 2,
             name : "Drafts",
-            param : "drafts",
+            param : "draft",
+            active : false
         },
         {
             id : 3,
             name : "Published",
             param : "published",
+            active : false
         },
         {
             id : 4,
             name : "Sold",
             param : "sold",
+            active : false
         },
         {
             id : 5,
             name : "Trash",
             param : "trash",
+            active : false
         },
     ]
+
+    const [navitems, setNavitems] = useState(nav)
+
     const handleParam = (param) => {
-        alert(param)
+        router.get(route('owner.business'), {
+            "status" : param
+        }, {
+            preserveScroll : true,
+            preserveState : true,
+        })
+        const newnav = navitems.map(item => ({
+            ...item, 
+            active : item.param === param,
+        }))
+        setNavitems(newnav)
     }
+
+    console.log(navitems)
+
   return (
     <div>
         {/* header  */}
@@ -42,9 +64,12 @@ const Index = ({businesses, total_count}) => {
             <div className="w-1/2">
                 <ul className='list-none flex'>
                     {
-                        nav.map(item => (
+                        navitems.length > 0 && navitems.map(item => (
                             <li className='me-3 cursor-pointer' key={item.id}>
-                                <span className='text-indigo-700' onClick={() => handleParam(item.param)}> {item.name} </span>
+                                <span 
+                                    className={`text-indigo-700 p-2 ${item.active ? 'border-x-0 border-t-0 border-b-2 border-b-indigo-700' : ''}`}
+                                    onClick={() => handleParam(item.param)}
+                                > {item.name} </span>
                             </li>
                         ))
                     }

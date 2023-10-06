@@ -16,6 +16,7 @@ const ListingDetails = () => {
                     className="border-indigo-700 p-2 my-2 w-full rounded-md"
                     placeholder="Enter Your Title"
                     onChange={(e) => setData("name", e.target.value)}
+                    value={data.name}
                 />
                 <small className="text-slate-500">
                     This serves as your listing title, with an 8-word limit. For
@@ -33,6 +34,7 @@ const ListingDetails = () => {
                     className="border-indigo-700 p-2 my-2 w-full rounded-md"
                     placeholder="Summary"
                     onChange={(e) => setData("description", e.target.value)}
+                    value={data.description}
                 />
                 <small className="text-slate-500">
                     Emphasize the strengths and advantages of the business

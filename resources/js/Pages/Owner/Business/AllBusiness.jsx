@@ -2,20 +2,34 @@ import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
 import {AiFillLike, AiFillEye} from 'react-icons/ai'
 import { router } from '@inertiajs/react'
+import Swal from 'sweetalert2'
 
 const AllBusiness = ({businesses}) => {
     const {flash} = usePage().props;
     console.log(flash)
     const handleDelete = (id) => {
-    if(confirm('are you sure to delete')) {
-        router.post(route('owner.business.destroy', id))
-            if(flash.message) {
-                alert(flash.message)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.post(route('owner.business.destroy', id), {
+                onSuccess: () =>
+                  Swal.fire("Deleted!", "Your file has been deleted.", "success"),
+              });
+            } else {
+                if(flash.message) {
+                    Swal.fire("Somthing Wrong", flash.message, "error");
+                }
             }
-        } else {
-            alert('something wrong');
-        }
+          });
     }
+   
   return (
     <div>
       {
@@ -76,7 +90,7 @@ const AllBusiness = ({businesses}) => {
                 {/* Action Button  */}
                 <div className="text-end">
                     <div>
-                        <button className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </button>
+                        <Link href={route('owner.business.edit', item.id)} className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </Link>
                         <button className='p-2 bg-red-700 rounded-md text-white me-3' onClick={() => handleDelete(item.id)}> Delete </button>
                     </div>
                 </div>

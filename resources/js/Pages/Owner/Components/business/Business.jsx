@@ -11,10 +11,15 @@ import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 import { router, usePage } from "@inertiajs/react";
 
-const Business = ({categories, cities, regions, subcategories}) => {
+const Business = ({categories, cities, regions, subcategories, business}) => {
     const [open, setOpen] = React.useState(true);
-    const {data,featureInfo, } = useContext(BusinessContext)
+    const {data,featureInfo,setBusiness } = useContext(BusinessContext)
     const { flash } = usePage().props
+
+    if(business) {
+        setBusiness(business)
+    }
+    
     console.log(flash.message)
     function handleSubmit(e) {
         e.preventDefault()

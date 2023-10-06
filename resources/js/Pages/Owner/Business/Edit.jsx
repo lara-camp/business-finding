@@ -1,13 +1,20 @@
 import React from 'react'
 import OwnerLayout from '@/Layouts/OwnerLayout'
+import BusinessStep from './BusinessStep'
 
-const Edit = () => {
+const Edit = ({business, categories, regions, cities, subcategories}) => {
   return (
     <div>
-      this is business edit page 
+      <BusinessStep 
+            categories={categories}
+            regions={regions}
+            cities ={cities}
+            subcategories={subcategories}
+            business={business}
+        />
     </div>
   )
 }
 
-Index.layout = page => <OwnerLayout title="Business" children={page}/>
+Edit.layout = page => <OwnerLayout title="Business" children={page}/>
 export default Edit

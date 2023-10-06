@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BusinessCollection;
+use App\Http\Resources\BusinessResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CityCollection;
 use App\Http\Resources\RegionCollection;
@@ -16,7 +17,6 @@ use App\Models\Region;
 use App\Models\SubCategory;
 use App\Services\BusinessService;
 use Exception;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,8 +24,23 @@ use Inertia\Inertia;
 
 class BusinessController extends Controller
 {
-    public function index() {
-        $businesses = Business::where('user_id', auth()->id())->latest('id')->paginate(5);
+    public function index(Request $request) {
+        $query = Business::where('user_id', auth()->id());
+
+        if($status = $request->status) {
+            switch ($status) {
+                case 'draft': case 'published':
+                    $query->where('stage', $status);
+                    break;
+                case 'sold':
+                    $query->where('status', 'sold');
+                    break;
+                default:
+                    $query;
+                    break;
+            }
+        }
+        $businesses = $query->latest('id')->paginate(5);
         return Inertia::render('Owner/Business/Index', [
             'businesses' => new BusinessCollection($businesses),
             'total_count' => Business::where('user_id', auth()->id())->count(),
@@ -83,8 +98,19 @@ class BusinessController extends Controller
         }
     }
 
-    public function edit() {
-        return Inertia::render('Owner/Business/Edit');
+    public function edit($id) {
+        $business = Business::find($id);
+        $categories = Category::latest('id')->get();
+        $regions = Region::latest('id')->get();
+        $cities = City::latest('id')->get();
+        $subcategories = SubCategory::latest('id')->get();
+        return Inertia::render('Owner/Business/Edit', [
+            'business'=> new BusinessResource($business),
+            'categories' => new CategoryCollection($categories),
+            'regions'   => new RegionCollection($regions),
+            'cities'    => new CityCollection($cities),
+            'subcategories' => new SubCategoryCollection($subcategories),
+        ]);
     }
 
     public function destroy($id) {
@@ -96,8 +122,7 @@ class BusinessController extends Controller
                     if(!$business->images->isEmpty()) {
                         $business->images()->delete();
                     }
-                    // Delete business  
-                    $business->delete();
+                    
     
                     // Delete Business Feature 
                     $business_features = BusinessFeature::where('business_id', $business->id)->get();
@@ -110,6 +135,9 @@ class BusinessController extends Controller
                             $item->delete();
                         }
                     }
+
+                    // Delete business  
+                    $business->delete();
                     
                     return to_route('owner.business')->with('message', 'Business Deleted Successfully');
                 });

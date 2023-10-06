@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('asking_price');
             $table->json('documents');
             $table->json('info');
+            $table->string('stage')->default('draft')->comment('published, draft');
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
             $table->timestamps();

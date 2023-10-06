@@ -37,6 +37,7 @@ class BusinessFactory extends Factory
             'asking_price' => $this->faker->randomNumber(5, false),
             'documents' => json_encode(['doc1', 'doc2', 'doc3']),
             'info' => json_encode($info),
+            'stage' => $this->faker->randomElement(['draft', 'published']),
             'views' => $this->faker->randomNumber(5, false),
             'likes' => $this->faker->randomNumber(5, false),
         ];
