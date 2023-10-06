@@ -145,7 +145,10 @@ class BlogController extends Controller
             }
             $image->delete();
         }
-
+        if(Storage::disk('public')->exists($blog->cover_image))
+        {
+            Storage::disk('public')->delete($blog->cover_image);
+        }
         $blog->delete();
         return to_route('admin.blog');
     }

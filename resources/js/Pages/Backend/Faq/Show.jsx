@@ -1,10 +1,20 @@
 import BackendLayout from '@/Layouts/BackendLayout'
 import React from 'react'
 
-const Show = () => {
+const Show = ({faq}) => {
   return (
     <div>
-      this is faq show page
+        <center>
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+              <div className="card shadow">
+                {/* <img src={category.url} className="card-img-top" alt="Category Image" /> */}
+                <div className="card-body">
+                  <h5 className="card-title">Name: {faq.question}</h5>
+                  <h5 className="card-title">Slug: {faq.answer}</h5>
+                </div>
+              </div>
+            </div>
+        </center>
     </div>
   )
 }
