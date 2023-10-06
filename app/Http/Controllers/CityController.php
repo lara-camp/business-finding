@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CityCollection;
-use App\Http\Resources\CityResource;
 use App\Models\City;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Region;
+use Illuminate\Http\Request;
+use App\Http\Resources\CityResource;
+use App\Http\Resources\CityCollection;
 
 class CityController extends Controller
 {
@@ -22,10 +23,28 @@ class CityController extends Controller
     // create
     public function create()
     {
-        return Inertia::render('Backend/City/Create');
+        $cities = Region::all();
+        // dd($cities);
+        return Inertia::render('Backend/City/Create', [
+            'cities' => new CityCollection($cities),
+        ]);
     }
 
-    // show 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'region_id' => 'required'
+        ]);
+
+        City::create([
+            'name' => $request->name,
+            'region_id' => $request->region_id
+        ]);
+        return to_route('admin.cities');
+    }
+
+    // show
     public function show($id)
     {
         $city = City::findOrFail($id);
@@ -41,5 +60,12 @@ class CityController extends Controller
         return Inertia::render('Backend/City/Edit', [
             'city' => new CityResource($city)
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $user = City::findOrFail($id);
+        $user->delete();
+        return to_route('admin.cities');
     }
 }

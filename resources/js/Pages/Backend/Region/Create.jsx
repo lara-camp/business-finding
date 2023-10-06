@@ -51,8 +51,8 @@ const Create = () => {
             <div className="p-2 rounded">
                 <div className="d-flex justify-content-between align-items-center">
                     <h3> Region Create </h3>
-                    <div>
-                        <Link href="/admin/regions" className='btn btn-sm btn-secondary' > Back </Link>
+                    <div className='mt-4'>
+                        <Link href="/admin/regions" className='bg-indigo-700 text-white p-2 rounded-md' > Back </Link>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@ const Create = () => {
                             <input
                                 type="text"
                                 name='name'
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Name'
                                 onChange={handleOnChange}
                             />
@@ -85,12 +85,12 @@ const Create = () => {
                             <input
                                 type="text"
                                 name='type'
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Type Region or State'
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.email && <div className="text-danger text-center my-2"> {errors.type} </div>}
+                        {errors.type && <div className="text-danger text-center my-2"> {errors.type} </div>}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -101,19 +101,19 @@ const Create = () => {
                             <input
                                 type="text"
                                 name='name_mm'
-                                className='form-control'
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Type Myanmar Name'
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.email && <div className="text-danger text-center my-2"> {errors.name_mm} </div>}
+                        {errors.name_mm && <div className="text-danger text-center my-2"> {errors.name_mm} </div>}
                     </div>
                     <div className="row mx-3">
                         <div className="col-md-12">
                             <div className="text-end">
                                 <button
                                     type='submit'
-                                    className='btn btn-sm btn-secondary text-dark'> Submit </button>
+                                    className='bg-indigo-700 text-white p-2 rounded-md'> Submit </button>
                             </div>
                         </div>
                     </div>

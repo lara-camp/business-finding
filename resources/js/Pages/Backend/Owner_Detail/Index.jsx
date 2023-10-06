@@ -13,7 +13,7 @@ const Index = ({ ownerdetails }) => {
         "action",
     ];
     const routeName = "owner";
-    const title = "owner";
+    const title = "ownerdetail";
     return (
         <div>
             <Table
