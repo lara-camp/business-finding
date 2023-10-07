@@ -20,7 +20,7 @@ class BusinessFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {   
+    {
         $info = array(
             'no_of_employee' => 3,
             'estiblished_date' => now(),

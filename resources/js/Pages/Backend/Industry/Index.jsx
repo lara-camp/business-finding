@@ -2,25 +2,24 @@ import React from 'react'
 import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
-const Index = ({blogs}) => {
-  const columns = ['id', 'image', 'title', 'tag', 'user_name', 'status', 'created_at', 'action']
-    const routeName = 'blog'
-    const title = 'blog'
-    console.log(blogs);
-  return (
-      <div>
-          {<Table
-                data={blogs}
+const Index = ({ industries }) => {
+    console.log(industries)
+    const columns = ['id', 'name', 'image',  'created_at', 'action']
+    const routeName = 'industry'
+    const title = 'industry'
+    return (
+        <div>
+            <Table
+                data={industries}
                 columns={columns}
                 routeName={routeName}
                 title={title}
                 add={true}
                 edit={true}
                 view={true}
-                destroy={true}
-          />}
-    </div>
-  )
+                destroy={true} />
+        </div>
+    )
 }
 
 Index.layout = page => <BackendLayout children={page} title="Welcome" />

@@ -77,6 +77,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     Route::get('/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
     Route::post('/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
     Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
+    Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('admin.blog.update');
     Route::get('/blog/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
     Route::post('/blog/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
     // end---------------------------------------------------------------------------------------------------

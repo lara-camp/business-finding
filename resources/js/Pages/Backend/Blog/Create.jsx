@@ -6,19 +6,19 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import Quill styles
 
 
-const Create = ( { blog}) => {
+const Create = ( { blog, errors}) => {
     const { data, setData } = useForm(
         {
             'tag' : blog.tag ,
             'title' : blog.title ,
-            'content' : '' ,
+            'content' : blog.content ,
             'description': blog.description,
             'cover_image' : "",
             'image_attachment' : "",
         }
     );
 
-    const [editorHtml, setEditorHtml] = useState('');
+    const [editorHtml, setEditorHtml] = useState(blog.content);
 
     const handleChange = (html) => {
         setEditorHtml(html);
@@ -54,7 +54,12 @@ const Create = ( { blog}) => {
                                   placeholder="Title"
                                   value={data.title}
                                 onChange={ (e) => setData('title', e.target.value)}
-                            />
+                              />
+                            {errors.title && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.title}
+                                </p>
+                            )}
                         </div>
 
                         <div class="mb-4">
@@ -66,7 +71,13 @@ const Create = ( { blog}) => {
                                 name="description"
                                   id="description"
                                 onChange={(e)=> setData('description', e.target.value)}
-                                  placeholder="Description">{ data.description}</textarea>
+                                  placeholder="Description">{data.description}</textarea>
+
+                            {errors.description && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.description}
+                                </p>
+                            )}
 
                         </div>
                             <div class="mb-4">
@@ -80,7 +91,12 @@ const Create = ( { blog}) => {
                                 value={data.tag}
                                 name="tags"
                                 onChange= {(e)=> setData('tag',e.target.value)}
-                                placeholder="Tags" />
+                                  placeholder="Tags" />
+                            {errors.tag && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.tag}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -93,12 +109,18 @@ const Create = ( { blog}) => {
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Cover Image
-                            </label>
+                              </label>
+                              <img src={data.cover_image} className='w-100 h-20-auto'/>
                                 <input type="file"
                                     name="coverImage"
                                     id="coverImage"
                                     onChange={ (e) => setData('cover_image', e.target.files[0])}
-                                    class="w-75 h-10 border rounded-md" />
+                                  class="w-75 h-10 border rounded-md" />
+                            {errors.cover_image && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.cover_image}
+                                </p>
+                            )}
                         </div>
 
                         <div class="mb-4">
@@ -121,7 +143,12 @@ const Create = ( { blog}) => {
                                       setData('image_attachments', imageAttachments);
                                     }}
                                     multiple
-                                    class="w-full h-10 border rounded-md mt-5" />
+                                  class="w-full h-10 border rounded-md mt-5" />
+                            {errors.image_attachment && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.image_attachment}
+                                </p>
+                            )}
                         </div>
 
                     </div>
@@ -131,14 +158,19 @@ const Create = ( { blog}) => {
 
             <div className='grid grid-cols-1 gap-1 mt-2' style={{ height: '200px'}}>
                 <div class="bg-white rounded-lg shadow-lg p-6" style={{ height: '200px'}}>
-                    <h2>Contact</h2>
+                    <h2>Content</h2>
                         <ReactQuill
                             name="content"
                             id="content"
                             style={{ height: '100px'}}
                             value={editorHtml}
                             onChange={handleChange}
-                        />
+                      />
+                    {errors.content && (
+                        <p className="text-red-500 text-xs italic">
+                            {errors.content}
+                        </p>
+                    )}
 
                 </div>
 

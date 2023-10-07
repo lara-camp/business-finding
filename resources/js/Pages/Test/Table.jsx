@@ -34,9 +34,9 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           className="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6"
         >
           <img
-            src={`/storage/app/public/${item.image}`} // Assuming 'item.image' contains the image URL
-            // alt="Image"
-            className="h-auto max-w-xs"
+            src={item.url}
+            alt="Image"
+            className="w-20 max-w-xs h-20-auto"
           />
         </td>
       );
@@ -100,7 +100,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
-            Users
+            {title}
           </h1>
         </div>
 

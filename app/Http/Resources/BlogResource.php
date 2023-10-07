@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogResource extends JsonResource
@@ -16,7 +17,7 @@ class BlogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image->url,
+            'url' => $this->cover_image ? Storage::url($this->cover_image): "",
             'title' => $this->title,
             'body' => $this->body,
             'tag' => $this->tag,

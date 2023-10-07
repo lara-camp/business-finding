@@ -37,7 +37,7 @@ class FaqController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.fag.create')
+            return redirect()->route('admin.faq.create')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -67,7 +67,7 @@ class FaqController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.fag.edit')
+            return redirect()->route('admin.faq.edit')
                 ->withErrors($validator)
                 ->withInput();
         }

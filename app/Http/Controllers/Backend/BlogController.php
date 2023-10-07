@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
@@ -28,7 +29,25 @@ class BlogController extends Controller
     }
     public function store(Request $request)
     {
-        
+        $rules = [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'tag' => 'required|string',
+            'cover_image' => 'required',
+            // 'image_attachment' => 'required',
+            'content' => 'required',
+        ];
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->route('admin.blog.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $blog = Blog::create([
             'title' => $request->title,
             'body' => $request->description,
@@ -40,7 +59,7 @@ class BlogController extends Controller
         // dd($request->hasFile('cover_image'));
         if($request->hasFile('cover_image'))
         {
-            $file = 'cover'.auth()->id().'-'.$_FILES['cover_image']['name'];
+            $file = 'cover'.time().auth()->id().'-'.$_FILES['cover_image']['name'];
             // dd($file);k
             $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+'));
             $blog->cover_image = $file ;
@@ -51,7 +70,7 @@ class BlogController extends Controller
         {
             foreach($request->image_attachments as $image)
             {
-                $file = 'img_'.auth()->id().'-'.$image->getClientOriginalName();
+                $file = 'img_'.time().auth()->id().'-'.$image->getClientOriginalName();
                 // dd($file);
                 $path = Storage::disk('public')->put( $file,fopen($image, 'r+'));
                 $blog->cover_image = $file ;
@@ -69,9 +88,43 @@ class BlogController extends Controller
 
     public function edit($id, Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $blog = Blog::findOrFail($id);
         return Inertia::render('Backend/Blog/Edit', ['blog' => new BlogResource($blog),]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $rules = [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'tag' => 'required|string',
+            'content' => 'required',
+        ];
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->route('admin.blog.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $blog = Blog::findOrFail($id);
+        if($request->cover_image != null && $request->hasFile('cover_image'))
+        {
+            // $image = Image::where('imageable_id',$blog->id)->where('imageable_type', 'App\Models\Blog')->first();
+            // dd( $image->url);
+            if(Storage::disk('public')->exists($blog->cover_image))
+            {
+                Storage::disk('public')->delete($blog->cover_image);
+            }
+
+        }
+        $blog->update($request->all());
+        return to_route('admin.blog');
     }
 
     public function show($id)
@@ -83,6 +136,19 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
+        $images = Image::where('imageable_id',$blog->id)->where('imageable_type', 'App\Models\Blog')->get();
+        foreach($images as $image)
+        {
+            if(Storage::disk('public')->exists($image->url))
+            {
+                Storage::disk('public')->delete($image->url);
+            }
+            $image->delete();
+        }
+        if(Storage::disk('public')->exists($blog->cover_image))
+        {
+            Storage::disk('public')->delete($blog->cover_image);
+        }
         $blog->delete();
         return to_route('admin.blog');
     }

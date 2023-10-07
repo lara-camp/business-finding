@@ -3,25 +3,21 @@ import BackendLayout from '@/Layouts/BackendLayout';
 import { useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 
-const Edit = ({ category, errors }) => {
-    console.log(category);
+const Create = ({ industry, errors }) => {
     const { data, setData, post, processing } = useForm({
-        id : category.id,
-        category_name: category.name ,
-        slug: category.slug ,
-        image: category.url,
+        name: industry.name || '',
+        image: null,
     });
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData();
-        formData.append('category_name', data.category_name);
-        formData.append('slug', data.slug);
+        formData.append('name', data.name);
         formData.append('image', data.image);
 
-        post('/admin/category/update/'+data.id, formData, {
+        post('/admin/industry/store', formData, {
             onSuccess: () => {
-                Swal.fire('Updated successfully.');
+                Swal.fire('Created successfully.');
 
             },
         });
@@ -33,54 +29,33 @@ const Edit = ({ category, errors }) => {
                 <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
                     <div className='col-md-12 col-lg-12 col-sm-12'>
                         <div className="p-6 bg-white rounded-lg shadow-lg">
-                            <h2>Parent Category</h2>
+                            <h2>Industry</h2>
                             <div className="mt-5 mb-4">
                                 <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="category_name">
-                                    Category Name
+                                    Industry Name
                                 </label>
                                 <input
                                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                                        errors.category_name ? 'border-red-500' : ''
+                                        errors.name ? 'border-red-500' : ''
                                     }`}
-                                    id="category_name"
+                                    id="name"
                                     type="text"
-                                    name="category_name"
-                                    placeholder="Category"
-                                    value={data.category_name}
-                                    onChange={(e) => setData('category_name', e.target.value)}
+                                    name="name"
+                                    placeholder="Industry Name"
+                                    value={data.name}
+                                    onChange={(e) => setData('name', e.target.value)}
                                 />
-                                {errors.category_name && (
+                                {errors.name && (
                                     <p className="text-xs italic text-red-500">
-                                        {errors.category_name}
+                                        {errors.name}
                                     </p>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="slug">
-                                    Slug
-                                </label>
-                                <input
-                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                                        errors.slug ? 'border-red-500' : ''
-                                    }`}
-                                    type="text"
-                                    id="slug"
-                                    value={data.slug}
-                                    name="slug"
-                                    onChange={(e) => setData('slug', e.target.value)}
-                                    placeholder="Slug"
-                                />
-                                {errors.slug && (
-                                    <p className="text-xs italic text-red-500">
-                                        {errors.slug}
-                                    </p>
-                                )}
-                            </div>
+
                             <div className="mb-4">
                                 <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="image">
                                     Image Attachment
                                 </label>
-                                <img src={ data.image } className='w-50 h-20-auto'/>
                                 <input
                                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                                         errors.image ? 'border-red-500' : ''
@@ -88,7 +63,6 @@ const Edit = ({ category, errors }) => {
                                     type="file"
                                     id="image"
                                     name="image"
-                                    // value={data.image}
                                     onChange={(e) => setData('image', e.target.files[0])}
                                 />
                                 {errors.image && (
@@ -108,7 +82,7 @@ const Edit = ({ category, errors }) => {
                         }`}
                         disabled={processing}
                     >
-                        Update
+                        Save
                     </button>
                 </div>
             </form>
@@ -116,5 +90,5 @@ const Edit = ({ category, errors }) => {
     );
 };
 
-Edit.layout = (page) => <BackendLayout children={page} title="Category Edit" />;
-export default Edit;
+Create.layout = (page) => <BackendLayout children={page} title="Category Create" />;
+export default Create;

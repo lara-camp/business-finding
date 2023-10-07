@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Storage;
 
 class BlogCollection extends ResourceCollection
 {
@@ -20,11 +21,11 @@ class BlogCollection extends ResourceCollection
             {
                 return [
                     'id' => $blog->id,
-                    'image' => $blog->cover_image,
+                    'url' => $blog->cover_image ? Storage::url($blog->cover_image) : "",
                     'title' => $blog->title,
                     // 'body' => $blog->body,
                     'tag' => $blog->tag,
-                    'user_id' => $blog->user_id,
+                    'user_name' => $blog->user->name,
                     'status' => $blog->status,
                     'created_at' => $blog->created_at->toFormattedDateString(),
                 ];
