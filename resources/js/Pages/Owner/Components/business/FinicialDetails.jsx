@@ -11,36 +11,39 @@ const FinicialDetails = () => {
                 <p className="mb-3"> Property Status *</p>
                 <input
                     type="radio"
-                    checked
-                    name="status"
+                    checked={ data.property_status === 'real_property' ? true : false}
+                    name="property_status"
                     value="real_property"
-                    onChange={e => setData('property_status', e.target.value)}
+                    onChange={e => setData('property_property_status', e.target.value)}
                 />
-                <label htmlFor="status"> Real Property </label>
+                <label htmlFor="property_status"> Real Property </label>
                 <input
                     type="radio"
-                    name="status"
+                    name="property_status"
+                    checked={ data.property_status === 'lease' ? true : false}
                     className="ms-4"
                     value="lease"
-                    onChange={e => setData('property_status', e.target.value)}
+                    onChange={e => setData('property_property_status', e.target.value)}
                 />
-                <label htmlFor="status"> Lease </label>
+                <label htmlFor="property_status"> Lease </label>
                 <input
                     type="radio"
-                    name="status"
+                    name="property_status"
                     className="ms-4"
                     value="both_freehold_and_leasehold"
-                    onChange={e => setData('property_status', e.target.value)}
+                    onChange={e => setData('property_property_status', e.target.value)}
+                    checked={ data.property_status === 'both_freehold_and_leasehold' ? true : false}
                 />
-                <label htmlFor="status"> Both Freehold and Leasehold </label>
+                <label htmlFor="property_status"> Both Freehold and Leasehold </label>
                 <input
                     type="radio"
-                    name="status"
+                    name="property_status"
                     className="ms-4"
                     value="n/a"
-                    onChange={e => setData('property_status', e.target.value)}
+                    onChange={e => setData('property_property_status', e.target.value)}
+                    checked={ data.property_status === 'n/a' ? true : false}
                 />
-                <label htmlFor="status"> N/A </label>
+                <label htmlFor="property_status"> N/A </label>
             </div>
 
             {/* Asking Price starts */}

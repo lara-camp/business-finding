@@ -3,6 +3,7 @@ import React from 'react'
 import {AiFillLike, AiFillEye} from 'react-icons/ai'
 import { router } from '@inertiajs/react'
 import Swal from 'sweetalert2'
+import { formatWord } from '@/Helper';
 
 const AllBusiness = ({businesses}) => {
     const {flash} = usePage().props;
@@ -18,7 +19,7 @@ const AllBusiness = ({businesses}) => {
             confirmButtonText: "Yes, delete it!",
           }).then((result) => {
             if (result.isConfirmed) {
-              router.post(route('owner.business.destroy', id), {
+              router.post(route('owner.business.destroy', id),{}, {
                 onSuccess: () =>
                   Swal.fire("Deleted!", "Your file has been deleted.", "success"),
               });
@@ -46,7 +47,7 @@ const AllBusiness = ({businesses}) => {
                     <div className="w-2/5 ms-3">
                         <div className="flex">
                             <div className='w-1/2 text-slate-500'> Status </div>
-                            <div className='w-1/2 text-indigo-700'> : {item.status} </div>
+                            <div className='w-1/2 text-indigo-700'> : {formatWord(item.status)} </div>
                         </div>
                         <div className="flex mt-2">
                             <div className='w-1/2 text-slate-500'> BusinessId </div>

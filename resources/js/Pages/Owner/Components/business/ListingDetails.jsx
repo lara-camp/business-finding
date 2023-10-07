@@ -3,7 +3,7 @@ import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 
 const ListingDetails = () => {
-    const { data, setData } = useContext(BusinessContext);
+    const { data, setData} = useContext(BusinessContext);
     return (
         <div className="listening-details border border-indigo-700 p-3 rounded-md my-5">
             <h5 className="font-bold"> Listing Details </h5>
@@ -52,6 +52,7 @@ const ListingDetails = () => {
                     name="status"
                     value="for_sale"
                     onChange={(e) => setData("status", e.target.value)}
+                    checked={data.status === 'for_sale' ? true : false}
                 />
                 <label htmlFor="status"> For Sale </label>
                 <input
@@ -60,6 +61,7 @@ const ListingDetails = () => {
                     value="under_offer"
                     className="ms-4"
                     onChange={(e) => setData("status", e.target.value)}
+                    checked={data.status === 'under_offer' ? true : false}
                 />
                 <label htmlFor="status"> Under Offer </label>
                 <input
@@ -68,6 +70,7 @@ const ListingDetails = () => {
                     value="sold"
                     className="ms-4"
                     onChange={(e) => setData("status", e.target.value)}
+                    checked={data.status === 'sold' ? true : false}
                 />
                 <label htmlFor="status"> Sold </label>
             </div>

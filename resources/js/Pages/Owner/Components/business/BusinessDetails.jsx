@@ -35,7 +35,11 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                         >
                             <option value=""> Select Category </option>
                             {categories.data.map((item) => (
-                                <option key={item.id} value={item.id}>
+                                <option 
+                                    key={item.id} 
+                                    value={item.id}
+                                    selected = {data.category_id == item.id ? 'selected' : ''}
+                                >
                                     {item.name}
                                 </option>
                             ))}
@@ -54,10 +58,16 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             {   
                                 filteredSubcategory.length > 0 
                                 ? filteredSubcategory.map(item => (
-                                    <option value={item.id}> {item.name}  </option>
+                                    <option 
+                                        value={item.id}
+                                        selected={data.subcategory_id == item.id ? 'selected' : ''}
+                                    > {item.name}  </option>
                                 ))
                                 : subcategories.data.map(item => (
-                                    <option value={item.id}> {item.name} </option>
+                                    <option 
+                                        value={item.id}
+                                        selected={data.subcategory_id == item.id ? 'selected' : ''}
+                                    > {item.name} </option>
                                 ))
                             }
                         </select>
@@ -81,7 +91,10 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             <option value=""> Select Region </option>
                             {
                                 regions.data.map(item => (
-                                    <option value={item.id}> {item.name} </option>
+                                    <option 
+                                        value={item.id}
+                                        selected={data.region_id == item.id ? 'selected' : ''}
+                                    > {item.name} </option>
                                 ))
                             }
                         </select>
@@ -97,10 +110,16 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             {
                                 filteredCities.length >  0 
                                 ? filteredCities.map(item => (
-                                    <option value={item.id}> {item.name} </option>
+                                    <option 
+                                        value={item.id}
+                                        selected={data.city_id === item.id ? 'selected' : ''}
+                                    > {item.name} </option>
                                 ))
                                 : cities.data.map(item => (
-                                    <option value={item.id}> {item.name} </option>
+                                    <option 
+                                        value={item.id}
+                                        selected={data.city_id === item.id ? 'selected' : ''}
+                                    > {item.name} </option>
                                 ))
                             }
                         </select>
@@ -111,6 +130,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                     placeholder="Street"
                     className="w-full p-2 border border-indigo-700 rounded-md"
                     onChange={e => setData('street', e.target.value)}
+                    value={data.street}
                 />
                 <small className="text-slate-500">
                     Please select the location of your business

@@ -5,7 +5,6 @@ import { usePage } from '@inertiajs/react'
 import Swal from "sweetalert2";
 
 const Create = ({ cities }) => {
-    console.log(cities);
     const [values, setValues] = useState({
         'name': "",
         'region_id': "",
@@ -19,6 +18,7 @@ const Create = ({ cities }) => {
             ...preValues,
             [name]: value,
         }));
+        console.log(values)
     };
 
     const handleSubmit = (e) => {
@@ -71,7 +71,7 @@ const Create = ({ cities }) => {
                             type="number"
                             name="region_id"
                             placeholder="region"
-                            onChange={(e) => setValues(values.region_id, e.target.value)}
+                            onChange={handleOnChange}
                         >
                             {cities.data.map((item) => (
                                 <option key={item.id} value={item.id}>

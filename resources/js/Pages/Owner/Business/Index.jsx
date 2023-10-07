@@ -55,8 +55,6 @@ const Index = ({businesses, total_count}) => {
         setNavitems(newnav)
     }
 
-    console.log(navitems)
-
   return (
     <div>
         {/* header  */}

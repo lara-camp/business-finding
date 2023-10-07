@@ -22,4 +22,8 @@ class Business extends Model
     public function city() {
         return $this->belongsTo(City::class);
     }
+
+    public function sub_category() {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+    }
 }
