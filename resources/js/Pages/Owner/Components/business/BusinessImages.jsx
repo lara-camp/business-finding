@@ -7,15 +7,14 @@ import '../../../../Css/index.css'
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 
+let initPreviewData = [];
+
+
 const BusinessImages = () => {
     const [featureImgCount, setFeatureImgCount] = useState(0);
-    const [featurePreviews, setFeaturePreviews] = useState([
-        {
-            source : FeatureImage,
-            text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
-            flexDirection : "flex-row",
-        }
-    ])
+    const [featurePreviews, setFeaturePreviews] = useState(initPreviewData)
+
+
     const [inputs, setInputs] = useState([
         {
             filename : `feature_image[${featureImgCount}]`,
@@ -24,6 +23,19 @@ const BusinessImages = () => {
     ])
     const [selectedImages, setSelectedImages] = useState([])
     const {data, setData, featureInfo, setFeatureInfo} = useContext(BusinessContext)
+
+
+    if(data.business_features.length > 0) {
+        initPreviewData = data.business_features;
+    } else {
+        initPreviewData = [
+            {
+                image : FeatureImage,
+                text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
+                flex_direction : "flex-row",
+            }
+        ]
+    }
 
     const addNewInputs = () => {
         if(inputs.length >= 5) {
@@ -39,9 +51,9 @@ const BusinessImages = () => {
         setFeaturePreviews([
             ...featurePreviews,
             {
-            source : FeatureImage,
+            image : FeatureImage,
             text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
-              flexDirection : "flex-row",
+              flex_direction : "flex-row",
             },
           ]);
 
@@ -60,7 +72,7 @@ const BusinessImages = () => {
         reader.onload = () => {
             const imgUrl = reader.result; 
             const updatePreviews = [...featurePreviews]
-            updatePreviews[index] = {source : imgUrl, text : featurePreviews[index].text,}
+            updatePreviews[index] = {image : imgUrl, text : featurePreviews[index].text}
             setFeaturePreviews(updatePreviews)
         };
         reader.readAsDataURL(files[0]); // Start reading the selected file as a data URL
@@ -79,7 +91,7 @@ const BusinessImages = () => {
     const handleFeatureTextChange = (index, e) => {
         const {value} = e.target;
         const updatePreviews = [...featurePreviews];
-        updatePreviews[index] = {source : featurePreviews[index].source , text : value,}
+        updatePreviews[index] = {image : featurePreviews[index].image , text : value}
         setFeaturePreviews(updatePreviews)
 
         // Add data to form 
@@ -99,7 +111,7 @@ const BusinessImages = () => {
             source : featurePreviews[index].source,
             text   : featurePreviews[index].text,
             flexDirection : 
-                featurePreviews[index].flexDirection === "flex-row"
+                featurePreviews[index].flex_direction === "flex-row"
                 ? "flex-row-reverse"
                 : "flex-row"
         }
@@ -204,9 +216,9 @@ const BusinessImages = () => {
                     inputs.map((item, index) => (
                         <div className="" key={index}>
                             <div className="w-full preview-img-feature my-4 p-2 border border-indigo-700 rounded-md">
-                                <div className={`flex ${featurePreviews[index].flexDirection} items-start`}>
+                                <div className={`flex ${featurePreviews[index].flex_direction} items-start`}>
                                     <div className="w-5/12">
-                                        <img src={featurePreviews[index].source} alt="" className="img-fluid w-1/2"/>
+                                        <img src={featurePreviews[index].image} alt="" className="img-fluid w-1/2"/>
                                     </div>
                                     <div className="text-center w-2/12">
                                     <button 
