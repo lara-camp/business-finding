@@ -10,8 +10,9 @@ import BusinessSocial from "./BusinessSocial";
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 import { router, usePage } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
-const Business = ({categories, cities, regions, subcategories, business}) => {
+const Business = ({categories, cities, regions, subcategories}) => {
     const [open, setOpen] = React.useState(true);
     const {data,featureInfo} = useContext(BusinessContext)
     const { flash } = usePage().props
@@ -28,6 +29,7 @@ const Business = ({categories, cities, regions, subcategories, business}) => {
                 Swal.fire("Business created successfully!", "Success", "success");
             },
             onError : (e) => {
+                console.log(e)
                 console.log(flash.message)
             }
         })

@@ -14,7 +14,7 @@ const FinicialDetails = () => {
                     checked={ data.property_status === 'real_property' ? true : false}
                     name="property_status"
                     value="real_property"
-                    onChange={e => setData('property_property_status', e.target.value)}
+                    onChange={e => setData('property_status', e.target.value)}
                 />
                 <label htmlFor="property_status"> Real Property </label>
                 <input
@@ -23,7 +23,7 @@ const FinicialDetails = () => {
                     checked={ data.property_status === 'lease' ? true : false}
                     className="ms-4"
                     value="lease"
-                    onChange={e => setData('property_property_status', e.target.value)}
+                    onChange={e => setData('property_status', e.target.value)}
                 />
                 <label htmlFor="property_status"> Lease </label>
                 <input
@@ -31,7 +31,7 @@ const FinicialDetails = () => {
                     name="property_status"
                     className="ms-4"
                     value="both_freehold_and_leasehold"
-                    onChange={e => setData('property_property_status', e.target.value)}
+                    onChange={e => setData('property_status', e.target.value)}
                     checked={ data.property_status === 'both_freehold_and_leasehold' ? true : false}
                 />
                 <label htmlFor="property_status"> Both Freehold and Leasehold </label>
@@ -40,7 +40,7 @@ const FinicialDetails = () => {
                     name="property_status"
                     className="ms-4"
                     value="n/a"
-                    onChange={e => setData('property_property_status', e.target.value)}
+                    onChange={e => setData('property_status', e.target.value)}
                     checked={ data.property_status === 'n/a' ? true : false}
                 />
                 <label htmlFor="property_status"> N/A </label>
@@ -72,6 +72,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('asking_price', e.target.value)}
+                            value={data.asking_price}
                         />
                     </div>
                 </div>
@@ -94,7 +95,7 @@ const FinicialDetails = () => {
                             type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
-                            onChange={e => setData('asking_price', e.target.value)}
+                            onChange={e => setData('revenue_price', e.target.value)}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -109,7 +110,8 @@ const FinicialDetails = () => {
                             type="number"
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
-                            onChange={e => setData('asking_price', e.target.value)}
+                            onChange={e => setData('revenue_price', e.target.value)}
+                            value={data.revenue_price}
                         />
                     </div>
                 </div>
@@ -142,6 +144,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('cash_flow', e.target.value)}
+                            value={data.cash_flow}
                         />
                     </div>
                 </div>
@@ -174,6 +177,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('inventory_value', e.target.value)}
+                            value={data.inventory_value}
                         />
                     </div>
                 </div>
@@ -206,6 +210,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('net_income', e.target.value)}
+                            value={data.net_income}
                         />
                     </div>
                 </div>

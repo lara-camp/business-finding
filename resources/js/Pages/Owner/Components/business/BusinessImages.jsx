@@ -128,6 +128,24 @@ const BusinessImages = () => {
         <div className="listening-details border border-indigo-700 p-3 rounded-md my-5">
             <h5 className="font-bold"> Add Photos and Description *</h5>
             <div className="my-3">
+                {
+                    data.show_case_images.length > 0 &&
+                    <>
+                        <p> Current Images </p>
+                        {
+                            data.show_case_images.map(item => (
+                            <div className="w-1/5 mx-2 my-3">
+                                    <img 
+                                    key={item.id}
+                                    src={item.path}
+                                    alt={`Preview ${item.id}`}
+                                    className="img-fluid"
+                                />
+                            </div>
+                            ))
+                        }
+                    </>
+                }
                 <p className="mb-3"> Show Case Photos *</p>
                 <div className="flex">
                     {

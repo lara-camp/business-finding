@@ -36,7 +36,25 @@ const BusinessDocuments = () => {
         <div className="listening-details border border-indigo-700 p-3 rounded-md my-5">
             <h5 className="font-bold"> Add Documents </h5>
             <div className="my-3">
-                <p className="mb-3"> Upload Document</p>
+                {
+                    data.documents.length > 0 &&
+                    <>
+                        <p className="mb-3 font-bold"> Curent Document</p>
+                        <div className="flex justify-between">
+                            {
+                                data.documents.map((item, index) => (
+                                    <div className="w-auto my-3" key={index}>
+                                        <a href={item.url} target="_blank">  
+                                            <p className="text-sm mb-2 font-bold"> File {index + 1} </p>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/640px-PDF_file_icon.svg.png" alt="" width={100} height={200} />
+                                        </a>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </>
+                }
+                <p className="mb-3 font-bold"> Upload Document</p>
                 <div className="preview-docs-container flex">
                 {selectedFiles.map((file, index) => (
                     <div key={index} className="w-1/5 mx-2">

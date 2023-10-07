@@ -50,7 +50,7 @@ class BusinessService {
             'asking_price' => $asking_price,
             'info' => json_encode($info),
             'documents' => json_encode($doc_arr),
-            'status' => 'draft',
+            'stage' => 'draft',
             'views' => 0,
             'likes' => 0,
         ]);
