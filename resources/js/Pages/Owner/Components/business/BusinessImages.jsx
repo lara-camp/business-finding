@@ -14,7 +14,6 @@ const BusinessImages = () => {
     const [featureImgCount, setFeatureImgCount] = useState(0);
     const [featurePreviews, setFeaturePreviews] = useState(initPreviewData)
 
-
     const [inputs, setInputs] = useState([
         {
             filename : `feature_image[${featureImgCount}]`,
@@ -53,7 +52,7 @@ const BusinessImages = () => {
             {
             image : FeatureImage,
             text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
-              flex_direction : "flex-row",
+            flex_direction : "flex-row",
             },
           ]);
 
@@ -108,9 +107,9 @@ const BusinessImages = () => {
     const toggleFlexDirection = (index) => {
         const updatePreviews = [...featurePreviews];
         updatePreviews[index] = {
-            source : featurePreviews[index].source,
+            image : featurePreviews[index].image,
             text   : featurePreviews[index].text,
-            flexDirection : 
+            flex_direction : 
                 featurePreviews[index].flex_direction === "flex-row"
                 ? "flex-row-reverse"
                 : "flex-row"
@@ -128,6 +127,7 @@ const BusinessImages = () => {
                     ? "flex-row-reverse"
                     : "flex-row"
         }
+        setFeatureInfo(formData)
     }
 
     const handleImagesChange = (e) => {
@@ -144,18 +144,19 @@ const BusinessImages = () => {
                     data.show_case_images_current.length > 0 &&
                     <>
                         <p className="font-bold"> Current Images </p>
+                        <div className="flex">
                         {
                             data.show_case_images_current.map(item => (
-                            <div className="w-1/5 mx-2 my-3">
-                                    <img 
-                                    key={item.id}
-                                    src={item.path}
-                                    alt={`Preview ${item.id}`}
-                                    className="img-fluid"
-                                />
-                            </div>
+                                <div className="w-1/5 mx-2 my-3">
+                                        <img 
+                                        key={item.id}
+                                        src={item.path}
+                                        alt={`Preview ${item.id}`}
+                                    />
+                                </div>
                             ))
                         }
+                        </div>
                     </>
                 }
                 <p className="mb-3 font-bold"> Show Case Photos *</p>

@@ -405,7 +405,7 @@ export default function BackendLayout({ children }) {
                         </div>
                     </div>
 
-                    <main className="py-10 h-screen">
+                    <main className="py-10 min-h-screen">
                         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                     </main>
                     <footer>

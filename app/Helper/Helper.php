@@ -13,4 +13,9 @@ class Helper {
             return $gs->value;
         }
     }
+
+    public static function getStragePathFromFullUrl($path) {
+       $text =  str_replace(env('APP_URL').'/storage', '', $path);
+       return $text;
+    }
 }

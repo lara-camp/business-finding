@@ -39,7 +39,7 @@ const BusinessProvider = ({children}) => {
     };
     
        
-    const {data, setData} = useForm(initData)
+    const {data, setData, reset} = useForm(initData)
 
   return (
     <BusinessContext.Provider value={{data, setData, featureInfo, setFeatureInfo}}>
