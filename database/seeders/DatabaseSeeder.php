@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             CategorySeeder::class,
             SubCategorySeeder::class,
-            // BlogSeeder::class,
+            BlogSeeder::class,
             FaqSeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             GeneralSettingSeeder::class,
             OwnerDetailSeeder::class,
             ImageSeeder::class,
+            IndustrySeeder::class,
+            SubCategorySeeder::class,
         ]);
 
         $user = User::factory()->create([

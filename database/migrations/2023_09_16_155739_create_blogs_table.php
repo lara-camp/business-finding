@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('cover_image')->nullable();
             $table->integer('user_id');
+            $table->integer('industry_id');
             $table->string('status');
             $table->timestamps();
         });

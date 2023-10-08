@@ -6,15 +6,16 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import Quill styles
 
 
-const Create = ( { blog, errors}) => {
+const Create = ({ blog, errors, industries }) => {
     const { data, setData } = useForm(
         {
-            'tag' : blog.tag ,
-            'title' : blog.title ,
-            'content' : blog.content ,
+            'tag': blog.tag,
+            'title': blog.title,
+            'content': blog.content,
             'description': blog.description,
-            'cover_image' : "",
-            'image_attachment' : "",
+            'cover_image': "",
+            'image_attachment': "",
+            'industry_id': blog.industry_id || '',
         }
     );
 
@@ -80,21 +81,52 @@ const Create = ( { blog, errors}) => {
                             )}
 
                         </div>
-                            <div class="mb-4">
+                        <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Tags
                             </label>
-                            <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            <select
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="tag"
                                 type="text"
-                                id='tags'
-                                value={data.tag}
-                                name="tags"
-                                onChange= {(e)=> setData('tag',e.target.value)}
-                                  placeholder="Tags" />
+                                name="tag"
+                                placeholder="category"
+                                onChange={ (e) => setData('tag', e.target.value)}
+                              >
+                                  <option key={0} value={0}>Choose Tags</option>
+                                  <option key={1} value={'News'}>News</option>
+                                  <option key={2} value={'Guide'}>Guide</option>
+                                  <option key={3} value={'Advice for buyers'}>Advice for buyers</option>
+                                  <option key={4} value={'Advice for sellers'}>Advice for sellers</option>
+                            </select>
                             {errors.tag && (
                                 <p className="text-red-500 text-xs italic">
                                     {errors.tag}
+                                </p>
+                            )}
+                          </div>
+                        <div class="mb-4 mt-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                                Industry Name
+                            </label>
+                            <select
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="industry_id"
+                                type="text"
+                                name="industry_id"
+                                placeholder="category"
+                                onChange={ (e) => setData('industry_id', e.target.value)}
+                              >
+                                  <option key={0} value={0}>Choose Industry</option>
+                            {industries.map((item) => (
+                                <option key={item.id} value={item.id}>
+                                {item.name}
+                                </option>
+                            ))}
+                              </select>
+                            {errors.industry_id && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.industry_id}
                                 </p>
                             )}
                         </div>

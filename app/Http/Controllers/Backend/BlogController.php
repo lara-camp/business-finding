@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
+use App\Models\Industry;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,8 +24,10 @@ class BlogController extends Controller
 
     public function create()
     {
+        $industries = Industry::get();
         return Inertia::render('Backend/Blog/Create',[
             'blog' => new Blog(),
+            'industries' => $industries,
         ]);
     }
     public function store(Request $request)
@@ -36,6 +39,7 @@ class BlogController extends Controller
             'cover_image' => 'required',
             // 'image_attachment' => 'required',
             'content' => 'required',
+            'industry_id' => 'required',
         ];
 
         // Validate the request data
@@ -48,11 +52,13 @@ class BlogController extends Controller
                 ->withInput();
         }
 
+
         $blog = Blog::create([
             'title' => $request->title,
             'body' => $request->description,
             'tag' => $request->tag,
             'content' => $request->content,
+            'industry_id' => $request->industry_id,
             'user_id' => auth()->user()->id,
             'status' => 1,
         ]);
@@ -90,7 +96,19 @@ class BlogController extends Controller
     {
         // dd($request->all());
         $blog = Blog::findOrFail($id);
-        return Inertia::render('Backend/Blog/Edit', ['blog' => new BlogResource($blog),]);
+        $urls = Image::where('imageable_id',$id)->where('imageable_type', 'App\Models\Blog')->pluck('url')->toArray();
+        $images =[];
+        $i=0;
+        foreach($urls as $url)
+        {
+            $images[$i++] = Storage::url($url);
+        }
+        // dd($images);
+        return Inertia::render('Backend/Blog/Edit', [
+            'blog' => new BlogResource($blog),
+            'industries' => Industry::get(),
+            'images' => $images,
+        ]);
     }
 
     public function update($id, Request $request)
@@ -121,7 +139,24 @@ class BlogController extends Controller
             {
                 Storage::disk('public')->delete($blog->cover_image);
             }
-
+            /* $file = 'cover'.time().auth()->id().'-'.$_FILES['cover_image']['name'];
+            // dd($file);k
+            $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+')); */
+        }
+        if($request->image_attachments)
+        {
+            foreach($request->image_attachments as $image)
+            {
+                $file = 'img_'.time().auth()->id().'-'.$image->getClientOriginalName();
+                // dd($file);
+                $path = Storage::disk('public')->put( $file,fopen($image, 'r+'));
+                $blog->cover_image = $file ;
+                Image::create([
+                    'url' => $file ,
+                    'imageable_id' => $blog->id,
+                    'imageable_type' => 'App\Models\Blog',
+                ]);
+            }
         }
         $blog->update($request->all());
         return to_route('admin.blog');

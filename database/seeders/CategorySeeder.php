@@ -13,14 +13,14 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::create(['name'=> 'Restaurant', 'slug'=> 'restaurant']);
-        Category::create(['name'=> 'Retail', 'slug'=> 'retail']);
-        Category::create(['name'=> 'Medical', 'slug'=> 'medical']);
-        Category::create(['name'=> 'Technology', 'slug'=> 'tech']);
-        Category::create(['name'=> 'Spa', 'slug'=> 'spa']);
-        Category::create(['name'=> 'Hotel', 'slug'=> 'hotel']);
+        Category::create(['name'=> 'Retail Businesses', 'slug'=> 'retail']);
+        Category::create(['name'=> 'Food and Beverage', 'slug'=> 'food']);
+            Category::create(['name'=> 'Service Businesses', 'slug'=> 'service']);
+        Category::create(['name'=> 'Manufacturing', 'slug'=> 'manufacturing']);
+        Category::create(['name'=> 'Technology and IT', 'slug'=> 'tech']);
+        /* Category::create(['name'=> 'Hotel', 'slug'=> 'hotel']);
         Category::create(['name'=> 'House', 'slug'=> 'house']);
         Category::create(['name'=> 'Shopping Mall', 'slug'=> 'mall']);
-        Category::create(['name'=> 'Fashion House', 'slug'=> 'fashion']);
+        Category::create(['name'=> 'Fashion House', 'slug'=> 'fashion']); */
     }
 }

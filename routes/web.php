@@ -33,9 +33,10 @@ use App\Http\Controllers\SubCategoryController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
+Route::get('/category', [HomeController::class, 'category'])->name('category');
 
 // Admin
-
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
 Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(function () {
     // Dashboard
