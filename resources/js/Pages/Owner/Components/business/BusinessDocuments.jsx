@@ -37,12 +37,12 @@ const BusinessDocuments = () => {
             <h5 className="font-bold"> Add Documents </h5>
             <div className="my-3">
                 {
-                    data.documents.length > 0 &&
+                    data.documents_current.length > 0 &&
                     <>
                         <p className="mb-3 font-bold"> Curent Document</p>
                         <div className="flex justify-between">
                             {
-                                data.documents.map((item, index) => (
+                                data.documents_current.map((item, index) => (
                                     <div className="w-auto my-3" key={index}>
                                         <a href={item.url} target="_blank">  
                                             <p className="text-sm mb-2 font-bold"> File {index + 1} </p>

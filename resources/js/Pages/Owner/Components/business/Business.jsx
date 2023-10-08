@@ -15,10 +15,10 @@ import Swal from "sweetalert2";
 const Business = ({categories, cities, regions, subcategories}) => {
     const [open, setOpen] = React.useState(true);
     const {data,featureInfo} = useContext(BusinessContext)
-    const { flash } = usePage().props
+    const { flash,business } = usePage().props
     function handleSubmit(e) {
         e.preventDefault()
-        router.post(route('owner.business.store'), {
+        router.post(business ? route('owner.business.update', business.id) : route('owner.business.store'), {
             data : data,
             feature_info : featureInfo,
         },{   
@@ -89,7 +89,7 @@ const Business = ({categories, cities, regions, subcategories}) => {
                         <button 
                             className="p-2 bg-indigo-700 text-white rounded-md"
                         > 
-                            Save for later 
+                            {business ? 'Update' : "Save for later "}
                         </button>
                     </div>
                 </form>

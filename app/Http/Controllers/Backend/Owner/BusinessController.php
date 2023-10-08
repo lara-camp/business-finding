@@ -113,6 +113,38 @@ class BusinessController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id) {
+        $data = $request->data;
+        $feature_info = $request->feature_info;
+        $showcase_images = $data['show_case_images'];
+        
+        // File 
+        $documents = $data['documents'];
+        $doc_arr = $this->storeDocs($documents);
+        // Create Business 
+
+        try {
+            DB::transaction(function () use ($id, $data, $doc_arr, $feature_info, $showcase_images) {
+                // Create Business 
+                $business_service = new BusinessService($data);
+                $business = $business_service->editBusiness($id, $doc_arr);
+    
+                // Save show case images 
+                if(array_key_exists('show_case_images', $data)) {
+                    $business_service->createShowCaseImages($business, $showcase_images);
+                }
+    
+                // Save Business Feature Info
+                if(array_key_exists('documents', $data)) {
+                    $business_service->createBusinessFeature($feature_info, $business);
+                }
+            });
+            return to_route('owner.business');
+        } catch(\Exception $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
     public function destroy($id) {
         $business = Business::find($id);
         if($business) {
@@ -147,6 +179,16 @@ class BusinessController extends Controller
         } else {
             throw new Exception('Business not found');
         }
+    }
+
+    private function storeDocs($documents) {
+        $doc_arr = array();
+        foreach($documents as $file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = Storage::putFileAs('uploads/documents', $file, $filename);
+            array_push($doc_arr, $path);
+        }
+        return $doc_arr;
     }
 }
 

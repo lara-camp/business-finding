@@ -200,6 +200,7 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
         Route::post('/create', [BusinessController::class, 'store'])->name('owner.business.store');
         Route::get('/{id}', [BusinessController::class, 'show'])->name('owner.business.show');
         Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('owner.business.edit');
+        Route::post('/edit/{id}', [BusinessController::class, 'update'])->name('owner.business.update');
         Route::post('/delete/{id}', [BusinessController::class, 'destroy'])->name('owner.business.destroy');
     });
 });

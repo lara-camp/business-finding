@@ -141,11 +141,11 @@ const BusinessImages = () => {
             <h5 className="font-bold"> Add Photos and Description *</h5>
             <div className="my-3">
                 {
-                    data.show_case_images.length > 0 &&
+                    data.show_case_images_current.length > 0 &&
                     <>
-                        <p> Current Images </p>
+                        <p className="font-bold"> Current Images </p>
                         {
-                            data.show_case_images.map(item => (
+                            data.show_case_images_current.map(item => (
                             <div className="w-1/5 mx-2 my-3">
                                     <img 
                                     key={item.id}
@@ -158,7 +158,7 @@ const BusinessImages = () => {
                         }
                     </>
                 }
-                <p className="mb-3"> Show Case Photos *</p>
+                <p className="mb-3 font-bold"> Show Case Photos *</p>
                 <div className="flex">
                     {
                         selectedImages.map((file, index)  => (
