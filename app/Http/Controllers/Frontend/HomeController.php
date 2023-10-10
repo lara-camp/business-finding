@@ -16,8 +16,6 @@ class HomeController extends Controller
         return Inertia::render('Frontend/Partials/Nav');
     }
 
-    public function category() {
-        return Inertia::render('Frontend/Category');
-    }
+   
 
 }

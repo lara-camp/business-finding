@@ -11,10 +11,11 @@ const FrontendLayout = ({children, title}) => {
         <Head title={title} />
             <Header />
           </header>
-          <Nav/>
-        <main>
+        <Nav>
+        </Nav>
+        {<main>
             {children}
-        </main>
+        </main>}
         <footer>
             <Footer />
         </footer>
