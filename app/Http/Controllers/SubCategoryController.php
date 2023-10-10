@@ -14,7 +14,7 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        $subcategories = SubCategory::latest()->paginate(10);
+        $subcategories = SubCategory::latest()->orderBy('id','desc')->paginate(10);
         // dd(new SubCategoryCollection($subcategories));
         return Inertia::render('Backend/Sub_Category/Index', [
             'subcategories' => new SubCategoryCollection($subcategories),
