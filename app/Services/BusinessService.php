@@ -30,7 +30,7 @@ class BusinessService {
 
 
     public function createShowCaseImages($business, $showcase_images) {
-        $cur_imgs = $this->data['show_case_images_current'];
+        $cur_imgs = array_key_exists('show_case_images_current', $this->data) ? $this->data['show_case_images_current'] : [];
         if(count($cur_imgs) > 0) {
             // do something
         }

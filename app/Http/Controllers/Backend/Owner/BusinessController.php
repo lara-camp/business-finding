@@ -70,6 +70,7 @@ class BusinessController extends Controller
         $data = $request->data;
         $feature_info = $request->feature_info;
         $showcase_images = $data['show_case_images'];
+        // $showcase_images_current = array_key_exists('show_case_images_current', $data) ? $data['show_case_images_current'] : "";
         
         // File 
         $documents = $data['documents'];
