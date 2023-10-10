@@ -8,8 +8,6 @@ const Index = ({ ownerdetails }) => {
         "user_id",
         "address",
         "company",
-        "frontend_img",
-        "backend_img",
         "action",
     ];
     const routeName = "owner";

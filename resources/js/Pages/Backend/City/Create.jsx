@@ -4,7 +4,7 @@ import { Link, router } from '@inertiajs/react'
 import { usePage } from '@inertiajs/react'
 import Swal from "sweetalert2";
 
-const Create = ({ cities }) => {
+const Create = ({ cities, regions }) => {
     console.log(cities);
     const [values, setValues] = useState({
         'name': "",
@@ -67,13 +67,14 @@ const Create = ({ cities }) => {
                         </label>
                         <select
                             class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="region_id"
-                            type="number"
+                            // id="region_id"
+                            type="integer"
                             name="region_id"
+                            value={values.region_id}
                             placeholder="region"
-                            onChange={(e) => setValues(values.region_id, e.target.value)}
+                            onChange={handleOnChange}
                         >
-                            {cities.data.map((item) => (
+                            {regions.data.map((item) => (
                                 <option key={item.id} value={item.id}>
                                     {item.name}
                                 </option>

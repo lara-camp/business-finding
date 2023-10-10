@@ -147,11 +147,13 @@ Route::get('/admin/cities/create', [CityController::class, 'create'])->name('adm
 Route::post('/admin/cities/create', [CityController::class, 'store'])->name('admin.store');
 Route::get('/admin/cities/{id}', [CityController::class, 'show'])->name('admin.cities.show');
 Route::get('/admin/cities/edit/{id}', [CityController::class, 'edit'])->name('admin.cities.edit');
+Route::post('/admin/cities/edit/{id}', [CityController::class, 'update'])->name('admin.cities.update');
 Route::post('/admin/cities/{id}', [CityController::class, 'destroy'])->name('admin.region.delete');
 
 // owner_detail
 Route::get('/admin/owner', [OwnerDetailController::class, 'index'])->name('admin.owner');
 Route::get('/admin/owner/create', [OwnerDetailController::class, 'create'])->name('admin.owner.create');
+Route::post('/admin/owner/create', [OwnerDetailController::class, 'store'])->name('admin.owner.store');
 Route::get('/admin/owner/{id}}', [OwnerDetailController::class, 'show'])->name('admin.owner.show');
 Route::get('/admin/owner/edit/{id}}', [OwnerDetailController::class, 'edit'])->name('admin.owner.edit');
 
