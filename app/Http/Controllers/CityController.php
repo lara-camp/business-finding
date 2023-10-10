@@ -8,13 +8,15 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CityCollection;
+use App\Http\Resources\RegionCollection;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
     //index
     public function index()
     {
-        $cities = City::paginate(10);
+        $cities = City::orderby('created_at', 'desc')->paginate(10);
         return Inertia::render('Backend/City/Index', [
             'cities' => new CityCollection($cities),
         ]);
@@ -23,10 +25,11 @@ class CityController extends Controller
     // create
     public function create()
     {
-        $cities = Region::all();
-        // dd($cities);
+        $cities = City::all();
+        $regions = Region::all();
         return Inertia::render('Backend/City/Create', [
             'cities' => new CityCollection($cities),
+            'regions' => new RegionCollection($regions)
         ]);
     }
 
@@ -57,9 +60,33 @@ class CityController extends Controller
     public function edit($id)
     {
         $city = City::findOrFail($id);
+        $regions = Region::all();
         return Inertia::render('Backend/City/Edit', [
-            'city' => new CityResource($city)
+            'city' => new CityResource($city),
+            'regions' => new RegionCollection($regions)
         ]);
+    }
+
+    // update
+    public function update($id, Request $request)
+    {
+        $rules = [
+            'name' => 'required',
+            'region_id' => 'required',
+        ];
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->route('admin.cities.edit', ['id' => $request->id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $city = City::findOrFail($id);
+        $city->update($request->all());
+        return to_route('admin.cities');
     }
 
     public function destroy($id)

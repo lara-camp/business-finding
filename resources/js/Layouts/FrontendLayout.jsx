@@ -1,5 +1,6 @@
 import Footer from '@/Pages/Frontend/Partials/Footer'
 import Header from '@/Pages/Frontend/Partials/Header'
+import Nav from '@/Pages/Frontend/Partials/Nav'
 import React from 'react'
 import { Head, usePage } from '@inertiajs/react'
 
@@ -9,10 +10,12 @@ const FrontendLayout = ({children, title}) => {
         <header>
         <Head title={title} />
             <Header />
-        </header>
-        <main>
+          </header>
+        <Nav>
+        </Nav>
+        {<main>
             {children}
-        </main>
+        </main>}
         <footer>
             <Footer />
         </footer>

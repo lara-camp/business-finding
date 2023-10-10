@@ -17,6 +17,7 @@ const ListingDetails = () => {
                     placeholder="Enter Your Title"
                     onChange={(e) => setData("name", e.target.value)}
                     value={data.name}
+                    required={true}
                 />
                 <small className="text-slate-500">
                     This serves as your listing title, with an 8-word limit. For
@@ -35,6 +36,7 @@ const ListingDetails = () => {
                     placeholder="Summary"
                     onChange={(e) => setData("description", e.target.value)}
                     value={data.description}
+                    required={true}
                 />
                 <small className="text-slate-500">
                     Emphasize the strengths and advantages of the business
@@ -53,6 +55,7 @@ const ListingDetails = () => {
                     value="for_sale"
                     onChange={(e) => setData("status", e.target.value)}
                     checked={data.status === 'for_sale' ? true : false}
+                    required={true}
                 />
                 <label htmlFor="status"> For Sale </label>
                 <input
@@ -62,6 +65,7 @@ const ListingDetails = () => {
                     className="ms-4"
                     onChange={(e) => setData("status", e.target.value)}
                     checked={data.status === 'under_offer' ? true : false}
+                    required={true}
                 />
                 <label htmlFor="status"> Under Offer </label>
                 <input
@@ -71,6 +75,7 @@ const ListingDetails = () => {
                     className="ms-4"
                     onChange={(e) => setData("status", e.target.value)}
                     checked={data.status === 'sold' ? true : false}
+                    required={true}
                 />
                 <label htmlFor="status"> Sold </label>
             </div>

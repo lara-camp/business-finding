@@ -22,6 +22,7 @@ class BlogResource extends JsonResource
             'body' => $this->body,
             'tag' => $this->tag,
             'user_id' => $this->user_id,
+            'industry_id' => $this->industry_id,
             'status' => $this->status,
         ];
     }

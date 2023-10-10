@@ -65,6 +65,9 @@ const AllBusiness = ({businesses}) => {
                             <div className='w-1/2 text-slate-500'> Asking Price </div>
                             <div className='w-1/2 text-indigo-700'> : {item.asking_price} </div>
                         </div>
+                        <div className='my-3'>
+                            <p className=' bg-indigo-700 inline p-2 text-white rounded-md'>{formatWord(item.stage)}</p>
+                        </div>
                     </div>
                     <div className="w-2/5 text-end">
                         {/* time show  */}
@@ -93,6 +96,15 @@ const AllBusiness = ({businesses}) => {
                     <div>
                         <Link href={route('owner.business.edit', item.id)} className='p-2 bg-indigo-700 rounded-md text-white me-3'> Edit </Link>
                         <button className='p-2 bg-red-700 rounded-md text-white me-3' onClick={() => handleDelete(item.id)}> Delete </button>
+                        <Link 
+                            className='p-2 bg-green-700 rounded-md text-white me-3'
+                            method='post'
+                            href={route('owner.business.change-stage', item.id)}
+                            only={['businesses']}
+                            preserveScroll
+                        >  
+                            {item.stage == 'draft' ? 'Published' : 'Unpublished'}
+                        </Link>
                     </div>
                 </div>
             </div>

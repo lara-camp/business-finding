@@ -6,25 +6,12 @@ import {usePage} from '@inertiajs/react'
 
 const BusinessProvider = ({children}) => {
 
-    const [featureInfo, setFeatureInfo] = useState([{
+    const [business, setBusiness] = useState(usePage().props.business)
+    const [featureInfo, setFeatureInfo] = useState(business ? business.business_features : [{
         image : '',
         text : "",
         flex_direction : "flex-row"
-    }])
-    const [business, setBusiness] = useState(usePage().props.business)
-
-    if(business && business.business_features && business.business_features.length > 0) {
-      // update feature image
-
-      const updatedFeatureInfo = business.business_features.map(item => ({
-        image: item.image,
-        text: item.subject,
-        flex_direction: item.position
-      }));
-    
-      // Update the featureInfo state once with the entire array
-      setFeatureInfo(updatedFeatureInfo);
-    }
+    }]);
     
     const initData = {
       "name": business?.name || '',
@@ -41,19 +28,20 @@ const BusinessProvider = ({children}) => {
       "cash_flow": business?.cash_flow || '',
       "inventory_value": business?.inventory_value || '',
       "net_income": business?.net_income || '',
-      "show_case_images": business?.show_case_images || [],
-      "documents": business?.documents || [],
+      "show_case_images" : [],
+      "show_case_images_current": business?.show_case_images || [],
+      "documents" : [], 
+      "documents_current": business?.documents || [],
       "website": business?.website || '',
       "embedded_video": business?.embedded_video || '',
+      "business_features" : business?.business_features || [],
     };
     
        
-    const {data, setData, post, errors, transform} = useForm(initData)
-
-
+    const {data, setData, reset} = useForm(initData)
 
   return (
-    <BusinessContext.Provider value={{data, setData, featureInfo, setFeatureInfo, setBusiness}}>
+    <BusinessContext.Provider value={{data, setData, featureInfo, setFeatureInfo}}>
         {children}
     </BusinessContext.Provider>
   )

@@ -11,4 +11,11 @@ class HomeController extends Controller
     public function index() {
         return Inertia::render('Frontend/Home');
     }
+    public function nav() {
+        // dd("Hello");
+        return Inertia::render('Frontend/Partials/Nav');
+    }
+
+   
+
 }

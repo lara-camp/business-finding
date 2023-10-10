@@ -23,6 +23,21 @@ class OwnerDetailController extends Controller
         return Inertia::render('Backend/Owner_Detail/Create');
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'region_id' => 'required'
+        ]);
+
+        OwnerDetail::create([
+            'user_id' => $request->user_id,
+            'address' => $request->address,
+            'company' => $request->company
+        ]);
+        return to_route('admin.owner');
+    }
+
     public function show($id)
     {
         $ownerdetail = OwnerDetail::findOrFail($id);

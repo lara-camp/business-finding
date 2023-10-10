@@ -6,7 +6,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import Quill styles
 
 
-const Edit = ( { blog, errors}) => {
+const Edit = ({ blog, errors, industries, images }) => {
+    console.log(blog, images);
     const { data, setData } = useForm(
         {
             'id' : blog.id,
@@ -14,17 +15,21 @@ const Edit = ( { blog, errors}) => {
             'title' : blog.title ,
             'content' : blog.content ,
             'description': blog.body,
-            'cover_image' : blog.cover_image,
+            'cover_image': blog.url,
+            'industry_id': blog.industry_id,
             'image_attachment' : "",
         }
     );
 
-    const [editorHtml, setEditorHtml] = useState('');
+     /* const [editorHtml, setEditorHtml] = useState(data.content);
 
-    const handleChange = (html) => {
+      const handleChange = (html) => {
         setEditorHtml(html);
-        setData('content', editorHtml);
-    };
+        setData('content', html);
+      }; */
+    const handleQuillChange = (html) => {
+        setData('content', html);
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -81,21 +86,52 @@ const Edit = ( { blog, errors}) => {
                             )}
 
                         </div>
-                            <div class="mb-4">
+                        <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Tags
                             </label>
-                            <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            <select
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="tag"
                                 type="text"
-                                id='tags'
-                                value={data.tag}
-                                name="tags"
-                                onChange= {(e)=> setData('tag',e.target.value)}
-                                  placeholder="Tags" />
+                                name="tag"
+                                placeholder="category"
+                                onChange={ (e) => setData('tag', e.target.value)}
+                              >
+                                  <option key={0} value={0}>Choose Tags</option>
+                                  <option key={1} value={'News'} selected={data.tag == 'News'}>News</option>
+                                  <option key={2} value={'Guide'} selected={data.tag == 'Guide'}>Guide</option>
+                                  <option key={3} value={'Advice for buyers'} selected={data.tag == 'Advice for buyers'}>Advice for buyers</option>
+                                  <option key={4} value={'Advice for sellers'} selected={data.tag == 'Advice for sellers'}>Advice for sellers</option>
+                            </select>
                             {errors.tag && (
                                 <p className="text-red-500 text-xs italic">
                                     {errors.tag}
+                                </p>
+                            )}
+                          </div>
+                        <div class="mb-4 mt-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                                Industry Name
+                            </label>
+                            <select
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="industry_id"
+                                type="text"
+                                name="industry_id"
+                                placeholder="category"
+                                onChange={ (e) => setData('industry_id', e.target.value)}
+                              >
+                                  <option key={0} value={0}>Choose Industry</option>
+                            {industries.map((item) => (
+                                <option key={item.id} value={item.id} selected={item.id == data.industry_id}>
+                                {item.name}
+                                </option>
+                            ))}
+                              </select>
+                            {errors.industry_id && (
+                                <p className="text-red-500 text-xs italic">
+                                    {errors.industry_id}
                                 </p>
                             )}
                         </div>
@@ -110,7 +146,8 @@ const Edit = ( { blog, errors}) => {
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Cover Image
-                            </label>
+                              </label>
+                              <img src={data.cover_image} className='w-30 h-30-auto mb-3'/>
                                 <input type="file"
                                     name="coverImage"
                                     id="coverImage"
@@ -126,7 +163,12 @@ const Edit = ( { blog, errors}) => {
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Image Attachment
-                            </label>
+                              </label>
+                                 <div className="flex">
+                                  {images.map((item, index) => (
+                                    <img key={index} src={item} alt={`Image ${index}`} className="w-50 h-10 ms-2" />
+                                  ))}
+                                </div>
                                 <input
                                     type="file"
                                     name="imageAttachment"
@@ -156,24 +198,20 @@ const Edit = ( { blog, errors}) => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-1 gap-1 mt-2' style={{ height: '200px'}}>
-                <div class="bg-white rounded-lg shadow-lg p-6" style={{ height: '200px'}}>
-                    <h2>Content</h2>
-                        <ReactQuill
-                            name="content"
-                            id="content"
-                            style={{ height: '100px'}}
-                            value={editorHtml}
-                            onChange={handleChange}
-                      />
-                    {errors.content && (
-                        <p className="text-red-500 text-xs italic">
-                            {errors.content}
-                        </p>
-                    )}
-
-                </div>
-
+            <div className='grid grid-cols-1 gap-1 mt-2' style={{ height: '200px' }}>
+              <div className="bg-white rounded-lg shadow-lg p-6" style={{ height: '200px' }}>
+                <h2>Content</h2>
+                <ReactQuill
+                  theme="snow" // Use the 'snow' theme for a standard Quill Editor
+                  value={data.content || ''} // Set the initial value from data.content
+                  onChange={handleQuillChange} // Handle changes
+                />
+                {errors.content && (
+                  <p className="text-red-500 text-xs italic">
+                    {errors.content}
+                  </p>
+                )}
+              </div>
             </div>
             <div className='p-6 mt-2 text-center bg-white rounded-lg shadow-lg'>
                   <button type="submit" class="bg-blue-500 w-75 txt-center

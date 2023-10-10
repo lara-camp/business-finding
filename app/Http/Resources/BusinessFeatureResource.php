@@ -16,9 +16,8 @@ class BusinessFeatureResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'position' => $this->position,
-            'subject' => $this->subject,
+            'flex_direction' => $this->position,
+            'text' => $this->subject,
             'image' => Storage::url($this->image),
         ];
     }

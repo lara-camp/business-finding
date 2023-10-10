@@ -7,41 +7,41 @@ import '../../../../Css/index.css'
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
 
+let initPreviewData = [];
+
+
 const BusinessImages = () => {
     const [featureImgCount, setFeatureImgCount] = useState(0);
-    const [featurePreviews, setFeaturePreviews] = useState([
-        {
-            source : FeatureImage,
-            text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
-            flexDirection : "flex-row",
-        }
-    ])
-    const [inputs, setInputs] = useState([
-        {
-            filename : `feature_image[${featureImgCount}]`,
-            textarea : `feature_text[${featureImgCount}]`,
-        }
-    ])
+    const [featurePreviews, setFeaturePreviews] = useState(initPreviewData)
     const [selectedImages, setSelectedImages] = useState([])
     const {data, setData, featureInfo, setFeatureInfo} = useContext(BusinessContext)
 
+
+    if(data.business_features.length > 0) {
+        initPreviewData = data.business_features;
+    } else {
+        initPreviewData = [
+            {
+                image : FeatureImage,
+                text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
+                flex_direction : "flex-row",
+            }
+        ]
+    }
+
     const addNewInputs = () => {
-        if(inputs.length >= 5) {
+        if(featureImgCount >= 5) {
             alert("you can not add more")
             return false;
         }
         let newCount = parseInt(featureImgCount) + 1
         setFeatureImgCount(newCount)
-        setInputs([...inputs, {
-            filename : `feature_image[${featureImgCount}]`, 
-            textarea : `feature_text[${featureImgCount}]`
-        }])
         setFeaturePreviews([
             ...featurePreviews,
             {
-            source : FeatureImage,
+            image : FeatureImage,
             text   : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati iure deleniti sequi atque cupiditate nulla, natus id deserunt ad.",
-              flexDirection : "flex-row",
+            flex_direction : "flex-row",
             },
           ]);
 
@@ -60,7 +60,7 @@ const BusinessImages = () => {
         reader.onload = () => {
             const imgUrl = reader.result; 
             const updatePreviews = [...featurePreviews]
-            updatePreviews[index] = {source : imgUrl, text : featurePreviews[index].text,}
+            updatePreviews[index] = {image : imgUrl, text : featurePreviews[index].text}
             setFeaturePreviews(updatePreviews)
         };
         reader.readAsDataURL(files[0]); // Start reading the selected file as a data URL
@@ -79,7 +79,7 @@ const BusinessImages = () => {
     const handleFeatureTextChange = (index, e) => {
         const {value} = e.target;
         const updatePreviews = [...featurePreviews];
-        updatePreviews[index] = {source : featurePreviews[index].source , text : value,}
+        updatePreviews[index] = {image : featurePreviews[index].image , text : value}
         setFeaturePreviews(updatePreviews)
 
         // Add data to form 
@@ -96,10 +96,10 @@ const BusinessImages = () => {
     const toggleFlexDirection = (index) => {
         const updatePreviews = [...featurePreviews];
         updatePreviews[index] = {
-            source : featurePreviews[index].source,
+            image : featurePreviews[index].image,
             text   : featurePreviews[index].text,
-            flexDirection : 
-                featurePreviews[index].flexDirection === "flex-row"
+            flex_direction : 
+                featurePreviews[index].flex_direction === "flex-row"
                 ? "flex-row-reverse"
                 : "flex-row"
         }
@@ -109,13 +109,14 @@ const BusinessImages = () => {
 
         const formData = [...featureInfo]
         formData[index] = {
-            source : featureInfo[index].image,
+            image : featureInfo[index].image,
             text : featureInfo[index].text,
             flex_direction : 
                     featureInfo[index].flex_direction === "flex-row"
                     ? "flex-row-reverse"
                     : "flex-row"
         }
+        setFeatureInfo(formData)
     }
 
     const handleImagesChange = (e) => {
@@ -129,24 +130,25 @@ const BusinessImages = () => {
             <h5 className="font-bold"> Add Photos and Description *</h5>
             <div className="my-3">
                 {
-                    data.show_case_images.length > 0 &&
+                    data.show_case_images_current.length > 0 &&
                     <>
-                        <p> Current Images </p>
+                        <p className="font-bold"> Current Images </p>
+                        <div className="flex">
                         {
-                            data.show_case_images.map(item => (
-                            <div className="w-1/5 mx-2 my-3">
-                                    <img 
-                                    key={item.id}
-                                    src={item.path}
-                                    alt={`Preview ${item.id}`}
-                                    className="img-fluid"
-                                />
-                            </div>
+                            data.show_case_images_current.map(item => (
+                                <div className="w-1/5 mx-2 my-3">
+                                        <img 
+                                        key={item.id}
+                                        src={item.path}
+                                        alt={`Preview ${item.id}`}
+                                    />
+                                </div>
                             ))
                         }
+                        </div>
                     </>
                 }
-                <p className="mb-3"> Show Case Photos *</p>
+                <p className="mb-3 font-bold"> Show Case Photos *</p>
                 <div className="flex">
                     {
                         selectedImages.map((file, index)  => (
@@ -167,6 +169,7 @@ const BusinessImages = () => {
                     multiple
                     className=" border border-indigo-700 p-2 my-2 w-full rounded-md"
                     onChange={handleImagesChange}
+                    required={true}
                 />
 
                 {/* Descrition list  */}
@@ -201,12 +204,12 @@ const BusinessImages = () => {
                 
                 <p> More Special Featured Photos</p>
                 {
-                    inputs.map((item, index) => (
+                    featureInfo.map((item, index) => (
                         <div className="" key={index}>
                             <div className="w-full preview-img-feature my-4 p-2 border border-indigo-700 rounded-md">
-                                <div className={`flex ${featurePreviews[index].flexDirection} items-start`}>
+                                <div className={`flex ${featurePreviews[index].flex_direction} items-start`}>
                                     <div className="w-5/12">
-                                        <img src={featurePreviews[index].source} alt="" className="img-fluid w-1/2"/>
+                                        <img src={featurePreviews[index].image} alt="" className="img-fluid w-1/2"/>
                                     </div>
                                     <div className="text-center w-2/12">
                                     <button 
@@ -231,6 +234,7 @@ const BusinessImages = () => {
                                         multiple
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         onChange={(event) => handleFeatureImageChange(index,event)}
+                                        required={true}
                                     />
                                 </div>
                                 <div className="w-1/2 ms-2">
@@ -239,6 +243,7 @@ const BusinessImages = () => {
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         placeholder="Enter Feature Text"
                                         onChange={(event) => handleFeatureTextChange(index, event)}
+                                        required={true}
                                     />
                                 </div>
                             </div>

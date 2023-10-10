@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Industry;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,8 +21,11 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->name,
             'body' => $this->faker->text,
-            'tag' => $this->faker->randomElement(['Technology', 'Food', 'Travel', 'Fashion']),
+            'content' => $this->faker->paragraph,
+            'cover_image' => 'Service Businesses.png',
+            'tag' => $this->faker->randomElement(['News', 'Guide', 'Advice for buyers', 'Advice for sellers']),
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
+            'industry_id' => $this->faker->numberBetween(1 , 8),
             'status' => $this->faker->randomElement(['0', '1']),
         ];
     }
