@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('name');
             $table->text('description');
-            $table->text('status')->comment('for_sale/under_offer/sold')->default('for_sale');
+            $table->string('status')->comment('for_sale/under_offer/sold')->default('for_sale');
             $table->string('property_status')->comment('real_property/lease/both_freehold_and_leasehold/n-a')->default('real_property');
             $table->integer('asking_price');
             $table->json('documents');

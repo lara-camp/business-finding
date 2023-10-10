@@ -36,7 +36,6 @@ const BusinessProvider = ({children}) => {
       "region_id": business?.region_id || '',
       "city_id": business?.city_id || '',
       "street": business?.street || '',
-      "property_status": business?.property_status || '',
       "asking_price": business?.asking_price || '',
       "revenue_price": business?.revenue_price || '',
       "cash_flow": business?.cash_flow || '',
