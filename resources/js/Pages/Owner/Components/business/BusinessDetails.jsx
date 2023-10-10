@@ -32,6 +32,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={handleCategoryChange}
+                            required={true}
                         >
                             <option value=""> Select Category </option>
                             {categories.data.map((item) => (
@@ -53,6 +54,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             onChange={(e) =>
                                 setData("subcategory_id", e.target.value)
                             }
+                            required={true}
                         >
                             <option value=""> Select Subcategory </option>
                             {   
@@ -87,6 +89,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={hanleRegionChange}
+                            required={true}
                         >
                             <option value=""> Select Region </option>
                             {
@@ -105,6 +108,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={(e) => setData("city_id", e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select City </option>
                             {
@@ -131,6 +135,7 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
                     className="w-full p-2 border border-indigo-700 rounded-md"
                     onChange={e => setData('street', e.target.value)}
                     value={data.street}
+                    required={true}
                 />
                 <small className="text-slate-500">
                     Please select the location of your business

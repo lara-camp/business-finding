@@ -23,7 +23,7 @@ class BlogCollection extends ResourceCollection
                     'id' => $blog->id,
                     'url' => $blog->cover_image ? Storage::url($blog->cover_image) : "",
                     'title' => $blog->title,
-                    'body' => $blog->body,
+                    'body' => $blog->body,  
                     // 'body' => $blog->body,
                     'tag' => $blog->tag,
                     'user_name' => $blog->user->name,

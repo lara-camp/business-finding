@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Owner;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BusinessCollection;
 use App\Http\Resources\BusinessResource;
@@ -69,15 +70,11 @@ class BusinessController extends Controller
         $data = $request->data;
         $feature_info = $request->feature_info;
         $showcase_images = $data['show_case_images'];
+        // $showcase_images_current = array_key_exists('show_case_images_current', $data) ? $data['show_case_images_current'] : "";
         
         // File 
         $documents = $data['documents'];
-        $doc_arr = array();
-        foreach($documents as $file) {
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::putFileAs('uploads/documents', $file, $filename);
-            array_push($doc_arr, $path);
-        }
+        $doc_arr = $this->storeDocs($documents, []);
         // Create Business 
 
         try {
@@ -113,6 +110,42 @@ class BusinessController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id) {
+        $data = $request->data;
+        $feature_info = $request->feature_info;
+        $showcase_images = array_key_exists('show_case_images', $data) ? $data['show_case_images'] : "";
+        $documents = array_key_exists('documents', $data) ?  $data['documents'] : array();
+    
+        // File 
+        $current_docs = array_key_exists('documents_current', $data) ? $data['documents_current'] : array();
+
+        // check if the current doc exsit or doc exit 
+        $doc_arr = count($documents) > 0 || count($current_docs) > 0 
+        ? $this->storeDocs($documents, $current_docs) 
+        : array();
+
+        // Create Business 
+
+        try {
+            DB::transaction(function () use ($id, $data, $doc_arr, $feature_info, $showcase_images) {
+                // Create Business 
+                $business_service = new BusinessService($data);
+                $business = $business_service->editBusiness($id, $doc_arr);
+    
+                // Save show case images 
+                if($showcase_images) {
+                    $business_service->createShowCaseImages($business, $showcase_images);
+                }
+    
+                // Save Business Feature Info
+                $business_service->createBusinessFeature($feature_info, $business);
+            });
+            return to_route('owner.business');
+        } catch(\Exception $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
     public function destroy($id) {
         $business = Business::find($id);
         if($business) {
@@ -146,6 +179,38 @@ class BusinessController extends Controller
             }
         } else {
             throw new Exception('Business not found');
+        }
+    }
+
+    private function storeDocs($documents, $cur_docs) {
+        $doc_arr = array();
+        if(count($cur_docs) > 0) {
+            foreach($cur_docs as $doc) {
+                $path = Helper::getStragePathFromFullUrl($doc['url']);
+                array_push($doc_arr, $path);
+            }
+        }
+        
+        foreach($documents as $file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = Storage::putFileAs('uploads/documents', $file, $filename);
+            array_push($doc_arr, $path);
+        }
+        return $doc_arr;
+    }
+
+    public function change_stage($id) {
+        $business = Business::find($id);
+        if($business) {
+            if($business->stage == 'draft') {
+                $business->update([
+                    'stage' => 'published',
+                ]);
+            } else {
+                $business->update([
+                    'stage' => 'draft',
+                ]);
+            }
         }
     }
 }

@@ -23,17 +23,20 @@ import Footer from "@/Pages/Backend/Parts/Footer";
 const intitalNavigation = [
     {
         name: "Dashboard",
-        href: route("owner.dashboard"),
+        href: '/owner/dashboard',
         icon: HomeIcon,
         current: true,
     },
     {
         name: "Business",
-        href: route("owner.business"),
+        href: '/owner/business',
         icon: UsersIcon,
         current: false,
     },
 ];
+
+
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

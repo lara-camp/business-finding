@@ -37,12 +37,12 @@ const BusinessDocuments = () => {
             <h5 className="font-bold"> Add Documents </h5>
             <div className="my-3">
                 {
-                    data.documents.length > 0 &&
+                    data.documents_current.length > 0 &&
                     <>
                         <p className="mb-3 font-bold"> Curent Document</p>
                         <div className="flex justify-between">
                             {
-                                data.documents.map((item, index) => (
+                                data.documents_current.map((item, index) => (
                                     <div className="w-auto my-3" key={index}>
                                         <a href={item.url} target="_blank">  
                                             <p className="text-sm mb-2 font-bold"> File {index + 1} </p>
@@ -84,6 +84,7 @@ const BusinessDocuments = () => {
                     className=" border border-indigo-700 p-2 my-2 w-full rounded-md"
                     // accept=".pdf, .doc, .docx, .txt" 
                     onChange={handleFileChange}
+                    required={true}
                 />
                 <small className="text-slate-500">
                     You have the option to upload a maximum of 3 documents,

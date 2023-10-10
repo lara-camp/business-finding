@@ -1,10 +1,13 @@
 import Pagination from "@/Components/Pagination";
+import { formatWord, textCapitalize } from "@/Helper";
 import { Link, router, usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
+import { Switch } from "@mui/material";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Example({ data, columns, routeName, view, title, edit, destroy, add}) {
   const { permissions } = usePage().props;
-  console.log(edit + " " +  destroy + "" + view)
+  const {url} = usePage();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -25,7 +28,18 @@ export default function Example({ data, columns, routeName, view, title, edit, d
     });
   };
 
-  const renderColumnValue = (item, col) => {
+  const handleStatusChange = (id) => {
+    router.post(`${url}/change-status/${id}`, {}, {
+      onSuccess : () => {
+        toast.success("Status Changed Successfully");
+      } ,
+      onError : () => {
+        alert("error");
+      }
+    })
+  }
+
+  const renderColumnValue = (item, col, index) => {
     if (col === "image") {
       // Render the image
       return (
@@ -40,6 +54,18 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           />
         </td>
       );
+    } else if(col === 'status') {
+      return (
+        <td
+          key={col}
+          className="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6"
+        >
+          <Switch 
+            checked={item[col] == 1 ? true : false}  
+            onChange={() => handleStatusChange(item['id'])}
+          />
+        </td>
+      )
     } else {
       // Render other columns as text
       return (
@@ -47,7 +73,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           key={col}
           className="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6"
         >
-          {item[col]}
+          {col === 'id' ? index + 1 : item[col]}
         </td>
       );
     }
@@ -100,10 +126,10 @@ export default function Example({ data, columns, routeName, view, title, edit, d
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
-            {title}
+            {textCapitalize(title)}
           </h1>
         </div>
-
+        <Toaster />
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           {add && permissions.includes(`create ${title}`) ? (
             <button
@@ -133,7 +159,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        {col.toUpperCase()}
+                        {formatWord(col)}
                       </th>
                     ))}
                     <th
@@ -160,14 +186,15 @@ export default function Example({ data, columns, routeName, view, title, edit, d
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {data.data.data.map((item) => (
+                  {data.data.data.length > 0 ? data.data.data.map((item, index) => (
                     <tr key={item.id}>
                       {columns.map((col) =>
-                        renderColumnValue(item, col)
+                        renderColumnValue(item, col, index)
                       )}
                       {renderActions(item)}
-                    </tr>
-                  ))}
+                    </tr> 
+                  )) 
+                  : <tr> <td colSpan={100} className="text-red-700 text-center p-3"> No Data </td>  </tr>}
                 </tbody>
               </table>
             </div>

@@ -20,6 +20,7 @@ class CityCollection extends ResourceCollection
                     'id' => $city->id,
                     'name' => $city->name,
                     'region_id' => $city->region_id,
+                    'created_at' => $city->created_at,
                 ];
             }),
         ];

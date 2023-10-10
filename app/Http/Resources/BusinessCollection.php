@@ -20,6 +20,7 @@ class BusinessCollection extends ResourceCollection
                 return [
                     'id' => $item->id,
                     'status' => $item->status,
+                    'stage' => $item->stage,
                     'name' => $item->name,
                     'location' => $item->city->region->name .','. $item->city->name .',' .$item->street,
                     'asking_price' => $item->asking_price,
