@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\Owner\AccountController;
 use App\Http\Controllers\Backend\AccountSettingController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\IndustryController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
@@ -39,7 +40,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
 Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(function () {
     // Dashboard
-    Route::inertia('/dashboard', 'Backend/Dashboard')->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // User
     Route::prefix('user')->group(function () {
@@ -90,6 +91,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     Route::post('/faq/update/{id}', [FaqController::class, 'update'])->name('admin.faq.update');
     Route::get('/faq/{id}', [FaqController::class, 'show'])->name('admin.faq.show');
     Route::post('/faq/{id}', [FaqController::class, 'destroy'])->name('admin.faq.delete');
+    Route::post('/faq/change-status/{id}', [FaqController::class, 'change_status'])->name('admin.faq.change_status');
     // end---------------------------------------------------------------------------------------------------
     // industry------------------------------------------------------------------------------------------------
     Route::get('/industry', [IndustryController::class, 'index'])->name('admin.industry');
@@ -202,6 +204,7 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->group(function () {
         Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('owner.business.edit');
         Route::post('/edit/{id}', [BusinessController::class, 'update'])->name('owner.business.update');
         Route::post('/delete/{id}', [BusinessController::class, 'destroy'])->name('owner.business.destroy');
+        Route::post('/change-stage/{id}', [BusinessController::class, 'change_stage'])->name('owner.business.change-stage');
     });
 });
 

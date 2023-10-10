@@ -13,13 +13,6 @@ let initPreviewData = [];
 const BusinessImages = () => {
     const [featureImgCount, setFeatureImgCount] = useState(0);
     const [featurePreviews, setFeaturePreviews] = useState(initPreviewData)
-
-    const [inputs, setInputs] = useState([
-        {
-            filename : `feature_image[${featureImgCount}]`,
-            textarea : `feature_text[${featureImgCount}]`,
-        }
-    ])
     const [selectedImages, setSelectedImages] = useState([])
     const {data, setData, featureInfo, setFeatureInfo} = useContext(BusinessContext)
 
@@ -37,16 +30,12 @@ const BusinessImages = () => {
     }
 
     const addNewInputs = () => {
-        if(inputs.length >= 5) {
+        if(featureImgCount >= 5) {
             alert("you can not add more")
             return false;
         }
         let newCount = parseInt(featureImgCount) + 1
         setFeatureImgCount(newCount)
-        setInputs([...inputs, {
-            filename : `feature_image[${featureImgCount}]`, 
-            textarea : `feature_text[${featureImgCount}]`
-        }])
         setFeaturePreviews([
             ...featurePreviews,
             {
@@ -120,7 +109,7 @@ const BusinessImages = () => {
 
         const formData = [...featureInfo]
         formData[index] = {
-            source : featureInfo[index].image,
+            image : featureInfo[index].image,
             text : featureInfo[index].text,
             flex_direction : 
                     featureInfo[index].flex_direction === "flex-row"
@@ -180,6 +169,7 @@ const BusinessImages = () => {
                     multiple
                     className=" border border-indigo-700 p-2 my-2 w-full rounded-md"
                     onChange={handleImagesChange}
+                    required={true}
                 />
 
                 {/* Descrition list  */}
@@ -214,7 +204,7 @@ const BusinessImages = () => {
                 
                 <p> More Special Featured Photos</p>
                 {
-                    inputs.map((item, index) => (
+                    featureInfo.map((item, index) => (
                         <div className="" key={index}>
                             <div className="w-full preview-img-feature my-4 p-2 border border-indigo-700 rounded-md">
                                 <div className={`flex ${featurePreviews[index].flex_direction} items-start`}>
@@ -244,6 +234,7 @@ const BusinessImages = () => {
                                         multiple
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         onChange={(event) => handleFeatureImageChange(index,event)}
+                                        required={true}
                                     />
                                 </div>
                                 <div className="w-1/2 ms-2">
@@ -252,6 +243,7 @@ const BusinessImages = () => {
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         placeholder="Enter Feature Text"
                                         onChange={(event) => handleFeatureTextChange(index, event)}
+                                        required={true}
                                     />
                                 </div>
                             </div>

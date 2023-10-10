@@ -197,6 +197,21 @@ class BusinessController extends Controller
         }
         return $doc_arr;
     }
+
+    public function change_stage($id) {
+        $business = Business::find($id);
+        if($business) {
+            if($business->stage == 'draft') {
+                $business->update([
+                    'stage' => 'published',
+                ]);
+            } else {
+                $business->update([
+                    'stage' => 'draft',
+                ]);
+            }
+        }
+    }
 }
 
 

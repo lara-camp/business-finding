@@ -1,10 +1,13 @@
 import Pagination from "@/Components/Pagination";
-import { textCapitalize } from "@/Helper";
+import { formatWord, textCapitalize } from "@/Helper";
 import { Link, router, usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
+import { Switch } from "@mui/material";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Example({ data, columns, routeName, view, title, edit, destroy, add}) {
   const { permissions } = usePage().props;
+  const {url} = usePage();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -25,6 +28,17 @@ export default function Example({ data, columns, routeName, view, title, edit, d
     });
   };
 
+  const handleStatusChange = (id) => {
+    router.post(`${url}/change-status/${id}`, {}, {
+      onSuccess : () => {
+        toast.success("Status Changed Successfully");
+      } ,
+      onError : () => {
+        alert("error");
+      }
+    })
+  }
+
   const renderColumnValue = (item, col, index) => {
     if (col === "image") {
       // Render the image
@@ -40,6 +54,18 @@ export default function Example({ data, columns, routeName, view, title, edit, d
           />
         </td>
       );
+    } else if(col === 'status') {
+      return (
+        <td
+          key={col}
+          className="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6"
+        >
+          <Switch 
+            checked={item[col] == 1 ? true : false}  
+            onChange={() => handleStatusChange(item['id'])}
+          />
+        </td>
+      )
     } else {
       // Render other columns as text
       return (
@@ -103,7 +129,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
             {textCapitalize(title)}
           </h1>
         </div>
-
+        <Toaster />
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           {add && permissions.includes(`create ${title}`) ? (
             <button
@@ -133,7 +159,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        {textCapitalize(col)}
+                        {formatWord(col)}
                       </th>
                     ))}
                     <th

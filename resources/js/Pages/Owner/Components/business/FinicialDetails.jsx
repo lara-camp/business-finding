@@ -15,6 +15,7 @@ const FinicialDetails = () => {
                     name="property_status"
                     value="real_property"
                     onChange={e => setData('property_status', e.target.value)}
+                    required={true}
                 />
                 <label htmlFor="property_status"> Real Property </label>
                 <input
@@ -24,6 +25,7 @@ const FinicialDetails = () => {
                     className="ms-4"
                     value="lease"
                     onChange={e => setData('property_status', e.target.value)}
+                    required={true}
                 />
                 <label htmlFor="property_status"> Lease </label>
                 <input
@@ -33,6 +35,7 @@ const FinicialDetails = () => {
                     value="both_freehold_and_leasehold"
                     onChange={e => setData('property_status', e.target.value)}
                     checked={ data.property_status === 'both_freehold_and_leasehold' ? true : false}
+                    required={true}
                 />
                 <label htmlFor="property_status"> Both Freehold and Leasehold </label>
                 <input
@@ -42,6 +45,7 @@ const FinicialDetails = () => {
                     value="n/a"
                     onChange={e => setData('property_status', e.target.value)}
                     checked={ data.property_status === 'n/a' ? true : false}
+                    required={true}
                 />
                 <label htmlFor="property_status"> N/A </label>
             </div>
@@ -57,6 +61,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('asking_price', e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -73,6 +78,7 @@ const FinicialDetails = () => {
                             placeholder="Enter Specific Price"
                             onChange={e => setData('asking_price', e.target.value)}
                             value={data.asking_price}
+                            required={true}
                         />
                     </div>
                 </div>
@@ -96,6 +102,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Specific Price"
                             onChange={e => setData('revenue_price', e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -112,6 +119,7 @@ const FinicialDetails = () => {
                             placeholder="Enter Specific Price"
                             onChange={e => setData('revenue_price', e.target.value)}
                             value={data.revenue_price}
+                            required={true}
                         />
                     </div>
                 </div>
@@ -129,6 +137,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('cash_flow', e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -145,6 +154,7 @@ const FinicialDetails = () => {
                             placeholder="Enter Your Title"
                             onChange={e => setData('cash_flow', e.target.value)}
                             value={data.cash_flow}
+                            required={true}
                         />
                     </div>
                 </div>
@@ -162,6 +172,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('inventory_value', e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -178,6 +189,7 @@ const FinicialDetails = () => {
                             placeholder="Enter Specific Price"
                             onChange={e => setData('inventory_value', e.target.value)}
                             value={data.inventory_value}
+                            required={true}
                         />
                     </div>
                 </div>
@@ -195,6 +207,7 @@ const FinicialDetails = () => {
                             className="border-indigo-700 p-2 my-2 w-full rounded-md"
                             placeholder="Enter Your Title"
                             onChange={e => setData('net_income', e.target.value)}
+                            required={true}
                         >
                             <option value=""> Select Price Range </option>
                             <option value=""> 50000000 - 10000000 MMK </option>
@@ -211,6 +224,7 @@ const FinicialDetails = () => {
                             placeholder="Enter Specific Price"
                             onChange={e => setData('net_income', e.target.value)}
                             value={data.net_income}
+                            required={true}
                         />
                     </div>
                 </div>

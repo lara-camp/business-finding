@@ -88,4 +88,20 @@ class FaqController extends Controller
         $faq->delete();
         return to_route('admin.faq');
     }
+
+    public function change_status($id) {
+        $faq = Faq::find($id);
+        if($faq->status == 1) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+
+        if($faq) {
+            $faq->update([
+                'status' => $status,
+            ]);
+            return to_route('admin.faq');
+        }
+    }
 }

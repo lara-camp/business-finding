@@ -84,6 +84,7 @@ const BusinessDocuments = () => {
                     className=" border border-indigo-700 p-2 my-2 w-full rounded-md"
                     // accept=".pdf, .doc, .docx, .txt" 
                     onChange={handleFileChange}
+                    required={true}
                 />
                 <small className="text-slate-500">
                     You have the option to upload a maximum of 3 documents,
