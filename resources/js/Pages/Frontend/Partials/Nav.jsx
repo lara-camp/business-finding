@@ -19,7 +19,7 @@ const Nav = () => {
                                       Categories
                                     </a>
                                     <a
-                                      href={route("category")}
+                                      href={route("blog")}
                                       className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                     >
                                       Blog
@@ -38,7 +38,7 @@ const Nav = () => {
 
                         <a href={route('home')} className="bg-gray-200 text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
                         <a href={route('category')} className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categories</a>
-                        <a href={route('category')} className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href={route('blog')} className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Blog</a>
                         <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Location</a>
                         <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About Us</a>
                     </div>

@@ -19,7 +19,7 @@ class FaqCollection extends ResourceCollection
                 function($faq) {
                     return [
                         'id' => $faq->id,
-                        'question' => $faq->question,
+                        'question' => substr($faq->question, 0, 30),
                         'answer' => $faq->answer,
                         'status' => $faq->status,
                         'created_at' => $faq->created_at->toFormattedDateString(),
