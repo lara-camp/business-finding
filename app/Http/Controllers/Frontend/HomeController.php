@@ -19,13 +19,13 @@ class HomeController extends Controller
     public function index() {
         $categories = Category::latest('id')->limit(4)->get();
         $locations = City::latest('id')->limit(4)->get();
-        $businesses = Business::latest()->limit(3)->get();
+        $businesses = Business::latest('id')->limit(3)->get();
         $blogs = Blog::latest('id')->limit(3)->get();
         return Inertia::render('Frontend/Home', [
-            'categories' => new CategoryCollection($categories),
-            'lcoations' => new CityCollection($locations),
-            'businesses' => new BusinessCollection($businesses),
-            'blogs' => new BlogCollection($blogs),
+            'categories' => fn() =>  new CategoryCollection($categories),
+            'locations' => fn() =>  new CityCollection($locations),
+            'businesses' => fn() =>  new BusinessCollection($businesses),
+            'blogs' => fn() => new BlogCollection($blogs),
         ]);
     }
 }

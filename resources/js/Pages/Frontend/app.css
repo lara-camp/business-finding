@@ -1,0 +1,11 @@
+
+
+  .move-right {
+    transform: translateX(1000px);
+    transition: transform 0.5s ease-in-out; /* Add a smooth transition effect */
+  }
+
+  .draw-back {
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out; /* Add a smooth transition effect */
+  }

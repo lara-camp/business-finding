@@ -25,6 +25,7 @@ class CategoryCollection extends ResourceCollection
                         'name' => $category->name,
                         'slug' => $category->slug,
                         'url' => $category->image->url !== null ? Storage::url($category->image->url) : "",
+                        'business_count' => !empty($category->subcategory->businesses) ? $category->subcategory->business->count() : 0,
                         'created_at' => $category->created_at->toFormattedDateString(),
                     ];
                 }

@@ -16,7 +16,11 @@ class Category extends Model
 
     public function image():MorphOne
     {
-        // dd($this->morphOne(Image::class,'imageable'));
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function subcategory() {
+        return $this->belongsTo(Category::class);
+    }
+    
 }

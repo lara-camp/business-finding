@@ -19,10 +19,13 @@ class BusinessCollection extends ResourceCollection
             'data' => $this->collection->transform(function($item) {
                 return [
                     'id' => $item->id,
+                    'title' => $item->name,
+                    'description' => $item->description,
                     'status' => $item->status,
                     'stage' => $item->stage,
                     'name' => $item->name,
                     'location' => $item->city->region->name .','. $item->city->name .',' .$item->street,
+                    'loc_wth_street' => $item->city->region->name .','. $item->city->name,
                     'asking_price' => $item->asking_price,
                     'likes' => $item->likes,
                     'views' => $item->views,

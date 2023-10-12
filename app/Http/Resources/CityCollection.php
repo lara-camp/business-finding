@@ -19,6 +19,7 @@ class CityCollection extends ResourceCollection
                 return [
                     'id' => $city->id,
                     'name' => $city->name,
+                    'business_count' => $city->businesses ? $city->businesses->count() : 0,
                     'region_id' => $city->region_id,
                     'created_at' => $city->created_at,
                 ];
