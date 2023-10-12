@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
+use Inertia\Inertia;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -22,7 +25,18 @@ class BlogController extends Controller
     public function detail($tag, $id)
     {
         $blog = Blog::where('id', $id)->where('tag', $tag)->get();
-        dd($blog);
+        $urls = Image::where('imageable_id',$id)->where('imageable_type', 'App\Models\Blog')->pluck('url')->toArray();
+        $images =[];
+        $i=0;
+        foreach($urls as $url)
+        {
+            $images[$i++] = Storage::url($url);
+        }
+        // dd($images);
+        return Inertia::render('Frontend/Blog/Details', [
+            'blog' => new BlogCollection($blog),
+            'images' => $images,
+        ]);
     }
 
     public function tags(Request $request)

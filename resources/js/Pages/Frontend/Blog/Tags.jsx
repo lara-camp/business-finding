@@ -37,7 +37,7 @@ const Tags = (blogs, tag) => {
             </a>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 {blogs.blogs.data.data.map((item, index) => (
-                    <div key={index} className="col-span-1 relative">
+                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110">
                         <div class="py-10 sm:py-8 mb-3 mx-5">
                             <div class="mx-auto max-w-2xl">
                                 <article class="items-start justify-between">
