@@ -19,8 +19,8 @@ class OwnerDetailResource extends JsonResource
             'user_id' => $this->user_id,
             'address' => $this->address,
             'company' => $this->company,
-            'frontend_img' => $this->frontend_img,
-            'backend_img' => $this->backend_img,
+            // 'frontend_img' => $this->frontend_img,
+            // 'backend_img' => $this->backend_img,
         ];
     }
 }

@@ -18,11 +18,11 @@ class OwnerDetailCollection extends ResourceCollection
             'data' => $this->collection->transform(function ($ownerdetails) {
                 return [
                     'id' => $ownerdetails->id,
-                    'user_id' => $ownerdetails->user_id,
-                    'address' => $ownerdetails->address,
+                    'user_name' => $ownerdetails->user->name,
+                    // 'address' => $ownerdetails->address,
                     'company' => $ownerdetails->company,
-                    'frontend_img' => $ownerdetails->frontend_img,
-                    'backend_img' => $ownerdetails->backend_img
+                    // 'frontend_img' => $ownerdetails->frontend_img,
+                    // 'backend_img' => $ownerdetails->backend_img
                 ];
             }),
         ];
