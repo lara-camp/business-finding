@@ -17,6 +17,7 @@ class BusinessCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection->transform(function($item) {
+                $info = collect(json_encode($item->info));
                 return [
                     'id' => $item->id,
                     'title' => $item->name,
@@ -27,6 +28,9 @@ class BusinessCollection extends ResourceCollection
                     'location' => $item->city->region->name .','. $item->city->name .',' .$item->street,
                     'loc_wth_street' => $item->city->region->name .','. $item->city->name,
                     'asking_price' => $item->asking_price,
+                    'revenue_price' => $info->get('revenue_price'),
+                    'inventory_price' => $info->get('inventory_price'),
+                    'cash_flow' => $info->get('cash_flow'),
                     'likes' => $item->likes,
                     'views' => $item->views,
                     'image' => $item->images->isEmpty() ? "null" : Storage::url($item->images[0]->url),

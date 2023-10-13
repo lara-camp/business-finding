@@ -202,7 +202,7 @@ export default function Example({ data, columns, routeName, view, title, edit, d
         </div>
       </div>
       {
-        data.data.data.length > 1 &&
+        data.data.data.length > 10 &&
         <div className="mt-10">
           <Pagination links={data.links} meta={data.meta} />
         </div>

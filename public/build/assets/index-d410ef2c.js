@@ -1,0 +1,1 @@
+const o=t=>t.split("_").map(e=>e.charAt(0).toUpperCase()+e.slice(1)).join(" "),a=t=>t.charAt(0).toUpperCase()+t.slice(1),n=t=>{var r=parseInt(t).toLocaleString("en-US",{maximumFractionDigits:3});return r},i=(t,r)=>t.length>r?t.slice(0,r)+"...":t;export{n as a,o as f,i as s,a as t};

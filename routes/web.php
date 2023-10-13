@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\IndustryController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
 use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\OwnerDetailController;
 use App\Http\Controllers\SubCategoryController;
 
@@ -37,6 +38,7 @@ use App\Http\Controllers\SubCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
 Route::get('/category', [FrontendCategoryController::class, 'category'])->name('category');
+Route::get('/search', [SearchController::class, 'index'])->name('search.business');
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');

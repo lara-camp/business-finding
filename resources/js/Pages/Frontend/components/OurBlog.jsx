@@ -28,8 +28,6 @@ useEffect(() => {
 
   return () => clearInterval(stateChangeInterval); // Clear the state change interval when the component unmounts
 }, []);
-
-  console.log(animate)
     return (
         <div
             className="bg-fixed w-full h-[35rem] bg-no-repeat bg-center bg-cover relative"
