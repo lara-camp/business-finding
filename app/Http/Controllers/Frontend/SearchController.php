@@ -13,6 +13,11 @@ class SearchController extends Controller
 {
     public function index(Request $request) {
         $query = Business::latest('id');
+
+        if ($title = $request->title) {
+            $query->where('name', 'like', '%' . $title . '%');
+        }
+
         if($category = $request->category) {
             $query->whereHas('category', function($q) use($category) {
                 $q->where('id', $category);

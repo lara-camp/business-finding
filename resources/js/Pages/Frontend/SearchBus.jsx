@@ -46,7 +46,7 @@ const SearchBus = ({ businesses }) => {
                                 <hr />
                             </div>
                             <div className="my-3">
-                              <Link href="" className="p-2 bg-black text-white"> Explore Business </Link>
+                              <Link href={route('business.detail', item.id)} className="p-2 bg-black text-white"> Explore Business </Link>
                             </div>
                         </div>
                     ))}

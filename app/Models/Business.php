@@ -28,6 +28,6 @@ class Business extends Model
     }
 
     public function category() {
-        return $this->sub_category();
+        return $this->belongsTo(Category::class);
     }
 }

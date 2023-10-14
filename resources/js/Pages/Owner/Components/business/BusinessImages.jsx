@@ -6,6 +6,7 @@ import FeatureImage from '../../../../Images/default/default-featured-image.jpg'
 import '../../../../Css/index.css'
 import { useContext } from "react";
 import BusinessContext from "@/Context/BusinessContext";
+import { usePage } from "@inertiajs/react";
 
 let initPreviewData = [];
 
@@ -15,7 +16,7 @@ const BusinessImages = () => {
     const [featurePreviews, setFeaturePreviews] = useState(initPreviewData)
     const [selectedImages, setSelectedImages] = useState([])
     const {data, setData, featureInfo, setFeatureInfo} = useContext(BusinessContext)
-
+    const {business} = usePage().props;
 
     if(data.business_features.length > 0) {
         initPreviewData = data.business_features;
@@ -169,7 +170,7 @@ const BusinessImages = () => {
                     multiple
                     className=" border border-indigo-700 p-2 my-2 w-full rounded-md"
                     onChange={handleImagesChange}
-                    required={true}
+                    required={!business ? true : false}
                 />
 
                 {/* Descrition list  */}
@@ -234,7 +235,7 @@ const BusinessImages = () => {
                                         multiple
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         onChange={(event) => handleFeatureImageChange(index,event)}
-                                        required={true}
+                                        required={!business ? true : false}
                                     />
                                 </div>
                                 <div className="w-1/2 ms-2">
@@ -243,7 +244,7 @@ const BusinessImages = () => {
                                         className="border border-indigo-700 p-2 my-2 w-full rounded-md"
                                         placeholder="Enter Feature Text"
                                         onChange={(event) => handleFeatureTextChange(index, event)}
-                                        required={true}
+                                        required={!business ? true : false}
                                     />
                                 </div>
                             </div>

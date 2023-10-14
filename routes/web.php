@@ -39,6 +39,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
 Route::get('/category', [FrontendCategoryController::class, 'category'])->name('category');
 Route::get('/search', [SearchController::class, 'index'])->name('search.business');
+Route::get('/business/{id}', [HomeController::class, 'business_detail'])->name('business.detail');
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');

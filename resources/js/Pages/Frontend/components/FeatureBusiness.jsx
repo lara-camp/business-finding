@@ -116,7 +116,7 @@ const HoverBusSec  = ({item}) => {
                 <h1 className="text-3xl font-bold"> Features </h1>
             </div>
 
-            <Link className="p-2 bg-black text-white w-full block text-center"> Contact the seller </Link>
+            <Link href={route('business.detail', item.id)} className="p-2 bg-black text-white w-full block text-center"> Contact the seller </Link>
         </div>
     )
 }

@@ -1,9 +1,19 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import React from "react";
 import {BsGlobe} from 'react-icons/bs'
 import {AiOutlineUser} from 'react-icons/ai'
+import {usePage} from "@inertiajs/react";
+import {BsSearch} from 'react-icons/bs'
+import { useState } from "react";
 
 const Header = () => {
+    const {nav_data} = usePage().props;
+    const [title, setTitle] = useState("")
+    const [cat_id, setCatId] = useState('');
+
+    const handleSearch = () => {
+        router.get(route('search.business'), {category : cat_id, title : title})
+    }
     return (
         <div className="bg-yellow-200">
             {/* top header starts  */}
@@ -28,8 +38,7 @@ const Header = () => {
                                 href={route("register")}
                                 className="p-2 border-spacing-1 border border-gray-950"
                             >
-                                {" "}
-                                Register Now{" "}
+                                Register Now
                             </Link>
                         </div>
                     </div>
@@ -38,24 +47,34 @@ const Header = () => {
             {/* top header ends  */}
             {/* low header starts */}
             <div className="flex mx-10 p-3 items-center">
-                <div className="w-1/5">Logo</div>
-                <div className="w-2/5">
+                <div className="w-1/6">Logo</div>
+                <div className="w-2/6">
                     <input
                         type="text"
                         placeholder="Search a business"
                         className="w-full border-none"
+                        onChange={e => setTitle(e.target.value)}
                     />
                 </div>
-                <div className="w-1/5">
+                <div className="w-1/6">
                     <select 
                         name="category" 
                         id=""
                         className="border-none"
+                        onChange={e => setCatId(e.target.value)}
                     >
-                        <option value=""> All Categories </option>
+                        <option value="">Categories </option>
+                        {
+                            nav_data.categories.data.map(item => (
+                                <option value={item.id} key={item.id} > {item.name}  </option>
+                            ))
+                        }
                     </select>
                 </div>
-                <div className="w-1/5 ms-5 text-end">
+                <div className="w-1/6">
+                    <BsSearch size={30} onClick={handleSearch}/>
+                </div>
+                <div className="w-1/6 ms-5 text-end">
                     <Link 
                         href=""
                         className="py-2 px-3 border bg-gray-900 text-white border-none"

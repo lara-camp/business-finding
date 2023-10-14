@@ -9,7 +9,7 @@ const FeatureCategories = ({categories}) => {
           <div className="flex justify-between mt-10">
             {
               categories.data.map(item => (
-                <Link className='w-1/4'>
+                <Link className='w-1/4' href={route('search.business', {category : item.id})}>
                   <BusinessCategory key={item.id} item={item}/>
                 </Link>
               ))

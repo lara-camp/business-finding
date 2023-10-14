@@ -9,7 +9,7 @@ const FeatureLocations = ({locations}) => {
           <div className="flex justify-between mt-10">
             {
               locations.data.map(item => (
-                <Link className='w-1/4'>
+                <Link className='w-1/4' href={route('search.business', {location : item.id})}>
                   <BusinessLocation key={item.id} item={item}/>
                 </Link>
               ))
