@@ -18,7 +18,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::latest()->paginate(10);
         return Inertia::render('Backend/Blog/Index', ['blogs' => new BlogCollection($blogs),]);
     }
 

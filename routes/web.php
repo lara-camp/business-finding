@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\IndustryController;
 use App\Http\Controllers\Backend\Owner\BusinessController;
 use App\Http\Controllers\Backend\Owner\DashboardContoller;
+use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\OwnerDetailController;
@@ -40,6 +41,9 @@ Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
 Route::get('/category', [FrontendCategoryController::class, 'category'])->name('category');
 Route::get('/search', [SearchController::class, 'index'])->name('search.business');
 Route::get('/business/{id}', [HomeController::class, 'business_detail'])->name('business.detail');
+Route::get('/blog', [FrontendBlogController::class, 'index'])->name('blog');
+Route::get('/blog/{tag}/{id}', [FrontendBlogController::class, 'detail'])->name('blog.detail');
+Route::get('/blog/details', [FrontendBlogController::class, 'tags'])->name('blog.tags');
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');

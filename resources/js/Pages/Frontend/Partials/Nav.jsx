@@ -41,7 +41,13 @@ const Nav = () => {
                                     </select>
                                     <Link
                                       href={route("category")}
-                                      className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium"
+                                      className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                    >
+                                      Categories
+                                    </Link>
+                                    <Link
+                                      href={route("blog")}
+                                      className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                     >
                                       Blog
                                     </Link>
@@ -61,7 +67,7 @@ const Nav = () => {
                         <Link href={route('home')} className="bg-gray-200 text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</Link>
 
                         <Link href={route('category')} className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Categories</Link>
-                        <Link href={route('category')} className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Blog</Link>
+                        <Link href={route('blog')} className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Blog</Link>
                         <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Location</Link>
                         <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">About Us</Link>
                     </div>
