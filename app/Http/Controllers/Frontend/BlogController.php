@@ -63,4 +63,15 @@ class BlogController extends Controller
             'blogs' => new BlogCollection($blogs),
         ]);
     }
+    public function industries($id)
+    {
+        dd($id);
+        // $tag  = str_replace("'", '', $request->tags);
+        /* $blogs = Blog::where('industry_id', $id)->latest()->paginate(9)->appends(request()->except('page'));
+        // dd($blogs);
+        return Inertia::render('Frontend/Blog/Industries', [
+            // 'tag' => $request->tags,
+            'blogs' => new BlogCollection($blogs),
+        ]); */
+    }
 }

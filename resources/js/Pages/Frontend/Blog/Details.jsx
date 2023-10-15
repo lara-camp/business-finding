@@ -1,17 +1,17 @@
 import FrontendLayout from '@/Layouts/FrontendLayout';
 import React from 'react';
-
+import { Link } from "@inertiajs/react";
 const Index = (blog ,images) => {
     console.log(blog, blog.images.length);
-    function stripHtmlAndTrim(text) {
+    /* function stripHtmlAndTrim(text) {
       const tmp = document.createElement("div");
       tmp.innerHTML = text;
       let plainText = tmp.textContent || tmp.innerText || "";
       return plainText;
-    }
+    } */
     return (
         <>
-            <div class="grid grid-cols-4 lg:grid-cols-4">
+            <div class="grid grid-cols-4 lg:grid-cols-4" >
                 <div class="col-span-3 lg:col-span-3">
                     {blog['blog']['data'].map((item, index) => (
                             <div key={index}>
@@ -33,8 +33,8 @@ const Index = (blog ,images) => {
                                                 <time datetime={item.created_at} class="text-gray-500">{item.created_at}</time>
                                             </div>
                                             <div class="group relative">
-                                                <p class="mt-4 line-clamp-3 text-sm leading-6 text-gray-600">
-                                                    {stripHtmlAndTrim(item.content)}
+                                                <p class="mt-4 line-clamp-3 text-sm leading-6 text-gray-600 prose">
+                                                    {item.content}
                                                 </p>
                                             </div>
                                         </div>
