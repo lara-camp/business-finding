@@ -2,26 +2,11 @@ import FrontendLayout from '@/Layouts/FrontendLayout';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from "@/Components/Pagination";
+
+let PageSize = 10;
 const Tags = (blogs, tag) => {
     console.log(blogs, tag, "hello");
-    const [currentPage, setCurrentPage] = useState(1);
-      const postsPerPage = 9;
 
-      /* if (!blogs || !blogs.blogs.data.dta || !Array.isArray(blogs.blogs.data.data)) {
-        return <div>No blog data available.</div>;
-      } */
-
-      const indexOfLastPost = currentPage * postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - postsPerPage;
-      const currentPosts = blogs.blogs.data.data.slice(indexOfFirstPost, indexOfLastPost);
-
-
-    const totalPages = Math.ceil(blogs.length / postsPerPage);
-
-    const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    };
-    // const tag = { blogs['blogs']['data']['data'][0].tag };
     function stripHtmlAndTrim(text, maxLength) {
       const tmp = document.createElement("div");
       tmp.innerHTML = text;
@@ -33,11 +18,11 @@ const Tags = (blogs, tag) => {
     return (
         <>
             <a href={`/blog/details?tags='News'`}>
-                <h1 class="mx-3 text-5xl text-dark mt-2">{blogs.tag.replace(/'/g, '')}</h1>
+                <h1 class="mx-3 text-5xl text-dark mt-5">{blogs.tag.replace(/'/g, '')}</h1>
             </a>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 {blogs.blogs.data.data.map((item, index) => (
-                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110">
+                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px', marginTop:"50px" }}>
                         <div class="py-10 sm:py-8 mb-3 mx-5">
                             <div class="mx-auto max-w-2xl">
                                 <article class="items-start justify-between">
@@ -71,15 +56,12 @@ const Tags = (blogs, tag) => {
                     </div>
                 ))}
             </div>
-            <div className="pagination">
-                {currentPage > 1 && (
-                    <Link to={`/?page=${currentPage - 1}`}>Previous</Link>
-                )}
-
-                {currentPage < totalPages && (
-                    <Link to={`/?page=${currentPage + 1}`}>Next</Link>
-                )}
-            </div>
+            {
+                
+                <div className="mt-10">
+                  <Pagination links={blogs.blogs.links} meta={blogs.blogs.meta} />
+                </div>
+              }
 
 
         </>
