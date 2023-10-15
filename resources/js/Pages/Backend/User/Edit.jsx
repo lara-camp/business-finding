@@ -65,6 +65,21 @@ const Edit = ({ user }) => {
                         </div>
                         {errors.email && <div className='text-danger text-center my-2'> {errors.email} </div>}
                     </div>
+                    <div className="row my-3 mx-3">
+                        <div className="col-md-3">
+                            <label htmlFor="email"> Role </label>
+                        </div>
+                        <div className="col-md-9">
+                            <input
+                                type="text"
+                                value={data.email}
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                                placeholder='Enter Email Address'
+                                onChange={e => setData('email', e.target.value)}
+                            />
+                        </div>
+                        {errors.email && <div className='text-danger text-center my-2'> {errors.email} </div>}
+                    </div>
 
                     <div className="row mx-3">
                         <div className="col-md-12">

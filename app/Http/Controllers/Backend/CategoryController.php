@@ -14,7 +14,8 @@ use App\Http\Resources\CategoryCollection;
 
 class CategoryController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         // dd("hello");
         $categories = Category::latest()->paginate(10);
         return Inertia::render('Backend/Category/Index', [
@@ -25,8 +26,10 @@ class CategoryController extends Controller
     public function create()
     {
         // dd("create");
-        return Inertia::render('Backend/Category/Create', [
-            'category' => new Category(),
+        return Inertia::render(
+            'Backend/Category/Create',
+            [
+                'category' => new Category(),
             ]
 
         );
@@ -54,17 +57,15 @@ class CategoryController extends Controller
             'slug' => $request->slug,
         ]);
 
-        if($request->hasFile('image'))
-        {
-            $file = 'cat'.time().auth()->id().'-'.$_FILES['image']['name'];
+        if ($request->hasFile('image')) {
+            $file = 'cat' . time() . auth()->id() . '-' . $_FILES['image']['name'];
             // dd($file);
-            $path = Storage::disk('public')->put( $file,fopen($request->file('image'), 'r+'));
+            $path = Storage::disk('public')->put($file, fopen($request->file('image'), 'r+'));
             Image::create([
-                'url' => $file ,
+                'url' => $file,
                 'imageable_id' => $category->id,
                 'imageable_type' => 'App\Models\Category',
             ]);
-
         }
         return redirect()->route('admin.category');
     }
@@ -88,25 +89,23 @@ class CategoryController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->route('admin.category.edit', ['id'=>$request->id])
+            return redirect()->route('admin.category.edit', ['id' => $request->id])
                 ->withErrors($validator)
                 ->withInput();
         }
         $category = Category::findOrFail($id);
-        if($request->image != null && $request->hasFile('image'))
-        {
-            $image = Image::where('imageable_id',$category->id)->where('imageable_type', 'App\Models\Category')->first();
+        if ($request->image != null && $request->hasFile('image')) {
+            $image = Image::where('imageable_id', $category->id)->where('imageable_type', 'App\Models\Category')->first();
             // dd( $image->url);
-            if(Storage::disk('public')->exists($image->url))
-            {
+            if (Storage::disk('public')->exists($image->url)) {
                 Storage::disk('public')->delete($image->url);
             }
             $image->delete();
-            $file = 'cat'.time().auth()->id().'-'.$_FILES['image']['name'];
+            $file = 'cat' . time() . auth()->id() . '-' . $_FILES['image']['name'];
             // dd($file);
-            $path = Storage::disk('public')->put( $file,fopen($request->file('image'), 'r+'));
+            $path = Storage::disk('public')->put($file, fopen($request->file('image'), 'r+'));
             Image::create([
-                'url' => $file ,
+                'url' => $file,
                 'imageable_id' => $category->id,
                 'imageable_type' => 'App\Models\Category',
             ]);
@@ -121,12 +120,12 @@ class CategoryController extends Controller
         return Inertia::render('Backend/Category/Show', ['category' => new CategoryResource($category)]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $category = Category::findOrFail($id);
-        $image = Image::where('imageable_id',$category->id)->where('imageable_type', 'App\Models\Category')->first();
+        $image = Image::where('imageable_id', $category->id)->where('imageable_type', 'App\Models\Category')->first();
         // dd( $image->url);
-        if(Storage::disk('public')->exists($image->url))
-        {
+        if (Storage::disk('public')->exists($image->url)) {
             Storage::disk('public')->delete($image->url);
         }
         $image->delete();

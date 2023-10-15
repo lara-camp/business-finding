@@ -61,7 +61,7 @@ const Create = () => {
                     <h5 className='text-center my-3'> Create User </h5>
                     <div className="row my-3 mx-3">
                         <div className="col-md-3">
-                            <label htmlFor="name"> User Id </label>
+                            <label htmlFor="name"> User name </label>
                         </div>
                         <div className="col-md-9">
                             <input
@@ -72,7 +72,10 @@ const Create = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.name && <div className="text-danger text-center my-2"> {errors.name} </div>}
+                        <p className="text-red-500 text-xs italic">
+                            {errors.user_id}
+                        </p>
+                        {/* {errors.user_id && <div className="text-danger text-center my-2"> {errors.user_id} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -88,7 +91,10 @@ const Create = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.address && <div className="text-danger text-center my-2"> {errors.address} </div>}
+                        <p className="text-red-500 text-xs italic">
+                            {errors.address}
+                        </p>
+                        {/* {errors.address && <div className="text-danger text-center my-2"> {errors.address} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -104,7 +110,10 @@ const Create = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.company && <div className="text-danger text-center my-2"> {errors.company} </div>}
+                        <p className="text-red-500 text-xs italic">
+                            {errors.company}
+                        </p>
+                        {/* {errors.company && <div className="text-danger text-center my-2"> {errors.company} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -120,12 +129,15 @@ const Create = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.frontend_img && <div className="text-danger text-center my-2"> {errors.frontend_img} </div>}
+                        <p className="text-red-500 text-xs italic">
+                            {errors.frontend_img}
+                        </p>
+                        {/* {errors.frontend_img && <div className="text-danger text-center my-2"> {errors.frontend_img} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
                         <div className="col-md-3">
-                            <label htmlFor="image"> Front Image </label>
+                            <label htmlFor="image"> Back Image </label>
                         </div>
                         <div className="col-md-9">
                             <input
@@ -136,7 +148,10 @@ const Create = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        {errors.backend_img && <div className="text-danger text-center my-2"> {errors.backend_img} </div>}
+                        <p className="text-red-500 text-xs italic">
+                            {errors.backend_img}
+                        </p>
+                        {/* {errors.backend_img && <div className="text-danger text-center my-2"> {errors.backend_img} </div>} */}
                     </div>
                     <div className="row mx-3">
                         <div className="col-md-12">
