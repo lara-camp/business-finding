@@ -27,7 +27,9 @@ class OwnerDetailController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+
+      
         // $request->validate([
         //     'user_id' => 'required',
         //     'region_id' => 'required'
@@ -57,6 +59,7 @@ class OwnerDetailController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        
         OwnerDetail::create([
             'user_id' => $request->user_id,
             'address' => $request->address,

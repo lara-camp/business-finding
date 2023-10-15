@@ -2,7 +2,7 @@ import Pagination from "@/Components/Pagination";
 import { formatWord, textCapitalize } from "@/Helper";
 import { Link, router, usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
-// import { Switch } from "@mui/material";
+import { Switch } from "@mui/material";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function Example({ data, columns, routeName, view, title, edit, destroy, add }) {

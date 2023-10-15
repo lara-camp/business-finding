@@ -20,7 +20,7 @@ class CityCollection extends ResourceCollection
                     'id' => $city->id,
                     'name' => $city->name,
                     'business_count' => $city->businesses ? $city->businesses->count() : 0,
-                    'region_id' => $city->region_id,
+                    'region_id' => $city->region->name,
                     'created_at' => $city->created_at,
                 ];
             }),
