@@ -26,5 +26,6 @@
 
 `npm i react-icons`
 `npm i react-quill`
+`$ npm install @splidejs/react-splide`
 
 
