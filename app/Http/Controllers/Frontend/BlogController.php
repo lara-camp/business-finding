@@ -56,7 +56,7 @@ class BlogController extends Controller
     {
         // dd($request->tags);
         $tag  = str_replace("'", '', $request->tags);
-        $blogs = Blog::where('tag', $tag)->latest()->paginate(9);
+        $blogs = Blog::where('tag', $tag)->latest()->paginate(9)->appends($request->except('page'));
         // dd($blogs);
         return Inertia::render('Frontend/Blog/Tags', [
             'tag' => $request->tags,

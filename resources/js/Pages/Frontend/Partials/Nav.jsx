@@ -40,12 +40,6 @@ const Nav = () => {
                                         }
                                     </select>
                                     <Link
-                                      href={route("category")}
-                                      className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    >
-                                      Categories
-                                    </Link>
-                                    <Link
                                       href={route("blog")}
                                       className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                     >

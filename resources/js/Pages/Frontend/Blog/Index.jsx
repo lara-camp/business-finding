@@ -1,6 +1,5 @@
 import FrontendLayout from '@/Layouts/FrontendLayout';
 import React from 'react';
-import { Link } from 'react-router-dom';
 const Index = (news, guide, buyers, sellers, industries) => {
     console.log(news, guide, buyers, sellers, industries);
     function stripHtmlAndTrim(text, maxLength) {
