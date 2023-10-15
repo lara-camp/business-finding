@@ -3,6 +3,8 @@ import FrontendLayout from '@/Layouts/FrontendLayout'
 import { Link } from '@inertiajs/react';
 import React from 'react'
 import { ImLocation } from "react-icons/im";
+import SplideCurosel from './components/SplideCurosel';
+import '@splidejs/react-splide/css';
 
 const BusinessDetail = ({business}) => {
   return (
@@ -14,8 +16,8 @@ const BusinessDetail = ({business}) => {
 
         {/* show case images and info  */}
         <div className="flex my-3 mx-20">
-            <div className="w-1/2">
-                This is image section 
+            <div className="w-1/2 me-5">
+                <SplideCurosel images={business.show_case_images} />
             </div>
             <div className="w-1/2">
                 <div className="mb-3 border-b-2 border-b-black pb-5">
@@ -90,7 +92,7 @@ const BusinessDetail = ({business}) => {
             </h1>
             <div className='text-center my-5'>
                 {
-                    business.business_features.map(item => (
+                    business.business_features ? business.business_features.map(item => (
                         <div className={`${item.flex_direction} flex items-center`}>
                             <div className="w-1/2 me-5">
                                 <img src={item.image} alt=""  className='' width={400} height={200}/>
@@ -99,7 +101,7 @@ const BusinessDetail = ({business}) => {
                                 {item.text}
                             </div>
                         </div>
-                    ))
+                    )) : <p className='text-red-700 text-center'> No Feature </p>
                 }
             </div>
         </div>

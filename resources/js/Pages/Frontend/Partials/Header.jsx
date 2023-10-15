@@ -7,7 +7,7 @@ import {BsSearch} from 'react-icons/bs'
 import { useState } from "react";
 
 const Header = () => {
-    const {nav_data} = usePage().props;
+    const {nav_data, general_setting} = usePage().props;
     const [title, setTitle] = useState("")
     const [cat_id, setCatId] = useState('');
 
@@ -47,7 +47,9 @@ const Header = () => {
             {/* top header ends  */}
             {/* low header starts */}
             <div className="flex mx-10 p-3 items-center">
-                <div className="w-1/6">Logo</div>
+                <div className="w-1/6">
+                    <img src={general_setting.logo} alt="" width={50} height={50} />
+                </div>
                 <div className="w-2/6">
                     <input
                         type="text"
