@@ -30,7 +30,11 @@ class HandleInertiaRequests extends Middleware
      * @return array<string, mixed>
      */
     public function share(Request $request): array
-    {
+    {   
+
+        if(request()->segment(1) != 'admin' || request()->segment(1) != 'owner') {
+            $frontend_data = true;
+        }
         return [
             ...parent::share($request),
             'auth' => [
@@ -45,6 +49,10 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],
+            'nav_data' => fn () => $frontend_data ? [
+                'categories' => Helper::getCategories(),
+                'locations' => Helper::getLocations(), 
+            ] : [],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

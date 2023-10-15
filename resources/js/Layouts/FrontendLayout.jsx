@@ -11,9 +11,11 @@ const FrontendLayout = ({children, title}) => {
         <Head title={title} />
             <Header />
           </header>
-        <Nav>
-        </Nav>
-        {<main>
+          {/* navbar  */}
+          <div className='sticky top-0 z-50'>
+            <Nav />
+          </div>
+        {<main className='min-h-screen'>
             {children}
         </main>}
         <footer>

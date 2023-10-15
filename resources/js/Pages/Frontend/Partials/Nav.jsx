@@ -1,33 +1,56 @@
-import { Link, } from "@inertiajs/react";
+import { Link, router, } from "@inertiajs/react";
 import Home from "../Home";
+import {usePage} from "@inertiajs/react";
+import {SlEarphones} from 'react-icons/sl'
 
 const Nav = () => {
+    const {nav_data} = usePage().props;
+    
+    const handleCatChange = (id) => {
+        router.get(route('search.business', {"category" : id}));
+    }
+
+    const handleLocChange = (id) => {
+        router.get(route('search.business', {'location' : id}));
+    }
+
     return (
         <>
-            <nav class="bg-gray-200">
+            <nav class="bg-slate-50">
                 <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div class="relative flex h-16 items-center justify-between">
-
-                        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="w-4/5 flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                             <div class="hidden sm:ml-6 sm:block">
                                 <div class="flex space-x-4">
-                                    <a href={route("home")} class="bg-gray-200 text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                                    <a
-                                      href={route("category")}
-                                      className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    >
-                                      Categories
-                                    </a>
-                                    <a
+                                    <Link href={route("home")} className="text-dark hover:text-yellow-400 active:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</Link>
+                                    <select className="border-0" onChange={(e) => handleCatChange(e.target.value)}>
+                                        <option value="">Categories </option>
+                                        {
+                                            nav_data.categories.data.map(item => (
+                                                <option value={item.id} key={item.id} > {item.name}  </option>
+                                            ))
+                                        }
+                                    </select>
+                                    <select className="border-0" onChange={e => handleLocChange(e.target.value)}>
+                                        <option value=""> Locations </option>
+                                        {
+                                            nav_data.locations.data.map(item => (
+                                                <option value={item.id} key={item.id}> {item.name}  </option>
+                                            ))
+                                        }
+                                    </select>
+                                    <Link
                                       href={route("blog")}
                                       className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                     >
                                       Blog
-                                    </a>
-                                    <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Location</a>
-                                    <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About Us</a>
+                                    </Link>
+                                    <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">About Us</Link>
                                 </div>
                             </div>
+                        </div>
+                        <div className="w-1/5">
+                           <Link href="" className="hover:text-yellow-400"> <SlEarphones className="inline me-3" size={30} /> Contact Us </Link>
                         </div>
                     </div>
                 </div>
@@ -35,12 +58,12 @@ const Nav = () => {
 
                 <div class="sm:hidden" id="mobile-menu">
                     <div class="space-y-1 px-2 pb-3 pt-2">
+                        <Link href={route('home')} className="bg-gray-200 text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</Link>
 
-                        <a href={route('home')} className="bg-gray-200 text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                        <a href={route('category')} className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categories</a>
-                        <a href={route('blog')} className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Blog</a>
-                        <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Location</a>
-                        <a href={route('home')} class="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About Us</a>
+                        <Link href={route('category')} className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Categories</Link>
+                        <Link href={route('blog')} className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Blog</Link>
+                        <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">Location</Link>
+                        <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">About Us</Link>
                     </div>
                 </div>
             </nav>

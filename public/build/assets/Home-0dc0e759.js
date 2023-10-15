@@ -1,1 +1,0 @@
-import{j as r}from"./app-a633abfa.js";import o from"./Nav-67258ff9.js";import"./transition-759747bf.js";import"./use-owner-45704a9b.js";import"./MagnifyingGlassIcon-a495a96d.js";import"./XMarkIcon-df114656.js";function n(){return r.jsxs(r.Fragment,{children:[r.jsx(o,{}),r.jsx("h1",{children:"Home Page"})]})}export{n as default};

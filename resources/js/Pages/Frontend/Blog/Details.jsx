@@ -1,6 +1,6 @@
 import FrontendLayout from '@/Layouts/FrontendLayout';
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 const Index = (blog ,images) => {
     console.log(blog, blog.images.length);
     function stripHtmlAndTrim(text) {
