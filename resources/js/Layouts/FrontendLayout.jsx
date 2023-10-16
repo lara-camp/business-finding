@@ -15,7 +15,7 @@ const FrontendLayout = ({children, title}) => {
           <div className='sticky top-0 z-50'>
             <Nav />
           </div>
-        {<main>
+        {<main className='min-h-screen'>
             {children}
         </main>}
         <footer>

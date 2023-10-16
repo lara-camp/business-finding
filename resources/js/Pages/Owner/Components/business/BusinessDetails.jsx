@@ -10,12 +10,14 @@ const BusinessDetails = ({ categories,regions, cities, subcategories }) => {
 
     const hanleRegionChange = (e) => {
         const region_id = e.target.value;
+        setData('region_id', region_id)
         const relavantCities = cities.data.filter(item => item.region_id == region_id)
         setFilteredCities(relavantCities)
     }
 
     const handleCategoryChange = (e) => {
         const category_id = e.target.value;
+        setData('category_id', category_id)
         const relavantSubcategories = subcategories.data.filter(item => item.category_id == category_id)
         setFilteredSubcategory(relavantSubcategories);
     }

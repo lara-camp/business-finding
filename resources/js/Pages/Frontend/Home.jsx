@@ -7,6 +7,7 @@ import FeatureBusiness from './components/FeatureBusiness'
 import OurBlog from './components/OurBlog'
 import FeatureCategories from './components/FeatureCategories'
 import FeatureLocations from './components/FeatureLocations'
+import './app.css'
 
 const Home = ({categories, locations, businesses, blogs}) => {
   return (
@@ -25,19 +26,19 @@ const Home = ({categories, locations, businesses, blogs}) => {
       {/* inform section ends  */}
 
       {/* feature business starts  */}
-        <FeatureBusiness />
+        <FeatureBusiness businesses={businesses} />
       {/* feature business ends */}
 
       {/* Our blogs section starts */}
-        <OurBlog />
+        <OurBlog blogs={blogs} />
       {/* Our blogs section ends */}
 
       {/* feature categories starts */}
-        <FeatureCategories />
+        <FeatureCategories categories={categories}/>
       {/* feature categories ends */}
 
       {/* feature locations starts */}
-        <FeatureLocations />
+        <FeatureLocations locations={locations} />
       {/* feature locations ends */}
     </div>
   )

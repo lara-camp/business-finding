@@ -5,8 +5,8 @@ import BackendLayout from "@/Layouts/BackendLayout";
 const Index = ({ ownerdetails }) => {
     const columns = [
         "id",
-        "user_id",
-        "address",
+        "user_name",
+        // "address",
         "company",
         "action",
     ];
