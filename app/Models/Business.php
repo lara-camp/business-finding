@@ -26,4 +26,8 @@ class Business extends Model
     public function sub_category() {
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

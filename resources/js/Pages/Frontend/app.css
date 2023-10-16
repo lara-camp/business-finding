@@ -1,0 +1,26 @@
+
+
+  .move-right {
+    transform: translateX(1000px);
+    transition: transform 0.5s ease-in-out; /* Add a smooth transition effect */
+  }
+
+  .draw-back {
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out; /* Add a smooth transition effect */
+  }
+
+  .bus-card {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .bus-card  .bus-hover-card {
+    display: none;
+    opacity: 0;
+    transition: opactiy 0.5s ease-in-out;
+  }
+  
+  .bus-card:hover .bus-hover-card {
+    display: block;
+    opacity: 1;
+  }

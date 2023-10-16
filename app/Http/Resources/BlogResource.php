@@ -20,6 +20,7 @@ class BlogResource extends JsonResource
             'url' => $this->cover_image ? Storage::url($this->cover_image): "",
             'title' => $this->title,
             'body' => $this->body,
+            'content' => $this->content,
             'tag' => $this->tag,
             'user_id' => $this->user_id,
             'industry_id' => $this->industry_id,

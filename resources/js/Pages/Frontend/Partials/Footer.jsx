@@ -10,7 +10,9 @@ const Footer = () => {
 
         {/* Top Footer starts */}
         <div className="flex">
-          <div className="w-1/2"> Logo </div>
+          <div className="w-1/2">  
+            <img src={general_setting.logo} alt="" width={50} height={50}/>
+          </div>
           <div className="w-1/2">
             <ul className='flex justify-between'>
               <li> <a href="">Home</a> </li>

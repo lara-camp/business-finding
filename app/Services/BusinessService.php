@@ -101,6 +101,8 @@ class BusinessService {
 
         return [
             'user_id' => auth()->id(),
+            'category_id' => $this->data['category_id'],
+            'region_id' => $this->data['region_id'],
             'sub_category_id' => $this->data['subcategory_id'],
             'city_id' => $this->data['city_id'],
             'street' => $this->data['street'],
