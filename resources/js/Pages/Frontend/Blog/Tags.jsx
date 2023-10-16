@@ -17,12 +17,12 @@ const Tags = (blogs, tag) => {
     return (
         <>
             <div style={{ marginLeft: "50px", marginRight: "50px"}}>
-                <a href={`/blog/details?tags='News'`}>
+                <a href={`/blog/details?tags='${blogs.tag.replace(/'/g, '')}'`}>
                     <h1 class="mx-3 text-5xl text-dark mt-5">{blogs.tag.replace(/'/g, '')}</h1>
                 </a>
-                <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+                <div className='grid grid-cols-1 gap-4 lg:grid-cols-3'>
                     {blogs.blogs.data.data.map((item, index) => (
-                            <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px', marginTop:"50px" }}>
+                            <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px', marginTop:"50px" }}>
                             <div class="py-10 sm:py-8 mb-3 mx-5">
                                 <div class="mx-auto max-w-2xl">
                                     <article class="items-start justify-between">

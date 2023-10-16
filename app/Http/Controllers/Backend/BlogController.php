@@ -111,6 +111,59 @@ class BlogController extends Controller
         ]);
     }
 
+    // public function update($id, Request $request)
+    // {
+    //     $rules = [
+    //         'title' => 'required|string|max:255',
+    //         'description' => 'required|string',
+    //         'tag' => 'required|string',
+    //         'content' => 'required',
+    //     ];
+
+    //     // Validate the request data
+    //     $validator = Validator::make($request->all(), $rules);
+
+    //     // Check if validation fails
+    //     if ($validator->fails()) {
+    //         return redirect()->route('admin.blog.edit')
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     $blog = Blog::findOrFail($id);
+    //     if($request->hasFile('cover_image'))
+    //     {
+    //         if ($blog->cover_image) {
+    //             Storage::disk('public')->delete($blog->cover_image);
+    //         }
+
+    //         $file = 'cover'.time().auth()->id().'-'.$_FILES['cover_image']['name'];
+    //         // dd($file);k
+    //         $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+'));
+
+    //         $blog->update([
+    //             'cover_image' => $file,
+    //         ]);
+
+    //     }
+    //     if($request->image_attachments)
+    //     {
+    //         foreach($request->image_attachments as $image)
+    //         {
+    //             $file = 'img_'.time().auth()->id().'-'.$image->getClientOriginalName();
+    //             // dd($file);
+    //             $path = Storage::disk('public')->put( $file,fopen($image, 'r+'));
+
+    //             Image::create([
+    //                 'url' => $file ,
+    //                 'imageable_id' => $blog->id,
+    //                 'imageable_type' => 'App\Models\Blog',
+    //             ]);
+    //         }
+    //     }
+    //     $blog->update($request->all());
+    //     return to_route('admin.blog');
+    // }
     public function update($id, Request $request)
     {
         $rules = [
@@ -125,42 +178,47 @@ class BlogController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->route('admin.blog.edit')
+            return redirect()->route('admin.blog.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
         $blog = Blog::findOrFail($id);
-        if($request->cover_image != null && $request->hasFile('cover_image'))
-        {
-            // $image = Image::where('imageable_id',$blog->id)->where('imageable_type', 'App\Models\Blog')->first();
-            // dd( $image->url);
-            if(Storage::disk('public')->exists($blog->cover_image))
-            {
+
+        if ($request->hasFile('cover_image')) {
+            // Delete the old cover image if it exists
+            if ($blog->cover_image) {
                 Storage::disk('public')->delete($blog->cover_image);
             }
-            /* $file = 'cover'.time().auth()->id().'-'.$_FILES['cover_image']['name'];
-            // dd($file);k
-            $path = Storage::disk('public')->put( $file,fopen($request->file('cover_image'), 'r+')); */
+
+            $file = 'cover_' . time() . auth()->id() . '-' . $request->file('cover_image')->getClientOriginalName();
+            $path = Storage::disk('public')->putFileAs('', $request->file('cover_image'), $file);
+
+            $blog->cover_image = $file;
         }
-        if($request->image_attachments)
-        {
-            foreach($request->image_attachments as $image)
-            {
-                $file = 'img_'.time().auth()->id().'-'.$image->getClientOriginalName();
-                // dd($file);
-                $path = Storage::disk('public')->put( $file,fopen($image, 'r+'));
-                $blog->cover_image = $file ;
+
+        if ($request->image_attachments) {
+            foreach ($request->image_attachments as $image) {
+                $file = 'img_' . time() . auth()->id() . '-' . $image->getClientOriginalName();
+                $path = Storage::disk('public')->put($file, fopen($image, 'r+'));
+
                 Image::create([
-                    'url' => $file ,
+                    'url' => $file,
                     'imageable_id' => $blog->id,
                     'imageable_type' => 'App\Models\Blog',
                 ]);
             }
         }
-        $blog->update($request->all());
-        return to_route('admin.blog');
+
+        $blog->title = $request->input('title');
+        $blog->body = $request->input('description');
+        $blog->tag = $request->input('tag');
+        $blog->content = $request->input('content');
+        $blog->save();
+
+        return redirect()->route('admin.blog');
     }
+
 
     public function show($id)
     {
