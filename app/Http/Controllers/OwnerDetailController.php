@@ -27,23 +27,10 @@ class OwnerDetailController extends Controller
     }
 
     public function store(Request $request)
-    {   
-
-      
-        // $request->validate([
-        //     'user_id' => 'required',
-        //     'region_id' => 'required'
-        // ]);
-
-        // OwnerDetail::create([
-        //     'user_id' => $request->user_id,
-        //     'address' => $request->address,
-        //     'company' => $request->company
-        // ]);
-        // return to_route('admin.owner');
+    {
+        $owner = OwnerDetail::findOrFail(auth()->id());
         $rules = [
             'user_id' => 'required',
-            'region_id' => 'required',
             'frontend_img' => 'required',
             'address' => 'required',
             'company' => 'required',
@@ -59,12 +46,33 @@ class OwnerDetailController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         OwnerDetail::create([
             'user_id' => $request->user_id,
             'address' => $request->address,
             'company' => $request->company
         ]);
+
+        if ($request->hasFile('frontend_img', 'backend_img')) {
+            // Delete file if exists
+            if ($owner->frontend_img != null) {
+                if (Storage::exists($owner->frontend_img)) {
+                    Storage::delete($owner->frontend_img);
+                }
+            }
+
+            // Update File
+            $file = $request->file('frontend_img', 'backend_img');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = Storage::putFileAs(
+                'uploads/profile',
+                $file,
+                $filename
+            );
+            $owner->frontend_img = $path;
+            $owner->backend_img = $path;
+            $owner->save();
+        }
 
         return to_route('admin.owner');
     }
