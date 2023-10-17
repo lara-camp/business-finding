@@ -27,8 +27,8 @@ class OwnerDetailController extends Controller
     }
 
     public function store(Request $request)
-    {   
-        dd($request->all());
+    {
+        // dd($request->all());
         $owner = OwnerDetail::findOrFail(auth()->id());
         $rules = [
             'user_id' => 'required',
