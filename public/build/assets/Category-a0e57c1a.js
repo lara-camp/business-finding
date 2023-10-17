@@ -1,1 +1,0 @@
-import{j as r}from"./app-2533865a.js";import t from"./Nav-06af9577.js";import"./transition-bce85724.js";import"./use-owner-5f49e9e9.js";import"./MagnifyingGlassIcon-f95dce6c.js";import"./XMarkIcon-84d4bc48.js";function s(){return r.jsxs(r.Fragment,{children:[r.jsx(t,{}),r.jsx("h1",{children:"Category Page"})]})}export{s as default};
