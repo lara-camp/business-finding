@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Pagination from "@/Components/Pagination";
 import { Link } from "@inertiajs/react";
 let PageSize = 10;
-const Tags = (blogs, tag) => {
-    console.log(blogs, tag, "hello");
+const Industries = (blogs) => {
+    console.log(blogs,"hello");
 
     function stripHtmlAndTrim(text, maxLength) {
       const tmp = document.createElement("div");
@@ -17,9 +17,9 @@ const Tags = (blogs, tag) => {
     return (
         <>
             <div style={{ marginLeft: "50px", marginRight: "50px"}}>
-                <a href={`/blog/details?tags='${blogs.tag.replace(/'/g, '')}'`}>
-                    <h1 class="mx-3 text-5xl text-dark mt-5">{blogs.tag.replace(/'/g, '')}</h1>
-                </a>
+
+                <h1 class="mx-3 text-5xl text-dark mt-5">{blogs.industry_name[0].replace(/'/g, '')}</h1>
+
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3'>
                     {blogs.blogs.data.data.map((item, index) => (
                             <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px', marginTop:"50px" }}>
@@ -62,11 +62,11 @@ const Tags = (blogs, tag) => {
                 <div className="mt-10">
                   <Pagination links={blogs.blogs.links} meta={blogs.blogs.meta} />
                 </div>
-              }
+            }
 
 
         </>
     );
 }
-Tags.layout = page => <FrontendLayout title="Blog" children={page} />
-export default Tags;
+Industries.layout = page => <FrontendLayout title="Blog" children={page} />
+export default Industries;

@@ -49,6 +49,7 @@ Route::get('/blog/details', [FrontendBlogController::class, 'tags'])->name('blog
 Route::match(['get', 'post'], '/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
 
+Route::get('/blog/industries/{id}/show', [FrontendBlogController::class, 'industries'])->name('blog.industry');
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
