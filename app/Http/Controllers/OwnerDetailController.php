@@ -27,7 +27,8 @@ class OwnerDetailController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+        dd($request->all());
         $owner = OwnerDetail::findOrFail(auth()->id());
         $rules = [
             'user_id' => 'required',
@@ -42,7 +43,7 @@ class OwnerDetailController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->route('admin.owner.create')
+            return to_route('admin.owner.create')
                 ->withErrors($validator)
                 ->withInput();
         }

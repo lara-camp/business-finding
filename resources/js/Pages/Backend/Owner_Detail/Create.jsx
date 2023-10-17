@@ -1,7 +1,7 @@
 import BackendLayout from '@/Layouts/BackendLayout'
 import React, { useState, useRef } from 'react'
 import { Link, router } from '@inertiajs/react'
-import { usePage, useForm, } from '@inertiajs/react'
+import { usePage, useForm} from '@inertiajs/react'
 import Swal from "sweetalert2";
 
 
