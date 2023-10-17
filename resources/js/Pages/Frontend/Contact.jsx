@@ -3,14 +3,36 @@ import React from "react";
 import { ImLocation } from "react-icons/im";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
-import { usePage } from "@inertiajs/react";
+import { router, useForm, usePage } from "@inertiajs/react";
 import BusinessImage from '../../../../public/image/contact/business.png'
 import CEOImage from '../../../../public/image/contact/ceo.png'
 import SellerImage from '../../../../public/image/contact/seller.png'
 import ShoppingImage from '../../../../public/image/contact/shopping.png'
+import { toast } from "react-hot-toast";
 
 const Contact = () => {
     const { nav_data } = usePage().props;
+    const {data, setData} = useForm({
+        "email" : "",
+        'first_name' : "",
+        'last_name' : "",
+        "phone_one" : "",
+        "phone_two" : "",
+        "location" : "",
+        "remark" : "",
+    })
+
+    function submit(e) {
+        e.preventDefault();
+        router.post(route('contact-us'), data, {
+            onSuccess : (res) => {
+                toast.success("Contact Form Submitted Successfully");
+            },
+            onError : (err) => {
+                console.log(err)
+            }
+        })
+    }
     return (
         <div>
             {/* header  */}
@@ -23,7 +45,7 @@ const Contact = () => {
             >
                 <div className="absolute start-20 top-10 w-[400px]">
                     <h1 className="text-4xl text-white font-bold">
-                        {" "}
+                        
                         Have Questions?{" "}
                     </h1>
                     <p className="text-white font-bold text-2xl">
@@ -41,7 +63,7 @@ const Contact = () => {
                 </div>
             </div>
 
-            {/* middle  */}
+            {/* middle mail form */}
             <div className="relative bg-yellow-50 p-5">
                 <div className="w-1/3 ms-20">
                     <div className="my-3">
@@ -89,104 +111,117 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="absolute end-20 top-[-50%] w-3/5">
-                    <div className=" bg-white p-5">
-                        <div className="flex">
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    First Name{" "}
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="eg.Henery"
-                                    className="w-full my-3"
-                                />
+                    <form action="" onSubmit={submit}>
+                        <div className=" bg-white p-5">
+                            <div className="flex">
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        First Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="eg.Henery"
+                                        className="w-full my-3"
+                                        onChange={e => setData("first_name", e.target.value)}
+                                    />
+                                </div>
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        
+                                        Last Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Cavill"
+                                        className="w-full my-3"
+                                        onChange={e => setData("last_name", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    Last Name{" "}
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Cavill"
-                                    className="w-full my-3"
-                                />
+                            {/* Email and phone number  */}
+                            <div className="flex">
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        
+                                        Email
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="name@gmail.com"
+                                        className="w-full my-3"
+                                        onChange={e => setData("email", e.target.value)}
+                                    />
+                                </div>
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="+959 737372882"
+                                        className="w-full my-3"
+                                        onChange={e => setData("phone_one", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        {/* Email and phone number  */}
-                        <div className="flex">
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    Email{" "}
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="name@gmail.com"
-                                    className="w-full my-3"
-                                />
-                            </div>
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    Phone Number{" "}
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="+959 737372882"
-                                    className="w-full my-3"
-                                />
-                            </div>
-                        </div>
 
-                        {/* Location and phone number  */}
-                        <div className="flex">
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    Email{" "}
-                                </label>
-                                <select className="w-full my-3">
-                                    <option value=""> Select Locations </option>
-                                    {nav_data.locations.data.map((item) => (
-                                        <option value={item.id}>
-                                            {" "}
-                                            {item.name}{" "}
-                                        </option>
-                                    ))}
-                                </select>
+                            {/* Location and phone number  */}
+                            <div className="flex">
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        Location
+                                    </label>
+                                    <select 
+                                        className="w-full my-3"
+                                        onChange={e => setData('location', e.target.value)}
+                                    >
+                                        <option value=""> Select Locations </option>
+                                        {nav_data.locations.data.map((item) => (
+                                            <option value={item.name}>
+                                                {item.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="w-1/2 me-3">
+                                    <label htmlFor="firstname" className="block">
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="+959 737372882"
+                                        className="w-full my-3"
+                                        onChange={e => setData('phone_two', e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-1/2 me-3">
-                                <label htmlFor="firstname" className="block">
-                                    {" "}
-                                    Phone Number{" "}
+
+                            {/* Description  */}
+
+                            <div>
+                                <label htmlFor="remark" className="block">
+                                    What would you like to discuss?
                                 </label>
-                                <input
-                                    type="text"
-                                    placeholder="+959 737372882"
-                                    className="w-full my-3"
-                                />
+                                <textarea
+                                    cols="30"
+                                    rows="10"
+                                    className="w-full"
+                                    placeholder="Tell us how we can assit you! Share your thoughts , we are here to listen and help"
+                                    onChange={e => setData('remark', e.target.value)}
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label htmlFor="term" className="block"> By clicking "Submit" button, you are agreeing our privacy and policy. </label>
+                                <button 
+                                    type="submit"
+                                    className="py-2 bg-black text-white px-5 my-3"
+                                >
+                                    Submit 
+                                </button>
                             </div>
                         </div>
-
-                        {/* Description  */}
-
-                        <div>
-                            <label htmlFor="firstname" className="block">
-                                {" "}
-                                What would you like to discuss?{" "}
-                            </label>
-                            <textarea
-                                name=""
-                                id=""
-                                cols="30"
-                                rows="10"
-                                className="w-full"
-                                placeholder="Tell us how we can assit you! Share your thoughts , we are here to listen and help"
-                            ></textarea>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

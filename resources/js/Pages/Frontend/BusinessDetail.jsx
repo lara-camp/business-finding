@@ -5,6 +5,10 @@ import React from 'react'
 import { ImLocation } from "react-icons/im";
 import SplideCurosel from './components/SplideCurosel';
 import '@splidejs/react-splide/css';
+import RevenueImage from '../../../../public/image/detail/revenue.png'
+import CashFlowImage from '../../../../public/image/detail/cash-flow.png'
+import InventoryImage from '../../../../public/image/detail/inventory.png'
+import MoneyGrowthImage from '../../../../public/image/detail/money-growth.png'
 
 const BusinessDetail = ({business}) => {
   return (
@@ -52,34 +56,50 @@ const BusinessDetail = ({business}) => {
             <div className="flex justify-between mx-20">
                 {/* revenue_price  */}
                 <div className='flex items-center p-5'>
-                    <div className='me-3'> Logo </div>
+                    <div className='me-3'>  
+                        <img src={RevenueImage} alt="" />
+                    </div>
                     <div> 
                         <p className='text-slate-500'> Gross Revenue </p>
-                        <p className='text-2xl font-bold font-mono'> {business.revenue_price} MMK </p>
+                        <p className='text-2xl font-bold font-mono'> 
+                            {business.revenue_price ? business.revenue_price + "MMK" : "Negotiate"  }  
+                        </p>
                     </div>
                 </div>
                 {/* cash flow  */}
                 <div className='flex items-center p-5'>
-                    <div className='me-3'> Logo </div>
+                    <div className='me-3'>  
+                        <img src={CashFlowImage} alt="" />
+                    </div>
                     <div> 
                         <p className='text-slate-500'> Cash Flow </p>
-                        <p className='text-2xl font-bold font-mono'> {business.cash_flow} MMK </p>
+                        <p className='text-2xl font-bold font-mono'> 
+                            {business.cash_flow ? business.cash_flow + "MMK" : "Negotiate"} 
+                        </p>
                     </div>
                 </div>
                 {/* inventory price  */}
                 <div className='flex items-center p-5'>
-                    <div className='me-3'> Logo </div>
+                    <div className='me-3'>  
+                        <img src={InventoryImage} alt="" />
+                    </div>
                     <div> 
                         <p className='text-slate-500'> Inventory Value </p>
-                        <p className='text-2xl font-bold font-mono'> {business.inventory_value} MMK </p>
+                        <p className='text-2xl font-bold font-mono'> 
+                            {business.inventory_value ? business.inventory_value + "MMK" : "Negotiate"} 
+                        </p>
                     </div>
                 </div>
                 {/* Net Income  */}
                 <div className='flex items-center p-5'>
-                    <div className='me-3'> Logo </div>
+                    <div className='me-3'>  
+                        <img src={MoneyGrowthImage} alt="" />
+                    </div>
                     <div> 
                         <p className='text-slate-500'> Net Income </p>
-                        <p className='text-2xl font-bold font-mono'> {business.net_income} MMK </p>
+                        <p className='text-2xl font-bold font-mono'> 
+                            {business.net_income ? business.net_income + "MMK" : "Negotiate"} 
+                        </p>
                     </div>
                 </div>
             </div>

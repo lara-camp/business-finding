@@ -46,8 +46,9 @@ Route::get('/business/{id}', [HomeController::class, 'business_detail'])->name('
 Route::get('/blog', [FrontendBlogController::class, 'index'])->name('blog');
 Route::get('/blog/{tag}/{id}', [FrontendBlogController::class, 'detail'])->name('blog.detail');
 Route::get('/blog/details', [FrontendBlogController::class, 'tags'])->name('blog.tags');
-Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
+Route::match(['get', 'post'], '/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
+
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');
