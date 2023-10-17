@@ -8,7 +8,7 @@ import BusinessImage from '../../../../public/image/contact/business.png'
 import CEOImage from '../../../../public/image/contact/ceo.png'
 import SellerImage from '../../../../public/image/contact/seller.png'
 import ShoppingImage from '../../../../public/image/contact/shopping.png'
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 
 const Contact = () => {
     const { nav_data } = usePage().props;
@@ -25,7 +25,8 @@ const Contact = () => {
     function submit(e) {
         e.preventDefault();
         router.post(route('contact-us'), data, {
-            onSuccess : (res) => {
+            preserveState : true,
+            onSuccess : () => {
                 toast.success("Contact Form Submitted Successfully");
             },
             onError : (err) => {
@@ -62,7 +63,7 @@ const Contact = () => {
                     </p>
                 </div>
             </div>
-
+            <Toaster />
             {/* middle mail form */}
             <div className="relative bg-yellow-50 p-5">
                 <div className="w-1/3 ms-20">
