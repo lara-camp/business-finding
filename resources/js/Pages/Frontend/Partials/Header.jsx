@@ -7,7 +7,7 @@ import {BsSearch} from 'react-icons/bs'
 import { useState } from "react";
 
 const Header = () => {
-    const {nav_data, general_setting} = usePage().props;
+    const {nav_data, general_setting, auth} = usePage().props;
     const [title, setTitle] = useState("")
     const [cat_id, setCatId] = useState('');
 
@@ -28,7 +28,9 @@ const Header = () => {
                         <option value="en"> English </option>
                     </select>
                 </div>
-                <div className="w-1/3 text-end">
+                {
+                    !auth.user
+                    ? <div className="w-1/3 text-end">
                     <div className="flex">
                         <div className="w-1/2">
                             <Link href={route("login")}> <AiOutlineUser size={20} className="inline me-2"/> Sign In </Link>
@@ -42,7 +44,8 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                </div>
+                </div> : "hello"
+                }
             </div>
             {/* top header ends  */}
             {/* low header starts */}

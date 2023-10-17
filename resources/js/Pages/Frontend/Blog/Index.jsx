@@ -1,5 +1,6 @@
 import FrontendLayout from '@/Layouts/FrontendLayout';
 import React from 'react';
+import { Link } from "@inertiajs/react";
 const Index = (news, guide, buyers, sellers, industries) => {
     console.log(news, guide, buyers, sellers, industries);
     function stripHtmlAndTrim(text, maxLength) {
@@ -11,13 +12,13 @@ const Index = (news, guide, buyers, sellers, industries) => {
     return (
         <>
             {/* News */}
-            <div class="mt-5 mb-5" >
-                <a href={`/blog/details?tags='News'`} >
+            <div class="mt-5 mb-5" style={{ marginLeft: "50px", marginRight: "50px" }}>
+                <Link href={`/blog/details?tags='News'`} >
                     <h1 class="mx-3 text-5xl text-dark mt-2" style={{ marginLeft: "30px"}}>News</h1>
-                </a>
+                </Link>
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3' style={{marginTop: "50px" }}>
                     {news['news']['data'].map((item, index) => (
-                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
+                        <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
                             <div class="py-10 sm:py-8 mb-3 mx-5">
                                 <div class="mx-auto max-w-2xl">
                                     <article class="items-start justify-between ">
@@ -39,11 +40,11 @@ const Index = (news, guide, buyers, sellers, industries) => {
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                                <a href={`/blog/${item.tag}/${item.id}`}>
+                                                <Link href={`/blog/${item.tag}/${item.id}`}>
                                                 <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
                                                     Read this article
                                                 </button>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </article>
                                 </div>
@@ -55,14 +56,14 @@ const Index = (news, guide, buyers, sellers, industries) => {
 
             {/* end */}
             {/* Guide */}
-            <div class="mt-5 mb-5" style={{ marginTop: "50px", marginBottom: "50px" }}>
+            <div class="mt-5 mb-5" style={{ marginTop: "50px", marginBottom: "50px" ,marginLeft: "50px", marginRight: "50px" }}>
 
-                <a href={`/blog/details?tags='Guide'`} class='mt-5 mb-5'>
+                <Link href={`/blog/details?tags='Guide'`} class='mt-5 mb-5'>
                     <h1 class="mx-3 text-5xl text-dark mt-2" style={{ marginLeft: "30px"}}>Guide</h1>
-                </a>
+                </Link>
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3' style={{marginTop: "50px" }}>
                     {news['guide']['data'].map((item, index) => (
-                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
+                        <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
                             <div class="py-10 sm:py-8 mb-3 mx-5">
                                 <div class="mx-auto max-w-2xl">
                                     <article class="items-start justify-between ">
@@ -84,11 +85,11 @@ const Index = (news, guide, buyers, sellers, industries) => {
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                                <a href={`/blog/${item.tag}/${item.id}`}>
+                                                <Link href={`/blog/${item.tag}/${item.id}`}>
                                                 <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
                                                     Read this article
                                                 </button>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </article>
                                 </div>
@@ -99,13 +100,13 @@ const Index = (news, guide, buyers, sellers, industries) => {
             </div>
             {/* End */}
             {/* Buyers */}
-            <div class="mt-5 mb-5" style={{marginBottom: "50px"}}>
-                <a href={`/blog/details?tags='Advice for buyers'`} class='mt-5 mb-5'>
+            <div class="mt-5 mb-5" style={{marginBottom: "50px"  ,marginLeft: "50px", marginRight: "50px"}}>
+                <Link href={`/blog/details?tags='Advice for buyers'`} class='mt-5 mb-5'>
                     <h1 class="mx-3 text-5xl text-dark mt-2" style={{ marginLeft: "30px"}}>Advice For Buyers</h1>
-                </a>
+                </Link>
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3' style={{marginTop: "50px" }}>
                     {news['buyers']['data'].map((item, index) => (
-                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
+                        <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
                             <div class="py-10 sm:py-8 mb-3 mx-5">
                                 <div class="mx-auto max-w-2xl">
                                     <article class="items-start justify-between ">
@@ -127,11 +128,11 @@ const Index = (news, guide, buyers, sellers, industries) => {
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                                <a href={`/blog/${item.tag}/${item.id}`}>
+                                            <Link href={`/blog/${item.tag}/${item.id}`}>
                                                 <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
                                                     Read this article
                                                 </button>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </article>
                                 </div>
@@ -142,13 +143,13 @@ const Index = (news, guide, buyers, sellers, industries) => {
             </div>
             {/* end */}
             {/* seller */}
-            <div class="mt-5 mb-5" style={{marginBottom: "50px"}}>
-                <a href={`/blog/details?tags='Advice for sellers'`} class='mt-5 mb-5'>
+            <div class="mt-5 mb-5" style={{marginBottom: "50px"  ,marginLeft: "50px", marginRight: "50px"}}>
+                <Link href={`/blog/details?tags='Advice for sellers'`} class='mt-5 mb-5'>
                     <h1 class="mx-3 text-5xl text-dark mt-2" style={{ marginLeft: "30px"}}>Advice for sellers</h1>
-                </a>
+                </Link>
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3' style={{marginTop: "50px" }}>
                     {news['sellers']['data'].map((item, index) => (
-                        <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
+                        <div key={index} className="relative col-span-1 px-2 transition duration-300 ease-in-out delay-150 shadow-lg mt-3mx-5 bg-amber-50 hover:-translate-y-1 hover:scale-110" style={{ marginRight: '30px', marginLeft: '30px' }}>
                             <div class="py-10 sm:py-8 mb-3 mx-5">
                                 <div class="mx-auto max-w-2xl">
                                     <article class="items-start justify-between ">
@@ -170,11 +171,11 @@ const Index = (news, guide, buyers, sellers, industries) => {
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                                <a href={`/blog/${item.tag}/${item.id}`}>
+                                                <Link href={`/blog/${item.tag}/${item.id}`}>
                                                 <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
                                                     Read this article
                                                 </button>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </article>
                                 </div>
@@ -185,41 +186,43 @@ const Index = (news, guide, buyers, sellers, industries) => {
             </div>
             {/* end */}
             {/* Industries */}
-            <div class="mt-5 mb-5" style={{marginBottom: "50px"}}>
+            <div class="mt-5 mb-5" style={{marginBottom: "50px"  ,marginLeft: "50px", marginRight: "50px"}}>
                 {/* <a href={`/blog/details?tags='Advice for sellers'`} class='mt-5 mb-5'> */}
                     <h1 class="mx-3 text-5xl text-dark mt-2" style={{ marginLeft: "20px"}}>By Industry</h1>
                 {/* </a> */}
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-4' style={{marginTop: "50px" }}>
                     {news['industries']['data'].map((item, index) => (
-                            <div key={index} className="relative col-span-1 px-2 duration-300 ease-in-out delay-150 shadow-lg transition mt-3 hover:-translate-y-1 hover:scale-110 overflow-hidden bg-amber-50 mx-2">
-                            <div class="py-10 sm:py-8 mb-3 mx-5">
-                                <div class="mx-auto max-w-2xl">
-                                    <article class="items-start justify-between ">
-                                        {/* <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                            {item.body.length > 20 ? `${item.body.substring(0, 50)}...` : item.body}
-                                        </h3> */}
-                                        <div class="relative w-full mt-2 item-center">
-                                            <img src={item.url} alt="image" class="mx-auto my-auto" style={{ width: "50px", height: "50px" }} />
+                        <div key={index} className="relative col-span-1 px-2 mx-2 mt-3 overflow-hidden transition duration-300 ease-in-out delay-150 shadow-lg hover:-translate-y-1 hover:scale-110 bg-amber-50">
+                            <Link href={`/blog/industries/${item.id}/show`} >
+                                <div class="py-10 sm:py-8 mb-3 mx-5">
+                                    <div class="mx-auto max-w-2xl">
+                                        <article class="items-start justify-between ">
+                                            {/* <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                                {item.body.length > 20 ? `${item.body.substring(0, 50)}...` : item.body}
+                                            </h3> */}
+                                            <div class="relative w-full mt-2 item-center">
+                                                <img src={item.url} alt="image" class="mx-auto my-auto" style={{ width: "50px", height: "50px" }} />
 
-                                        </div>
-                                        <div class="max-w-xl mt-4">
-
-                                            <div class="group relative">
-                                                <h3 class="mt-4 line-clamp-3 text-sm leading-6 text-gray-600 text-center">
-                                                    {item.name}
-                                                </h3>
                                             </div>
-                                        </div>
-                                        {/* <div class="mt-4">
-                                                <a href={`/blog/${item.tag}/${item.id}`}>
-                                                <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
-                                                    Read this article
-                                                </button>
-                                            </a>
-                                        </div> */}
-                                    </article>
+                                            <div class="max-w-xl mt-4">
+
+                                                <div class="group relative">
+                                                    <h3 class="mt-4 line-clamp-3 text-sm leading-6 text-gray-600 text-center">
+                                                        {item.name}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            {/* <div class="mt-4">
+                                                    <a href={`/blog/${item.tag}/${item.id}`}>
+                                                    <button class="btn bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-500">
+                                                        Read this article
+                                                    </button>
+                                                </a>
+                                            </div> */}
+                                        </article>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>

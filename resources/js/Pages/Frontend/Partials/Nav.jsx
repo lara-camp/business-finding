@@ -41,16 +41,16 @@ const Nav = () => {
                                     </select>
                                     <Link
                                       href={route("blog")}
-                                      className="text-dark hover:bg-yellow-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                      className="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium"
                                     >
                                       Blog
                                     </Link>
-                                    <Link href={route('home')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">About Us</Link>
+                                    <Link href={route('about-us')} class="text-dark hover:text-yellow-400 rounded-md px-3 py-2 text-sm font-medium">About Us</Link>
                                 </div>
                             </div>
                         </div>
                         <div className="w-1/5">
-                           <Link href="" className="hover:text-yellow-400"> <SlEarphones className="inline me-3" size={30} /> Contact Us </Link>
+                           <Link href={route('contact-us')} className="hover:text-yellow-400"> <SlEarphones className="inline me-3" size={30} /> Contact Us </Link>
                         </div>
                     </div>
                 </div>

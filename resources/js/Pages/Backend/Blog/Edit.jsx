@@ -62,7 +62,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                                 onChange={ (e) => setData('title', e.target.value)}
                               />
                             {errors.title && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.title}
                                 </p>
                             )}
@@ -80,7 +80,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                                   placeholder="Description">{data.description}</textarea>
 
                             {errors.description && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.description}
                                 </p>
                             )}
@@ -105,7 +105,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                                   <option key={4} value={'Advice for sellers'} selected={data.tag == 'Advice for sellers'}>Advice for sellers</option>
                             </select>
                             {errors.tag && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.tag}
                                 </p>
                             )}
@@ -130,7 +130,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                             ))}
                               </select>
                             {errors.industry_id && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.industry_id}
                                 </p>
                             )}
@@ -147,14 +147,14 @@ const Edit = ({ blog, errors, industries, images }) => {
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Cover Image
                               </label>
-                              <img src={data.cover_image} className='w-30 h-30-auto mb-3'/>
+                              <img src={data.cover_image} className='mb-3 w-30 h-30-auto'/>
                                 <input type="file"
                                     name="coverImage"
                                     id="coverImage"
                                     onChange={ (e) => setData('cover_image', e.target.files[0])}
                                   class="w-75 h-10 border rounded-md" />
                             {errors.cover_image && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.cover_image}
                                 </p>
                             )}
@@ -166,7 +166,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                               </label>
                                  <div className="flex">
                                   {images.map((item, index) => (
-                                    <img key={index} src={item} alt={`Image ${index}`} className="w-50 h-10 ms-2" />
+                                    <img key={index} src={item} alt={`Image ${index}`} className="h-10 w-50 ms-2" />
                                   ))}
                                 </div>
                                 <input
@@ -187,7 +187,7 @@ const Edit = ({ blog, errors, industries, images }) => {
                                     multiple
                                   class="w-full h-10 border rounded-md mt-5" />
                             {errors.image_attachment && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.image_attachment}
                                 </p>
                             )}
@@ -199,19 +199,19 @@ const Edit = ({ blog, errors, industries, images }) => {
             </div>
 
             <div className='grid grid-cols-1 gap-1 mt-2' style={{ height: '200px' }}>
-              <div className="bg-white rounded-lg shadow-lg p-6" style={{ height: '200px' }}>
-                <h2>Content</h2>
-                <ReactQuill
-                  theme="snow" // Use the 'snow' theme for a standard Quill Editor
-                  value={data.content || ''} // Set the initial value from data.content
-                  onChange={handleQuillChange} // Handle changes
-                />
-                {errors.content && (
-                  <p className="text-red-500 text-xs italic">
-                    {errors.content}
-                  </p>
-                )}
-              </div>
+                <div className="p-6 bg-white rounded-lg shadow-lg" style={{ height: '100%', overflowY: 'auto' }}>
+                    <h2>Content</h2>
+                    <ReactQuill
+                    theme="snow" // Use the 'snow' theme for a standard Quill Editor
+                    value={data.content || ''} // Set the initial value from data.content
+                    onChange={handleQuillChange} // Handle changes
+                    />
+                    {errors.content && (
+                    <p className="text-xs italic text-red-500">
+                        {errors.content}
+                    </p>
+                    )}
+                </div>
             </div>
             <div className='p-6 mt-2 text-center bg-white rounded-lg shadow-lg'>
                   <button type="submit" class="bg-blue-500 w-75 txt-center

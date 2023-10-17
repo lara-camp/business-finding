@@ -1,24 +1,13 @@
-// import BackendLayout from '@/Layouts/BackendLayout'
-// import React from 'react'
-
-// const Create = () => {
-//     return (
-//         <div>
-//             <p> this is Owner create page </p>
-//         </div>
-//     )
-// }
-
-// Create.layout = page => <BackendLayout children={page} title="Owner Create" />
-// export default Create
 import BackendLayout from '@/Layouts/BackendLayout'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, router } from '@inertiajs/react'
-import { usePage } from '@inertiajs/react'
+import { usePage, useForm} from '@inertiajs/react'
 import Swal from "sweetalert2";
 
+
 const Create = () => {
-    const [values, setValues] = useState({
+    const [imageSrc, setImageSrc] = useState()
+    const [data, setValues] = useState({
         'user_id': "",
         'address': "",
         'company': "",
@@ -36,14 +25,40 @@ const Create = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        router.post('/admin/owner/create', values, {
+    const fileInputRef = useRef(null);
+    function submit(e) {
+        e.preventDefault()
+        router.post(route('admin.owner.store'), data, {
             onSuccess: () => {
-                Swal.fire("Owner Created Successfully");
+                Swal.fire("Owner created Successfully");
             }
-        });
+        })
     }
+
+    const handleImageClick = () => {
+        fileInputRef.current.click();
+    }
+
+    const handleImageChange = (e) => {
+        const selectedFile = e.target.files[0]
+        setValues('frontend_img', ' backend_img', selectedFile)
+        // Read the selected file as a data URL
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const dataURL = e.target.result;
+            setImageSrc(selectedFile);
+        };
+        reader.readAsDataURL(selectedFile);
+    }
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     router.post('/admin/owner/create', values, {
+    //         onSuccess: () => {
+    //             Swal.fire("Owner Created Successfully");
+    //         }
+    //     });
+    // }
     return (
         <div className="container my-3">
             <div className="p-2 rounded">
@@ -56,7 +71,7 @@ const Create = () => {
             </div>
 
             {/* Search Component */}
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <form onSubmit={submit} encType="multipart/form-data">
                 <div className="p-2 bg-light shadow-lg my-3">
                     <h5 className='text-center my-3'> Create User </h5>
                     <div className="row my-3 mx-3">
@@ -113,7 +128,6 @@ const Create = () => {
                         <p className="text-red-500 text-xs italic">
                             {errors.company}
                         </p>
-                        {/* {errors.company && <div className="text-danger text-center my-2"> {errors.company} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -121,18 +135,27 @@ const Create = () => {
                             <label htmlFor="image"> Front Image </label>
                         </div>
                         <div className="col-md-9">
+                            {/* <img
+                                src={imageSrc}
+                                alt=""
+                                id="previewImg"
+                                width={200}
+                                height={200}
+                                onClick={handleImageClick}
+                                style={{ cursor: 'pointer' }}
+                            /> */}
                             <input
                                 type="file"
-                                name='frontend_img'
+                                name="frontend_img"
+                                ref={fileInputRef}
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                placeholder='Enter Image Number'
-                                onChange={handleOnChange}
+                                onChange={handleImageChange}
+                            // style={{ display: "none" }}
                             />
                         </div>
                         <p className="text-red-500 text-xs italic">
                             {errors.frontend_img}
                         </p>
-                        {/* {errors.frontend_img && <div className="text-danger text-center my-2"> {errors.frontend_img} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
@@ -140,18 +163,27 @@ const Create = () => {
                             <label htmlFor="image"> Back Image </label>
                         </div>
                         <div className="col-md-9">
+                            {/* <img
+                                src={imageSrc}
+                                alt=""
+                                id="previewImg"
+                                width={200}
+                                height={200}
+                                onClick={handleImageClick}
+                                style={{ cursor: 'pointer' }}
+                            /> */}
                             <input
                                 type="file"
-                                name='backend_img'
+                                name="backend_img"
+                                ref={fileInputRef}
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                placeholder='Enter Image Number'
-                                onChange={handleOnChange}
+                                onChange={handleImageChange}
+                            // style={{ display: "none" }}
                             />
                         </div>
                         <p className="text-red-500 text-xs italic">
                             {errors.backend_img}
                         </p>
-                        {/* {errors.backend_img && <div className="text-danger text-center my-2"> {errors.backend_img} </div>} */}
                     </div>
                     <div className="row mx-3">
                         <div className="col-md-12">

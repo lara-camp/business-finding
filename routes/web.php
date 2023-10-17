@@ -36,6 +36,8 @@ use App\Http\Controllers\SubCategoryController;
 |
 */
 
+// Frontend 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
 Route::get('/category', [FrontendCategoryController::class, 'category'])->name('category');
@@ -44,6 +46,10 @@ Route::get('/business/{id}', [HomeController::class, 'business_detail'])->name('
 Route::get('/blog', [FrontendBlogController::class, 'index'])->name('blog');
 Route::get('/blog/{tag}/{id}', [FrontendBlogController::class, 'detail'])->name('blog.detail');
 Route::get('/blog/details', [FrontendBlogController::class, 'tags'])->name('blog.tags');
+Route::match(['get', 'post'], '/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
+Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
+
+Route::get('/blog/industries/{id}/show', [FrontendBlogController::class, 'industries'])->name('blog.industry');
 
 // Admin
 Route::inertia('/admin/login', 'Backend/Auth/Login')->name('admin.login');

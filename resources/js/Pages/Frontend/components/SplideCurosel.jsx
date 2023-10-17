@@ -9,7 +9,7 @@ const SplideCurosel = ({images}) => {
                 {
                     images.map(item => (
                         <SplideSlide key={item.id}>
-                            <img src={item.path} alt="Image 1" />
+                            <img src={item.path} alt="Image 1" className="w-full" />
                         </SplideSlide>
                     ))
                 }
