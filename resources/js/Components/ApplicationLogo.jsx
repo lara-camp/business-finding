@@ -1,10 +1,11 @@
-export default function ApplicationLogo(props) {
-    console.log(props);
+import { usePage } from "@inertiajs/react";
+
+export default function ApplicationLogo() {
+    const {general_setting}  = usePage().props;
     return (
 
         <>
-            {<img src={ props['props']['general_setting']['logo']} />}
-            {/* <img src="/storage/app/public/Default_Logo_withName.png"/> */}
+            {<img src={ general_setting.logo} />}
         </>
     );
 }
