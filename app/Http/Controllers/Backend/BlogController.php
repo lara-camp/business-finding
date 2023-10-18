@@ -258,7 +258,7 @@ class BlogController extends Controller
             $faq->update([
                 'status' => $status,
             ]);
-            return to_route('admin.faq');
+            return to_route('admin.blog');
         }
     }
 }

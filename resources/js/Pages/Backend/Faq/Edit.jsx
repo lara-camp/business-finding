@@ -38,7 +38,7 @@ const Edit = ({ faq, errors }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
+                    <div className='grid grid-cols-1 gap-4 md:grid-cols-1 sm:grid-cols-1' style={{marginLeft: "200px", marginRight: "200px"}}>
                     <div className='col-md-12 col-lg-12 col-sm-12'>
                         <div className="bg-white rounded-lg shadow-lg p-6">
                             {/* <h2>Parent Category</h2> */}
@@ -85,10 +85,10 @@ const Edit = ({ faq, errors }) => {
                                 )}
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                {/* <label className="block text-gray-700 text-sm font-bold mb-2">
                                     Status
-                                </label>
-                                <label className="switch">
+                                </label> */}
+                                {/* <label className="switch">
                                     <input
                                         type="checkbox"
                                         name='status'
@@ -97,7 +97,7 @@ const Edit = ({ faq, errors }) => {
                                         onChange={handleStatusChange}
                                     />
                                     <span className="slider round"></span>
-                                </label>
+                                </label> */}
                             </div>
 
                         </div>

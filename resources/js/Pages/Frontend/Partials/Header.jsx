@@ -13,10 +13,10 @@ const Header = () => {
   const [cat_id, setCatId] = useState("");
 
   const { auth } = usePage().props;
-  const [isOpen, setIsOpen] = useState(false);
+const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdownOpen
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleSearch = () => {
@@ -56,53 +56,28 @@ const Header = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="relative">
-            <div className="flex-shrink-0">
-              <button
-                onClick={toggleDropdown}
-                className="flex bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  src={auth.user.image || "/storage/profile.jpg"} // Replace with the actual image URL
-                  alt={auth.user.name} // Replace with the user's name
-                  className="w-12 h-12 rounded-full"
-                />
-              </button>
-            </div>
-
-            <Transition
-              show={isOpen}
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items
-                static
-                className="origin-top-right absolute right-0 mt-2 w-48 py-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      key={auth.user.id}
-                      href={route("logout")}
-                      className={`${
-                        active ? "bg-gray-100" : ""
-                      } block px-4 py-2 text-sm text-gray-700`}
+        ) :
+            <div className="flex justify-end w-1/3">
+                <div class="">
+                <ul className="mr-2 list-none text-end" >
+                <li className="relative">
+                    <a href="#" className="block p-2 hover:bg-gray-200" onClick={toggleDropdown}>
+                    {/* User Avatar */}
+                    <img src={`${auth.user.image || "/storage/profile.jpg"}`} className="w-10 h-10 rounded-full" alt="user" />
+                    </a>
+                    <div
+                    className={`absolute right-0 py-2 w-48 bg-white rounded-lg shadow-lg ${
+                        isDropdownOpen ? 'block' : 'hidden'
+                    }`}
                     >
-                      Logout
-                    </Link>
-                  )}
-                </Menu.Item>
-              </Menu.Items>
-            </Transition>
-          </div>
-        )}
+                    <h3 className="block px-4 py-2 text-center text-gray-800 hover:bg-gray-200">{auth.user.name}</h3>
+                    <Link href={route('logout')} className="block px-4 py-2 text-center text-gray-800 hover-bg-gray-200">Sign Out</Link>
+                    </div>
+                </li>
+                </ul>
+                </div>
+            </div>
+        }
       </div>
       {/* top header ends  */}
       {/* low header starts */}

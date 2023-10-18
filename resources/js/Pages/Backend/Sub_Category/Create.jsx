@@ -26,7 +26,7 @@ const Create = ( { categories, errors }) => {
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-1 sm:grid-cols-1' style={{marginLeft: "200px", marginRight: "200px"}}>
                 <div className='col-md-12 col-lg-12 col-sm-12'>
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         {/* <h2>Parent Category</h2> */}
