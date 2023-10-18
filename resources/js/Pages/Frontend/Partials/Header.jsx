@@ -1,19 +1,20 @@
+import React, { useState } from 'react';
 import { Link, router } from "@inertiajs/react";
-import React from "react";
-import { BsGlobe } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
+import { BsGlobe } from 'react-icons/bs';
+import { AiOutlineUser } from 'react-icons/ai';
 import { usePage } from "@inertiajs/react";
-import { BsSearch } from "react-icons/bs";
-import { Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import { BsSearch } from 'react-icons/bs';
 
 const Header = () => {
-  const { nav_data, general_setting } = usePage().props;
+  const { nav_data, general_setting, auth } = usePage().props;
   const [title, setTitle] = useState("");
-  const [cat_id, setCatId] = useState("");
+  const [cat_id, setCatId] = useState('');
 
-  const { auth } = usePage().props;
-const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdownOpen
+  const handleSearch = () => {
+    router.get(route('search.business'), { category: cat_id, title: title });
+  }
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -32,31 +33,30 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdow
           <select
             name="lang"
             id=""
-            className="rounded border-none bg-yellow-200"
+            className="bg-yellow-200 border-none rounded"
           >
             <option value="en"> English </option>
           </select>
         </div>
-        {!auth.user ? (
-          <div className="w-1/3 text-end">
-            <div className="flex">
-              <div className="w-1/2">
-                <Link href={route("login")}>
-                  {" "}
-                  <AiOutlineUser size={20} className="inline me-2" /> Sign In{" "}
-                </Link>
+        {
+          !auth.user
+            ? <div className="w-1/3 text-end">
+              <div className="flex">
+                <div className="w-1/2">
+                  <Link href={route("login")}>
+                    <AiOutlineUser size={20} className="inline mr-2 me-2" /> Sign In
+                  </Link>
+                </div>
+                <div className="w-1/2">
+                  <Link
+                    href={route("register")}
+                    className="p-2 border border-spacing-1 border-gray-950"
+                  >
+                    Register Now
+                  </Link>
+                </div>
               </div>
-              <div className="w-1/2">
-                <Link
-                  href={route("register")}
-                  className="p-2 border-spacing-1 border border-gray-950"
-                >
-                  Register Now
-                </Link>
-              </div>
-            </div>
-          </div>
-        ) :
+            </div> :
             <div className="flex justify-end w-1/3">
                 <div class="">
                 <ul className="mr-2 list-none text-end" >
@@ -90,7 +90,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdow
             type="text"
             placeholder="Search a business"
             className="w-full border-none"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
           />
         </div>
         <div className="w-1/6">
@@ -98,14 +98,14 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdow
             name="category"
             id=""
             className="border-none"
-            onChange={(e) => setCatId(e.target.value)}
+            onChange={e => setCatId(e.target.value)}
           >
             <option value="">Categories </option>
-            {nav_data.categories.data.map((item) => (
-              <option value={item.id} key={item.id}>
-                {item.name}
-              </option>
-            ))}
+            {
+              nav_data.categories.data.map(item => (
+                <option value={item.id} key={item.id} > {item.name}  </option>
+              ))
+            }
           </select>
         </div>
         <div className="w-1/6">
@@ -114,7 +114,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Define isDropdow
         <div className="w-1/6 ms-5 text-end">
           <Link
             href=""
-            className="py-2 px-3 border bg-gray-900 text-white border-none"
+            className="px-3 py-2 text-white bg-gray-900 border border-none"
           >
             Sell Your Business
           </Link>

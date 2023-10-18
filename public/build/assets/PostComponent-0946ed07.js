@@ -1,0 +1,1 @@
+import{r as t,j as n}from"./app-17eb0ad0.js";import{Q as r}from"./quill-87697b3f.js";function l({post:o}){return t.useEffect(()=>{const e=new r("#editor",{readOnly:!0,theme:"snow",modules:{toolbar:!1}});e.root.innerHTML=o.content},[o]),n.jsx("div",{id:"editor",style:{border:"none",outline:"none",fontSize:"30px"}})}export{l as default};
