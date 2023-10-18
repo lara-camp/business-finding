@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             CategorySeeder::class,
             SubCategorySeeder::class,
-            BlogSeeder::class,
+            // BlogSeeder::class,
             FaqSeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
