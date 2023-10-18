@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\OwnerDetailResource;
 use App\Http\Resources\OwnerDetailCollection;
+use App\Http\Resources\UserCollection;
 
 class OwnerDetailController extends Controller
 {
@@ -24,107 +25,68 @@ class OwnerDetailController extends Controller
 
     public function create()
     {
-        $users = OwnerDetail::all();
+        $users = User::all();
         // dd($users);
         return Inertia::render('Backend/Owner_Detail/Create', [
-            'users' => $users,
+            'users' => new UserCollection($users),
         ]);
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $owner = User::findOrFail($request->user_id);
-        // dd($owner);
-        // $rules = [
-        //     'user_id' => 'required',
-        //     'frontend_img' => 'required',
-        //     'address' => 'required',
-        //     'company' => 'required',
-        //     'backend_img' => 'required',
-        // ];
+       
+        $rules = [
+            'user_id' => 'required',
+            'frontend_img' => 'required',
+            'address' => 'required',
+            'company' => 'required',
+            'backend_img' => 'required',
+        ];
 
         // Validate the request data
-        // $validator = Validator::make($request->all(), $rules);
-        // dd('hello');
+        $validator = Validator::make($request->all(), $rules);
 
         // Check if validation fails
-        // if ($validator->fails()) {
-        //     return to_route('admin.owner.create')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
-        $frontend_img = [];
-        $backend_img = [];
+        if ($validator->fails()) {
+            return to_route('admin.owner.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->hasFile('frontend_img')) {
+            // Update
+            $file = $request->file('frontend_img');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $frontend_img = Storage::putFileAs(
+                'uploads/profile',
+                $file,
+                $filename
+            );
+        }
+
+        if ($request->hasFile('backend_img')) {
+            // Update backendFile
+            $file = $request->file('backend_img');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $backend_img = Storage::putFileAs(
+                'uploads/profile',
+                $file,
+                $filename
+            );
+        }
+
+        $owner = User::find($request->user_id);
         try {
             OwnerDetail::create([
                 'user_id' => $request->user_id,
                 'address' => $request->address,
-                'company' => $request->company
+                'company' => $request->company,
+                'frontend_img' => $frontend_img,
+                'backend_img' => $backend_img,
             ]);
         } catch (\Throwable $th) {
             throw $th;
         }
-
-
-        if ($request->hasFile('frontend_img')) {
-            // Delete file if exists
-            if ($owner->frontend_img != null) {
-                if (Storage::exists($owner->frontend_img)) {
-                    Storage::delete($owner->frontend_img);
-                }
-            }
-
-            // Update frontend File
-            $file = $request->file('frontend_img');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::putFileAs(
-                'uploads/profile',
-                $file,
-                $filename
-            );
-
-            // Update
-            $file = $request->file('frontend_img');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::putFileAs(
-                'uploads/profile',
-                $file,
-                $filename
-            );
-            $owner->frontend_img = $path;
-            $owner->save();
-        }
-
-        if ($request->hasFile('backend_img')) {
-            // Delete file if exists
-            if ($owner->frontend_img != null) {
-                if (Storage::exists($owner->backend_img)) {
-                    Storage::delete($owner->backend_img);
-                }
-            }
-
-            // Update backend File
-            $file = $request->file('backend_img');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::putFileAs(
-                'uploads/profile',
-                $file,
-                $filename
-            );
-
-            // Update backendFile
-            $file = $request->file('backend_img');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::putFileAs(
-                'uploads/profile',
-                $file,
-                $filename
-            );
-            $owner->backend_img = $path;
-            $owner->save();
-        }
-        dd('hello');
         return to_route('admin.owner');
     }
 

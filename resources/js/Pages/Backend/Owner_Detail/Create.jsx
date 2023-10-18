@@ -5,7 +5,7 @@ import { usePage, useForm } from '@inertiajs/react'
 import Swal from "sweetalert2";
 
 
-const Create = (users) => {
+const Create = ({users}) => {
     const [imageSrc, setImageSrc] = useState()
     const { data, setData } = useForm({
         'user_id': "",
@@ -71,7 +71,7 @@ const Create = (users) => {
                                 onChange={(e) => setData('user_id', e.target.value)}
                             >
                                 <option value="">Select a User</option>
-                                {users.map((user) => (
+                                {users.data.map((user) => (
                                     <option key={user.id} value={user.id}>
                                         {user.name}
                                     </option>
@@ -93,7 +93,7 @@ const Create = (users) => {
                                 name='address'
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Address'
-                                onChange={() => setData("address", e.target.value)}
+                                onChange={(e) => setData("address", e.target.value)}
                             />
                         </div>
                         <p className="text-red-500 text-xs italic">
