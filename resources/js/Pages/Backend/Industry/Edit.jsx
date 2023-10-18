@@ -84,7 +84,7 @@ const Edit = ({ industry, errors }) => {
                         }`}
                         disabled={processing}
                     >
-                        Save
+                        Update
                     </button>
                 </div>
             </form>

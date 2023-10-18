@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(100)->create();
+        // \App\Models\User::factory(100)->create();
 
 
         $this->call([
@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
             BusinessSeeder::class,
             BusinessFeatureSeeder::class,
             GeneralSettingSeeder::class,
-            OwnerDetailSeeder::class,
-            ImageSeeder::class,
+            // OwnerDetailSeeder::class,
+            // ImageSeeder::class,
             IndustrySeeder::class,
             SubCategorySeeder::class,
         ]);
