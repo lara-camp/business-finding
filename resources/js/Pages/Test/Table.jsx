@@ -82,10 +82,10 @@ export default function Example({ data, columns, routeName, view, title, edit, d
     const renderActions = (item) => (
         <td className="relative flex py-4 pl-3 pr-4 text-sm font-medium text-center whitespace-nowrap sm:pr-6">
             {/* Render your action links/buttons here */}
-            {view && permissions.includes(`view ${title}`) && (
+            {view && routeName=='blog' && permissions.includes(`view ${title}`) ? (
                 <Link
-                    href={`/admin/${routeName}/${item.id}`}
-                    className="text-yellow-700 hover:text-yello-200 me-5"
+                    href={`/${routeName}/${item.tag}/${item.id}`}
+                    className="text-yellow-700 hover:text-yellow-200 me-5"
                 >
                     {/* Render your view link */}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-cyan-500 text-bold">
@@ -93,7 +93,19 @@ export default function Example({ data, columns, routeName, view, title, edit, d
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16s2-2.5 2-4" />
                     </svg>
                 </Link>
-            )}
+            ) : view ? (
+                <Link
+                    href={`/admin/${routeName}/${item.id}`}
+                    className="text-yellow-700 hover:text-yellow-200 me-5"
+                >
+                    {/* Render your view link */}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-cyan-500 text-bold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4c-5.5 0-10 4.5-10 5s4.5 5 10 5 10-4.5 10-5-4.5-5-10-5zm0 9a3 3 0 100-6 3 3 0 000 6z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16s2-2.5 2-4" />
+                    </svg>
+                </Link>
+            ) : null}
+
             {edit && permissions.includes(`edit ${title}`) && (
                 <Link
                     href={`/admin/${routeName}/edit/${item.id}`}

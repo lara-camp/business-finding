@@ -36,7 +36,7 @@ use App\Http\Controllers\SubCategoryController;
 |
 */
 
-// Frontend 
+// Frontend
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/nav', [HomeController::class, 'nav'])->name('nav');
@@ -96,6 +96,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|editor'])->group(functio
     Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('admin.blog.update');
     Route::get('/blog/{id}', [BlogController::class, 'show'])->name('admin.blog.show');
     Route::post('/blog/{id}', [BlogController::class, 'destroy'])->name('admin.blog.delete');
+    Route::post('/blog/change-status/{id}', [BlogController::class, 'change_status'])->name('admin.blog.change_status');
     // end---------------------------------------------------------------------------------------------------
 
     // Faq------------------------------------------------------------------------------------------------
