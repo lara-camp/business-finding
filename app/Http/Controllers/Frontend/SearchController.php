@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class SearchController extends Controller
 {
     public function index(Request $request) {
-        $query = Business::latest('id');
+        $query = Business::latest('id')->where("stage", 'published');
 
         if ($title = $request->title) {
             $query->where('name', 'like', '%' . $title . '%');

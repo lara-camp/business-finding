@@ -58,7 +58,7 @@ const Header = () => {
                 <li className="relative">
                     <a href="#" className="block p-2 hover:bg-gray-200" onClick={toggleDropdown}>
                     {/* User Avatar */}
-                    <img src={`${auth.user.image || "/storage/profile.jpg"}`} className="w-10 h-10 rounded-full" alt="user" />
+                    <img src={`${auth.user.image || "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"}`} className="w-10 h-10 rounded-full" alt="user" />
                     </a>
                     <div
                     className={`absolute right-0 py-2 w-48 bg-white rounded-lg shadow-lg ${
