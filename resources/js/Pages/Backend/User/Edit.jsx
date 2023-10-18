@@ -4,10 +4,12 @@ import { useForm, usePage } from '@inertiajs/react'
 import { Link, router } from '@inertiajs/react'
 import Swal from "sweetalert2";
 
-const Edit = ({ user }) => {
+const Edit = ({ user, roles, userRole }) => {
     const { data, setData, put } = useForm({
         'name': user.name,
         'email': user.email,
+        'role': user.role,
+
     })
     const { errors } = usePage().props
 
@@ -65,7 +67,7 @@ const Edit = ({ user }) => {
                         </div>
                         {errors.email && <div className='text-danger text-center my-2'> {errors.email} </div>}
                     </div>
-                    <div className="row my-3 mx-3">
+                    {/* <div className="row my-3 mx-3">
                         <div className="col-md-3">
                             <label htmlFor="email"> Role </label>
                         </div>
@@ -79,7 +81,27 @@ const Edit = ({ user }) => {
                             />
                         </div>
                         {errors.email && <div className='text-danger text-center my-2'> {errors.email} </div>}
+                    </div> */}
+
+                    <div className="row my-3 mx-3">
+                        <div className="col-md-3">
+                            <label htmlFor="role">Role</label>
+                        </div>
+                        <div className="col-md-9">
+                            <select
+                                value={data.role}
+                                onChange={e => setData('role', e.target.value)}
+                                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            >
+                                {roles.map(role => (
+                                    <option key={role.id} value={role.name} selected={userRole === role.name ? 'selected' : ''}>
+                                        {role.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+
 
                     <div className="row mx-3">
                         <div className="col-md-12">

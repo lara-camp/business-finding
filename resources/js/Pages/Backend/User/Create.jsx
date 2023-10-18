@@ -95,7 +95,7 @@ const Create = () => {
                         {errors.phone && <div className="text-danger text-center my-2"> {errors.phone} </div>}
                     </div>
 
-                    <div className="row my-3 mx-3">
+                    {/* <div className="row my-3 mx-3">
                         <div className="col-md-3">
                             <label htmlFor="image"> Image </label>
                         </div>
@@ -109,7 +109,7 @@ const Create = () => {
                             />
                         </div>
                         {errors.image && <div className="text-danger text-center my-2"> {errors.image} </div>}
-                    </div>
+                    </div> */}
 
                     <div className="row my-3 mx-3">
                         <div className="col-md-3">

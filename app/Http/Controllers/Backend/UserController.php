@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
@@ -39,7 +40,7 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete file if exists 
+            // Delete file if exists
 
             if ($user->image != null) {
                 if (Storage::exists($user->image)) {
@@ -47,7 +48,7 @@ class UserController extends Controller
                 }
             }
 
-            // Update File 
+            // Update File
             $file = $request->file('image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = Storage::putFileAs(
@@ -59,21 +60,27 @@ class UserController extends Controller
             $user->save();
         }
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => $request->password,
         ]);
 
+        $user->assignRole('user');
         return to_route('admin.users')->with('message', 'User created successfully');
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $roles = Role::all();
+        $userRole = $user->roles->first()->name;
+        // dd($userRole);
         return Inertia::render('Backend/User/Edit', [
             'user' => new UserResource($user),
+            'roles' => $roles,
+            'userRole' => $userRole
         ]);
     }
 
@@ -83,8 +90,9 @@ class UserController extends Controller
         $user->update($request->validate([
             'name' => ['required', 'max:50'],
             'email' => ['required', Rule::unique('users')->ignore($id)],
-            // 'phone' => []
         ]));
+        $newRoleName = $request->input('role');
+        $user->syncRoles([$newRoleName]);
         return to_route('admin.users')->with('message', 'User Updated Successfully');
     }
 

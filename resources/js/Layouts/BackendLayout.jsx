@@ -12,6 +12,14 @@ import {
     HomeIcon,
     UsersIcon,
     XMarkIcon,
+    QuestionMarkCircleIcon,
+    UserIcon,
+    MapIcon,
+    ShoppingBagIcon,
+    BuildingOffice2Icon,
+    HomeModernIcon,
+    SwatchIcon,
+    BookOpenIcon
 
 } from "@heroicons/react/24/outline";
 
@@ -24,14 +32,14 @@ import Footer from "@/Pages/Backend/Parts/Footer";
 const intitalNavigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, permission: "view dashboard" },
     { name: "Users", href: "/admin/user", icon: UsersIcon, permission: "view user" },
-    { name: "Regions", href: "/admin/regions", icon: FolderIcon, permission: "view region" },
-    { name: "Category", href: "/admin/category", icon: FolderIcon, permission: "view category" },
-    { name: "Faq", href: "/admin/faq", icon: FolderIcon, permission: "view faq" },
-    { name: "Blog", href: "/admin/blog", icon: FolderIcon, permission: "view blog" },
-    { name: "Cities", href: "/admin/cities", icon: Bars3Icon, permission: "view city" },
-    { name: "Sub Category", href: "/admin/sub_category", icon: FolderIcon, permission: "view subcategory" },
-    { name: "Owner Detail", href: "/admin/owner", icon: XMarkIcon, permission: "view ownerdetail" },
-    { name: "Industry", href: "/admin/industry", icon: FolderIcon,  permission: "view industry" },
+    { name: "Regions", href: "/admin/regions", icon: MapIcon, permission: "view region" },
+    { name: "Category", href: "/admin/category", icon: ShoppingBagIcon, permission: "view category" },
+    { name: "Faq", href: "/admin/faq", icon: QuestionMarkCircleIcon, permission: "view faq" },
+    { name: "Blog", href: "/admin/blog", icon: BookOpenIcon, permission: "view blog" },
+    { name: "Cities", href: "/admin/cities", icon: HomeModernIcon, permission: "view city" },
+    { name: "Sub Category", href: "/admin/sub_category", icon: SwatchIcon, permission: "view subcategory" },
+    { name: "Owner Detail", href: "/admin/owner", icon: UserIcon, permission: "view ownerdetail" },
+    { name: "Industry", href: "/admin/industry", icon: BuildingOffice2Icon, permission: "view industry" },
 ];
 
 
