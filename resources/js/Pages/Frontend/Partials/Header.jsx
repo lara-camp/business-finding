@@ -108,7 +108,7 @@ const Header = () => {
         </div>
         <div className="w-1/6 ms-5 text-end">
           <Link
-            href=""
+            href={route('pricing')}
             className="px-3 py-2 text-white bg-gray-900 border border-none"
           >
             Sell Your Business
