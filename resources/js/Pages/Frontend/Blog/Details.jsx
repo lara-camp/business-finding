@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "@inertiajs/react";
 import PostComponent from '../Partials/PostComponent';
 const Index = (blog ,images) => {
-    console.log(blog, blog.images.length);
+    console.log(blog, blog.related_articles.length);
     const post = { content: blog['blog']['data'][0].content };
     /* function stripHtmlAndTrim(text) {
       const tmp = document.createElement("div");
@@ -61,27 +61,35 @@ const Index = (blog ,images) => {
                     <h1 className="mx-3 mt-5 mb-5 text-5xl text-dark">Related Articles</h1>
 
                     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4" style={{marginRight: "60px", height: "500px"}}>
-                      {blog.related_articles.data.map((item, index) => (
-                        <div key={index} className="col-span-2 mt-3 shadow-lg card lg:col-span-4">
-                          <div className="flex">
-                            <div class="w-1/3 relative">
-                              <img
-                                src={item.url}
-                                alt="image"
-                                className="card-img-top aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover mt-5"
-                                style={{ width: "200px", height: "100px" }}
-                              />
-                            </div>
-                            <div class="w-2/3">
-                                <a href={`/blog/${item.tag}/${item.id}`}>
+                        {blog.related_articles.data.length !== 0 ? (
+                          blog.related_articles.data.map((item, index) => (
+                            <div key={item.id} className="col-span-2 mt-3 shadow-lg card lg:col-span-4">
+                              <div className="flex">
+                                <div className="w-1/3 relative">
+                                  <img
+                                    src={item.url}
+                                    alt="image"
+                                    className="card-img-top aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover mt-5"
+                                    style={{ width: "200px", height: "100px" }}
+                                  />
+                                </div>
+                                <div className="w-2/3">
+                                  <a href={`/blog/${item.tag}/${item.id}`}>
                                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 card-title group-hover:text-gray-600">
-                                        {item.body.length > 20 ? `${item.body.substring(0, 50)}...` : item.body}
+                                      {item.body.length > 20 ? `${item.body.substring(0, 50)}...` : item.body}
                                     </h3>
-                                </a>
+                                  </a>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
+                          ))
+                        ) : (
+                          <h3 className="col-span-2 mt-3 lg:col-span-4">
+
+                            Related Articles Not Found!
+                          </h3>
+                        )}
+
                     </div>
                   </div>
                 </div>

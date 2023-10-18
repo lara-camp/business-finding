@@ -245,4 +245,20 @@ class BlogController extends Controller
         $blog->delete();
         return to_route('admin.blog');
     }
+
+    public function change_status($id) {
+        $faq = Blog::find($id);
+        if($faq->status == 1) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+
+        if($faq) {
+            $faq->update([
+                'status' => $status,
+            ]);
+            return to_route('admin.blog');
+        }
+    }
 }

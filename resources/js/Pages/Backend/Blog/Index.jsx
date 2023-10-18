@@ -3,7 +3,7 @@ import Table from '../../Test/Table'
 import BackendLayout from '@/Layouts/BackendLayout'
 
 const Index = ({blogs}) => {
-  const columns = ['id', 'image', 'title', 'tag', 'user_name', 'status', 'created_at', 'action']
+  const columns = ['id', 'image', 'title', 'tag', 'user_name', 'status', 'created_at']
     const routeName = 'blog'
     const title = 'blog'
     console.log(blogs);

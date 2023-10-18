@@ -26,7 +26,7 @@ const Create = ( { categories, errors }) => {
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-1 sm:grid-cols-1' style={{marginLeft: "200px", marginRight: "200px"}}>
                 <div className='col-md-12 col-lg-12 col-sm-12'>
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         {/* <h2>Parent Category</h2> */}
@@ -44,7 +44,7 @@ const Create = ( { categories, errors }) => {
                                 onChange={ (e) => setData('name', e.target.value)}
                               />
                             {errors.name && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.name}
                                 </p>
                             )}
@@ -69,7 +69,7 @@ const Create = ( { categories, errors }) => {
                             ))}
                               </select>
                             {errors.category_id && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.category_id}
                                 </p>
                             )}
@@ -87,7 +87,7 @@ const Create = ( { categories, errors }) => {
                                 onChange= {(e)=> setData('slug',e.target.value)}
                                   placeholder="slug" />
                             {errors.slug && (
-                                <p className="text-red-500 text-xs italic">
+                                <p className="text-xs italic text-red-500">
                                     {errors.slug}
                                 </p>
                             )}
