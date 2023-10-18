@@ -62,6 +62,10 @@ class HomeController extends Controller
         return Inertia::render('Frontend/AboutUs');
     }
 
+    public function pricing() {
+        return Inertia::render('Frontend/Pricing');
+    }
+
     public function drinkBeerToday($day) {
         $drink = false;
         $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'suday'];
