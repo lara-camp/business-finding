@@ -17,10 +17,10 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $news = Blog::where('tag', 'News')->latest()->limit(3)->get();
-        $guide = Blog::where('tag', 'Guide')->latest()->limit(3)->get();
-        $buyers = Blog::where('tag', 'Advice for buyers')->latest()->limit(3)->get();
-        $sellers = Blog::where('tag', 'Advice for sellers')->latest()->limit(3)->get();
+        $news = Blog::where('tag', 'News')->where('status', 1)->latest()->limit(3)->get();
+        $guide = Blog::where('tag', 'Guide')->where('status', 1)->latest()->limit(3)->get();
+        $buyers = Blog::where('tag', 'Advice for buyers')->where('status', 1)->latest()->limit(3)->get();
+        $sellers = Blog::where('tag', 'Advice for sellers')->where('status', 1)->latest()->limit(3)->get();
         $industries = Industry::get();
         // dd(new BlogCollection($news));
         return Inertia::render('Frontend/Blog/Index', [
@@ -34,7 +34,7 @@ class BlogController extends Controller
 
     public function detail($tag, $id)
     {
-        $blog = Blog::where('id', $id)->where('tag', $tag)->get();
+        $blog = Blog::where('id', $id)->where('tag', $tag)->where('status', 1)->get();
         $urls = Image::where('imageable_id',$id)->where('imageable_type', 'App\Models\Blog')->pluck('url')->toArray();
         $images =[];
         $i=0;
@@ -43,7 +43,7 @@ class BlogController extends Controller
             $images[$i++] = Storage::url($url);
         }
 
-        $related_articles = Blog::where('tag', $tag)->where('industry_id', $blog[0]->industry_id)->whereNot('id',$id)->latest()->limit(3)->get();
+        $related_articles = Blog::where('tag', $tag)->where('status', 1)->where('industry_id', $blog[0]->industry_id)->whereNot('id',$id)->latest()->limit(3)->get();
         // dd($images);
         return Inertia::render('Frontend/Blog/Details', [
             'blog' => new BlogCollection($blog),
@@ -56,7 +56,7 @@ class BlogController extends Controller
     {
         // dd($request->tags);
         $tag  = str_replace("'", '', $request->tags);
-        $blogs = Blog::where('tag', $tag)->latest()->paginate(6)->appends($request->except('page'));
+        $blogs = Blog::where('tag', $tag)->where('status', 1)->latest()->paginate(6)->appends($request->except('page'));
         // dd($blogs);
         return Inertia::render('Frontend/Blog/Tags', [
             'tag' => $request->tags,
@@ -67,7 +67,7 @@ class BlogController extends Controller
     {
         // dd($id);
         // $tag  = str_replace("'", '', $request->tags);
-        $blogs = Blog::where('industry_id', $id)->latest()->paginate(6)->appends(request()->except('page'));
+        $blogs = Blog::where('industry_id', $id)->where('status', 1)->latest()->paginate(6)->appends(request()->except('page'));
         $industry_name = Industry::whereId($id)->pluck('name')->toArray();
         return Inertia::render('Frontend/Blog/Industries', [
             'industry_name' => $industry_name,
