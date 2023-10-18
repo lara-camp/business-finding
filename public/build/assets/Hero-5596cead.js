@@ -1,0 +1,1 @@
+import{j as e}from"./app-d15abf51.js";const t=()=>e.jsx("div",{className:"w-full",children:e.jsx("img",{src:"https://www.re-thinkingthefuture.com/wp-content/uploads/2021/05/A4196-10-Things-you-should-remember-before-designing-a-coffee-shop.jpg",alt:"",className:"w-full md:h-[400px] sm:h-[600px] object-cover object-center"})});export{t as default};

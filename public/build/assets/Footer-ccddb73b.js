@@ -1,1 +1,0 @@
-import{j as e}from"./app-17eb0ad0.js";const t=({title:s})=>e.jsx("div",{className:"bg-slate-300 p-3",children:e.jsxs("div",{className:"flex flex-between mx-10",children:[e.jsxs("div",{className:"w-1/2",children:[" Copy Right ",s," 2023 "]}),e.jsx("div",{className:"w-1/2 text-end",children:" Developed by Team CodeArtisan"})]})});export{t as default};
