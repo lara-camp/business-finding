@@ -186,7 +186,7 @@ class BusinessController extends Controller
         $doc_arr = array();
         if(count($cur_docs) > 0) {
             foreach($cur_docs as $doc) {
-                $path = Helper::getStragePathFromFullUrl($doc['url']);
+                $path = Helper::getStoragePathFromFullUrl($doc['url']);
                 array_push($doc_arr, $path);
             }
         }

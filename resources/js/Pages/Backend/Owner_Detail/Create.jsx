@@ -1,64 +1,50 @@
 import BackendLayout from '@/Layouts/BackendLayout'
 import React, { useState, useRef } from 'react'
 import { Link, router } from '@inertiajs/react'
-import { usePage, useForm} from '@inertiajs/react'
+import { usePage, useForm } from '@inertiajs/react'
 import Swal from "sweetalert2";
 
 
-const Create = () => {
+const Create = ({users}) => {
     const [imageSrc, setImageSrc] = useState()
-    const [data, setValues] = useState({
+    const { data, setData } = useForm({
         'user_id': "",
         'address': "",
         'company': "",
         'frontend_img': "",
         "backend_img": "",
     })
+    console.log(data)
 
     const { errors } = usePage().props;
 
-    const handleOnChange = (e) => {
-        const { name, value } = e.target;
-        setValues((preValues) => ({
-            ...preValues,
-            [name]: value,
-        }));
-    };
-
-    const fileInputRef = useRef(null);
     function submit(e) {
         e.preventDefault()
-        router.post(route('admin.owner.store'), data, {
+        console.log(data)
+        router.post(route("admin.owner.store"), data, {
+            forceFormData: true,
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
-                Swal.fire("Owner created Successfully");
+                console.log("success")
+            },
+            onError: (err) => {
+                console.log(err)
             }
         })
     }
 
-    const handleImageClick = () => {
-        fileInputRef.current.click();
-    }
-
     const handleImageChange = (e) => {
         const selectedFile = e.target.files[0]
-        setValues('frontend_img', ' backend_img', selectedFile)
         // Read the selected file as a data URL
         const reader = new FileReader();
         reader.onload = (e) => {
             const dataURL = e.target.result;
-            setImageSrc(selectedFile);
+            setImageSrc(dataURL);
         };
         reader.readAsDataURL(selectedFile);
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     router.post('/admin/owner/create', values, {
-    //         onSuccess: () => {
-    //             Swal.fire("Owner Created Successfully");
-    //         }
-    //     });
-    // }
     return (
         <div className="container my-3">
             <div className="p-2 rounded">
@@ -79,31 +65,35 @@ const Create = () => {
                             <label htmlFor="name"> User name </label>
                         </div>
                         <div className="col-md-9">
-                            <input
-                                type="integer"
-                                name='user_id'
+                            <select
+                                name="user_id"
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                placeholder='Enter Name'
-                                onChange={handleOnChange}
-                            />
+                                onChange={(e) => setData('user_id', e.target.value)}
+                            >
+                                <option value="">Select a User</option>
+                                {users.data.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <p className="text-red-500 text-xs italic">
                             {errors.user_id}
                         </p>
-                        {/* {errors.user_id && <div className="text-danger text-center my-2"> {errors.user_id} </div>} */}
                     </div>
 
                     <div className="row my-3 mx-3">
                         <div className="col-md-3">
                             <label htmlFor="email"> Address </label>
-                        </div>
+                        </div>address
                         <div className="col-md-9">
                             <input
                                 type="text"
                                 name='address'
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                placeholder='Enter Email Address'
-                                onChange={handleOnChange}
+                                placeholder='Enter Address'
+                                onChange={(e) => setData("address", e.target.value)}
                             />
                         </div>
                         <p className="text-red-500 text-xs italic">
@@ -122,7 +112,7 @@ const Create = () => {
                                 name='company'
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 placeholder='Enter Phone Number'
-                                onChange={handleOnChange}
+                                onChange={(e) => setData("company", e.target.value)}
                             />
                         </div>
                         <p className="text-red-500 text-xs italic">
@@ -135,21 +125,20 @@ const Create = () => {
                             <label htmlFor="image"> Front Image </label>
                         </div>
                         <div className="col-md-9">
-                            {/* <img
+                            <img
                                 src={imageSrc}
                                 alt=""
                                 id="previewImg"
                                 width={200}
                                 height={200}
-                                onClick={handleImageClick}
+                                onClick={handleImageChange}
                                 style={{ cursor: 'pointer' }}
-                            /> */}
+                            />
                             <input
                                 type="file"
                                 name="frontend_img"
-                                ref={fileInputRef}
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                onChange={handleImageChange}
+                                onChange={(e) => setData("frontend_img", e.target.files[0])}
                             // style={{ display: "none" }}
                             />
                         </div>
@@ -175,9 +164,8 @@ const Create = () => {
                             <input
                                 type="file"
                                 name="backend_img"
-                                ref={fileInputRef}
                                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                                onChange={handleImageChange}
+                                onChange={(e) => setData('backend_img', e.target.files[0])}
                             // style={{ display: "none" }}
                             />
                         </div>

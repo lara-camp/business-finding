@@ -18,7 +18,7 @@ class Helper {
         }
     }
 
-    public static function getStragePathFromFullUrl($path) {
+    public static function getStoragePathFromFullUrl($path) {
        $text =  str_replace(env('APP_URL').'/storage', '', $path);
        return $text;
     }

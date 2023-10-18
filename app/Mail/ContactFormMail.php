@@ -16,9 +16,10 @@ class ContactFormMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $data;
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -37,7 +38,10 @@ class ContactFormMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.contactform',
+            markdown : 'mail.contactform',
+            with : [
+                'data' => $this->data,
+            ]
         );
     }
 

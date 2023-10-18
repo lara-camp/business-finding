@@ -9,11 +9,6 @@ const Header = () => {
   const { nav_data, general_setting, auth } = usePage().props;
   const [title, setTitle] = useState("");
   const [cat_id, setCatId] = useState('');
-
-  const handleSearch = () => {
-    router.get(route('search.business'), { category: cat_id, title: title });
-  }
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -113,7 +108,7 @@ const Header = () => {
         </div>
         <div className="w-1/6 ms-5 text-end">
           <Link
-            href=""
+            href={route('pricing')}
             className="px-3 py-2 text-white bg-gray-900 border border-none"
           >
             Sell Your Business

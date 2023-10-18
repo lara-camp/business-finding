@@ -8,7 +8,8 @@ import BusinessImage from '../../../../public/image/contact/business.png'
 import CEOImage from '../../../../public/image/contact/ceo.png'
 import SellerImage from '../../../../public/image/contact/seller.png'
 import ShoppingImage from '../../../../public/image/contact/shopping.png'
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
+import {BsFacebook, BsInstagram, BsTwitter, BsLinkedin, BsYoutube} from 'react-icons/bs'
 
 const Contact = () => {
     const { nav_data } = usePage().props;
@@ -25,7 +26,8 @@ const Contact = () => {
     function submit(e) {
         e.preventDefault();
         router.post(route('contact-us'), data, {
-            onSuccess : (res) => {
+            preserveState : true,
+            onSuccess : () => {
                 toast.success("Contact Form Submitted Successfully");
             },
             onError : (err) => {
@@ -62,7 +64,7 @@ const Contact = () => {
                     </p>
                 </div>
             </div>
-
+            <Toaster />
             {/* middle mail form */}
             <div className="relative bg-yellow-50 p-5">
                 <div className="w-1/3 ms-20">
@@ -107,7 +109,15 @@ const Contact = () => {
                             {" "}
                             Connect With Us{" "}
                         </h1>
-                        <p className="my-3"> Sunday Closed </p>
+                        <div className="my-5">
+                        <ul className='flex justify-between w-1/2'>
+                            <li> <a href=""> <BsFacebook size={25}/></a> </li>
+                            <li> <a href=""> <BsInstagram size={25}/></a> </li>
+                            <li> <a href=""> <BsTwitter size={25}/> </a> </li>
+                            <li> <a href=""><BsLinkedin size={25}/></a> </li>
+                            <li> <a href=""><BsYoutube size={25}/></a> </li>
+                        </ul>
+                        </div>
                     </div>
                 </div>
                 <div className="absolute end-20 top-[-50%] w-3/5">

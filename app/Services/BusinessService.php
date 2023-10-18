@@ -50,7 +50,6 @@ class BusinessService {
             $text = $item['text'];
             $position =  $item['flex_direction'];
             $image_path = "";
-
             $feature_exit = BusinessFeature::where('subject', $text)->first();
 
             // check image exit 
@@ -67,28 +66,21 @@ class BusinessService {
                     $path = Storage::putFileAs('uploads/business-features', $file, $filename); 
                     $image_path = $path;
                 } else {
-                    $trimText = Helper::getStragePathFromFullUrl($item['image']);
+                    $trimText = Helper::getStoragePathFromFullUrl($item['image']);
                     $image_path = $trimText;
                 }
             } 
 
             if($text || $position) {
-
-                if($feature_exit) {
-                    $feature_exit->update([
-                        'business_id' => $business->id,
+                BusinessFeature::updateOrCreate(
+                    ['business_id' => $business->id],
+                    [
                         'subject' => $text ?? "",
                         'position' => $position ?? "",
                         'image' => $image_path,
-                    ]);
-                } else {
-                    BusinessFeature::create([
-                        'business_id' => $business->id,
-                        'subject' => $text ?? "",
-                        'position' => $position ?? "",
-                        'image' => $image_path,
-                    ]);
-                }
+                    ]
+                );
+                
             }
         }
     }

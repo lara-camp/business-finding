@@ -42,15 +42,17 @@ class HomeController extends Controller
 
     public function contact_us(Request $request) {
         if(request()->isMethod('post')) {
-            $first_name = $request->first_name;
-            $last_name = $request->last_name;
-            $location = $request->location;
-            $phone_one = $request->phone_one;
-            $phone_two = $request->phone_two;
-            $email = $request->email;
-            $remark = $request->remark;
+            $data = array(
+                'first_name' => $request->first_name,
+                "last_name" => $request->last_name,
+                "location" => $request->location,
+                "phone_one" => $request->phone_one,
+                "phone_two" => $request->phone_two,
+                "email" => $request->email,
+                "remark" => $request->remark,
+            );
             
-            Mail::to("minthetpaing376@gmail.com")->send(new ContactFormMail());
+            Mail::to("minthetpaing376@gmail.com")->send(new ContactFormMail($data));
             return to_route('contact-us');
         }
         return Inertia::render('Frontend/Contact');
@@ -58,6 +60,10 @@ class HomeController extends Controller
 
     public function about_us() {
         return Inertia::render('Frontend/AboutUs');
+    }
+
+    public function pricing() {
+        return Inertia::render('Frontend/Pricing');
     }
 
     public function drinkBeerToday($day) {

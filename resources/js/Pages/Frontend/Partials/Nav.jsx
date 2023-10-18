@@ -1,10 +1,19 @@
 import { Link, usePage } from "@inertiajs/react";
 import { SlEarphones } from "react-icons/sl";
+import { router } from "@inertiajs/react";
 
 const Nav = () => {
   const { nav_data } = usePage().props;
     const currentRoute = usePage().url;
-    // console.log(currentRoute === "/?);
+    
+    const handleCatChange = (id) => {
+        router.get(route('search.business', {"category" : id}));
+    }
+
+    const handleLocChange = (id) => {
+        router.get(route('search.business', {'location' : id}));
+    }
+
 
   return (
     <nav className="bg-slate-50">

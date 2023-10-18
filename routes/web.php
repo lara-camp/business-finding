@@ -48,7 +48,7 @@ Route::get('/blog/{tag}/{id}', [FrontendBlogController::class, 'detail'])->name(
 Route::get('/blog/details', [FrontendBlogController::class, 'tags'])->name('blog.tags');
 Route::match(['get', 'post'], '/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
-
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
 Route::get('/blog/industries/{id}/show', [FrontendBlogController::class, 'industries'])->name('blog.industry');
 
 // Admin
