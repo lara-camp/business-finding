@@ -89,6 +89,26 @@ class IndustryController extends Controller
                 ->withInput();
         }
         $industry = Industry::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+
+            $image = Image::where('imageable_id',$id)->where('imageable_type','App\Models\Industry')->first();
+            // dd($image);
+            if ($image->url) {
+                Storage::disk('public')->delete($image->url);
+
+            }
+            $image->delete();
+            $file = 'In'.time().auth()->id().'-'.$_FILES['image']['name'];
+            $path = Storage::disk('public')->put( $file,fopen($request->file('image'), 'r+'));
+
+            Image::create([
+                'url' => $file ,
+                'imageable_id' => $industry->id,
+                'imageable_type' => 'App\Models\Industry',
+            ]);
+            // dd(Image::where('imageable_id',$id)->where('imageable_type','App\Models\Industry')->first());
+        }
         $industry->update($request->all());
         return to_route('admin.industry');
     }

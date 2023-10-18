@@ -38,12 +38,12 @@ const Edit = ({ faq, errors }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div className='grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1'>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-1 sm:grid-cols-1' style={{marginLeft: "200px", marginRight: "200px"}}>
                     <div className='col-md-12 col-lg-12 col-sm-12'>
-                        <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="p-6 bg-white rounded-lg shadow-lg">
                             {/* <h2>Parent Category</h2> */}
-                            <div className="mb-4 mt-5">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="question">
+                            <div className="mt-5 mb-4">
+                                <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="question">
                                     Question
                                 </label>
                                 <textarea
@@ -58,13 +58,13 @@ const Edit = ({ faq, errors }) => {
                                     onChange={(e) => setData('question', e.target.value)}
                                 />
                                 {errors.question && (
-                                    <p className="text-red-500 text-xs italic">
+                                    <p className="text-xs italic text-red-500">
                                         {errors.question}
                                     </p>
                                 )}
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="answer">
+                                <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="answer">
                                     Answer
                                 </label>
                                 <textarea
@@ -79,13 +79,13 @@ const Edit = ({ faq, errors }) => {
                                     placeholder="Answer"
                                 />
                                 {errors.answer && (
-                                    <p className="text-red-500 text-xs italic">
+                                    <p className="text-xs italic text-red-500">
                                         {errors.answer}
                                     </p>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                            {/* <div className="mb-4">
+                                <label className="block mb-2 text-sm font-bold text-gray-700">
                                     Status
                                 </label>
                                 <label className="switch">
@@ -98,7 +98,7 @@ const Edit = ({ faq, errors }) => {
                                     />
                                     <span className="slider round"></span>
                                 </label>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
